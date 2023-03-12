@@ -31,5 +31,10 @@ public class FoodController {
         return foodService.searchAllFoods();
     }
 
+    //음식 수정
+    @PutMapping("/foods/{id}")
+    public void updateFood(@PathVariable Long id, @RequestBody FoodUpdateRequest foodUpdateRequest){
+        foodService.updateFood(id,foodUpdateRequest);
+    }
 
 }
