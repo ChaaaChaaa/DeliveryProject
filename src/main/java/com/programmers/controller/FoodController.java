@@ -37,4 +37,9 @@ public class FoodController {
         foodService.updateFood(id,foodUpdateRequest);
     }
 
+    //음식 삭제
+    @DeleteMapping("/foods/{foodId}")
+    public void deleteFoodId(@PathVariable Long foodId) {
+        foodService.deleteFoodId(foodId);
+    }
 }
