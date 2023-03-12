@@ -25,4 +25,11 @@ public class FoodController {
         foodService.saveFood(food);
     }
 
+    //음식 조회(전체)
+    @GetMapping("/all-foods")
+    public List<FoodResponse> searchAllFoods(){
+        return foodService.searchAllFoods();
+    }
+
+
 }
