@@ -22,6 +22,5 @@ public interface FoodRepository extends JpaRepository<Food, Long> {
     Food save(Food food);
     Optional<Food> findById(Long id);
 
-
-
+    List<Food> findByNameContaining(String Name);
 }
