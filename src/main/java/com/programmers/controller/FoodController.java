@@ -26,4 +26,10 @@ public class FoodController {
     public void createFood(@RequestBody Food food){
         foodServiceImpl.create(food);
     }
+
+    //음식 등록
+    @PostMapping("/save/{foodId}")
+    public void saveFood(@RequestBody Food food){
+        foodServiceImpl.save(food);
+    }
 }
