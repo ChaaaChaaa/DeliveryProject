@@ -20,5 +20,8 @@ public interface FoodRepository extends JpaRepository<Food, Long> {
                 .build();
     }
     Food save(Food food);
+    Optional<Food> findById(Long id);
+
+
 
 }
