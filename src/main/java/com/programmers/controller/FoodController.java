@@ -32,4 +32,12 @@ public class FoodController {
     public void saveFood(@RequestBody Food food){
         foodServiceImpl.save(food);
     }
+
+    //음식 조회(id)
+    @GetMapping("/search/id/{foodId}")
+    public Optional<Food> searchFoodById(@PathVariable Long id){
+        return foodServiceImpl.findById(id);
+    }
+
+
 }
