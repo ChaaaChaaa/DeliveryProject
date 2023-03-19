@@ -10,7 +10,12 @@ import java.util.Optional;
 
 public interface FoodService {
     void create(Food food);
+
     Food save(Food food);
+
     Optional<Food> findById(Long id);
+
     List<Food> findByNameContaining(String Name);
+
+    FoodResponseDto update(long id, FoodRequestDto foodRequestDto);
 }
