@@ -44,4 +44,11 @@ public class FoodController {
     public List<Food> searchFoodContainName(@PathVariable String Name){
         return foodServiceImpl.findByNameContaining(Name);
     }
+
+    //음식 수정
+    @PutMapping("/update/{foodId}")
+    public void updateFood(@PathVariable Long id, @RequestBody FoodRequestDto foodRequestDto){
+        foodServiceImpl.update(id,foodRequestDto);
+    }
+
 }
