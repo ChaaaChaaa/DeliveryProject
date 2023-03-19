@@ -33,4 +33,8 @@ public class FoodServiceImpl implements FoodService {
         return foodRepository.findById(id);
     }
 
+    @Override
+    public List<Food> findByNameContaining(String Name) {
+        return foodRepository.findByNameContaining(Name);
+    }
 }
