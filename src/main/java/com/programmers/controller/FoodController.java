@@ -21,38 +21,39 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/foods")
 public class FoodController {
     private final FoodServiceImpl foodServiceImpl;
+
     //음식 생성
     @PostMapping
-    public void createFood(@RequestBody Food food){
+    public void createFood(@RequestBody Food food) {
         foodServiceImpl.create(food);
     }
 
     //음식 등록
-    @PostMapping("/save/{foodId}")
-    public void saveFood(@RequestBody Food food){
+    @PostMapping("/save")
+    public void saveFood(@RequestBody Food food) {
         foodServiceImpl.save(food);
     }
 
-    //음식 조회(id)
+    //음식 조회(foodId)
     @GetMapping("/search/id/{foodId}")
-    public Optional<Food> searchFoodById(@PathVariable Long id){
-        return foodServiceImpl.findById(id);
+    public Optional<Food> searchFoodById(@PathVariable Long foodId) {
+        return foodServiceImpl.findById(foodId);
     }
 
     //음식 조회(포함 단어)
-    @GetMapping("/search/name/{foodId}")
-    public List<Food> searchFoodContainName(@PathVariable String Name){
-        return foodServiceImpl.findByNameContaining(Name);
+    @GetMapping("/search/{name}")
+    public List<Food> searchFoodContainName(@PathVariable String name) {
+        return foodServiceImpl.findByNameContaining(name);
     }
 
     //음식 수정
     @PutMapping("/update/{foodId}")
-    public void updateFood(@PathVariable Long id, @RequestBody FoodRequestDto foodRequestDto){
-        foodServiceImpl.update(id,foodRequestDto);
+    public void updateFood(@PathVariable Long foodId, @RequestBody FoodRequestDto foodRequestDto) {
+        foodServiceImpl.update(foodId, foodRequestDto);
     }
 
     //음식 삭제
-    @DeleteMapping("/delete/{foodId}")
+    @DeleteMapping("/delete")
     public void deleteFoodId(@RequestBody Food food) {
         foodServiceImpl.delete(food);
     }
