@@ -21,4 +21,9 @@ public class FoodServiceImpl implements FoodService {
     public void create(Food food) {
         foodRepository.createFood(food);
     }
+
+    @Override
+    public Food save(Food food) {
+        return foodRepository.save(food);
+    }
 }
