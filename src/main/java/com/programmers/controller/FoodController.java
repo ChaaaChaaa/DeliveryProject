@@ -39,5 +39,9 @@ public class FoodController {
         return foodServiceImpl.findById(id);
     }
 
-
+    //음식 조회(포함 단어)
+    @GetMapping("/search/name/{foodId}")
+    public List<Food> searchFoodContainName(@PathVariable String Name){
+        return foodServiceImpl.findByNameContaining(Name);
+    }
 }
