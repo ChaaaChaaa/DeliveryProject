@@ -50,4 +50,10 @@ public class FoodServiceImpl implements FoodService {
         updatedFood = save(updatedFood);
         return new FoodResponseDto(updatedFood);
     }
+
+    @Override
+    public void delete(Food food) {
+        foodRepository.delete(food);
+    }
+
 }
