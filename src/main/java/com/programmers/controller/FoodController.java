@@ -51,4 +51,9 @@ public class FoodController {
         foodServiceImpl.update(id,foodRequestDto);
     }
 
+    //음식 삭제
+    @DeleteMapping("/delete/{foodId}")
+    public void deleteFoodId(@RequestBody Food food) {
+        foodServiceImpl.delete(food);
+    }
 }
