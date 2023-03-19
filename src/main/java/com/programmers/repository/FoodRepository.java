@@ -2,8 +2,19 @@ package com.programmers.repository;
 
 import com.programmers.domain.Food;
 
-import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface FoodRepository {
-    List<Food> getList();
+
+@Repository
+public interface FoodRepository extends JpaRepository<Food, Long> {
+    default void createFood(Food food) {
+        Food.builder()
+                .category(food.getCategory())
+                .name(food.getName())
+                .price(food.getPrice())
+                .description(food.getDescription())
+                .image(food.getImage())
+                .build();
+    }
 }
