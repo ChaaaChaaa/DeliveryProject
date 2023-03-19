@@ -39,16 +39,16 @@ public class FoodServiceImpl implements FoodService {
     }
 
     @Override
-    public FoodResponseDto update(long id, FoodRequestDto foodRequestDto) {
-        Food food = foodRepository.findById(id)
-                .orElseThrow(()-> new IllegalArgumentException("해당 게시글이 존재하지 않습니다."));
+    public void update(long id, FoodRequestDto foodRequestDto) {
+        foodRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 존재하지 않습니다."));
         Food updatedFood = new Food(foodRequestDto.getName(),
                 foodRequestDto.getCategory(),
                 foodRequestDto.getPrice(),
                 foodRequestDto.getDescription(),
                 foodRequestDto.getImage());
         updatedFood = save(updatedFood);
-        return new FoodResponseDto(updatedFood);
+        new FoodResponseDto(updatedFood);
     }
 
     @Override
