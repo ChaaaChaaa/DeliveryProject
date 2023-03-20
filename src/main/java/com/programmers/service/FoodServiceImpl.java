@@ -16,13 +16,13 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Service
 public class FoodServiceImpl implements FoodService {
+
     private final FoodRepository foodRepository;
 
     @Override
     public Food save(Food food) {
         return foodRepository.save(food);
     }
-
 
     @Override
     public Optional<Food> findById(Long id) {
