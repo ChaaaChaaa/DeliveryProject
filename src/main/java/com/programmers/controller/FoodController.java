@@ -29,9 +29,9 @@ public class FoodController {
     }
 
     //음식 조회(foodId)
-    @GetMapping("/search/id/{foodId}")
-    public Optional<Food> searchFoodById(@PathVariable Long foodId) {
-        return foodServiceImpl.findById(foodId);
+    @GetMapping("/search/id/{id}")
+    public Optional<Food> searchFoodById(@PathVariable Long id) {
+        return foodServiceImpl.findById(id);
     }
 
     //음식 조회(포함 단어)
@@ -41,9 +41,9 @@ public class FoodController {
     }
 
     //음식 수정
-    @PutMapping("/update/{foodId}")
-    public void updateFood(@PathVariable Long foodId, @RequestBody FoodRequestDto foodRequestDto) {
-        foodServiceImpl.update(foodId, foodRequestDto);
+    @PutMapping("/update/{id}")
+    public void updateFood(@PathVariable Long id, @RequestBody FoodRequestDto foodRequestDto) {
+        foodServiceImpl.update(id, foodRequestDto);
     }
 
     //음식 삭제
