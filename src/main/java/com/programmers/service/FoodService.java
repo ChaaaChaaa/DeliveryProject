@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface FoodService {
-    void create(Food food);
-
     Food save(Food food);
 
     Optional<Food> findById(Long id);
