@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor  //선언된 모든 final 필드가 포함된 생성자를 생성
+@EqualsAndHashCode
 public class FoodRequestDto {
     @NotNull
     private final Long id;

@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
+@EqualsAndHashCode
 public class FoodResponseDto {
     private String name;
     private String category;
