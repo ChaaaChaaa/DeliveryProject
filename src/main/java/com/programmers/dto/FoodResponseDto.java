@@ -31,11 +31,28 @@ public class FoodResponseDto {
         this.image = image;
     }
 
-    public FoodResponseDto(Food food) {
-        this.name = food.getName();
-        this.category = food.getCategory();
-        this.price = food.getPrice();
-        this.description = food.getDescription();
-        this.image = food.getImage();
+    public static FoodResponseDto of(Food food) {
+        return FoodResponseDto.builder()
+                .id(food.getId())
+                .category(food.getCategory())
+                .name(food.getName())
+                .price(food.getPrice())
+                .description(food.getDescription())
+                .image(food.getImage())
+                .build();
+    }
+
+
+    public static List<FoodResponseDto> from(List<Food> foods) {
+        return foods.stream()
+                .map(food -> FoodResponseDto.builder()
+                        .id(food.getId())
+                        .name(food.getName())
+                        .category(food.getCategory())
+                        .price(food.getPrice())
+                        .description(food.getDescription())
+                        .image(food.getImage())
+                        .build())
+                .collect(Collectors.toList());
     }
 }
