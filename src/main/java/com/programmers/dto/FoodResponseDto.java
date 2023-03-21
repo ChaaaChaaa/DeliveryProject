@@ -14,11 +14,22 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode
 public class FoodResponseDto {
-    private String name;
-    private String category;
-    private int price;
-    private String description;
-    private String image;
+    private final Long id;
+    private final String name;
+    private final String category;
+    private final int price;
+    private final String description;
+    private final String image;
+
+    @Builder
+    public FoodResponseDto(Long id, String name, String category, int price, String description, String image) {
+        this.id = id;
+        this.name = name;
+        this.category = category;
+        this.price = price;
+        this.description = description;
+        this.image = image;
+    }
 
     public FoodResponseDto(Food food) {
         this.name = food.getName();
