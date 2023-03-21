@@ -29,8 +29,8 @@ public class FoodController {
     }
 
     //음식 조회(foodId)
-    @GetMapping("/search/id/{id}")
-    public Optional<Food> searchFoodById(@PathVariable Long id) {
+    @GetMapping("/searchById/{id}")
+    public FoodResponseDto searchFoodById(@PathVariable Long id) {
         return foodServiceImpl.findById(id);
     }
 

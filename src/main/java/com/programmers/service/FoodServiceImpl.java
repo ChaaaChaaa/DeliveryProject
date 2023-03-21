@@ -25,8 +25,8 @@ public class FoodServiceImpl implements FoodService {
     }
 
     @Override
-    public Optional<Food> findById(Long id) {
-        return foodRepository.findById(id);
+    public FoodResponseDto findById(Long id) {
+        return FoodResponseDto.of(foodRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("해당 id의 음식이 존재하지 않습니다")));
     }
 
     @Override

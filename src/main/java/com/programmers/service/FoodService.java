@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface FoodService {
     Food save(Food food);
 
-    Optional<Food> findById(Long id);
+    FoodResponseDto findById(Long id);
 
     List<Food> findByNameContaining(String Name);
 
