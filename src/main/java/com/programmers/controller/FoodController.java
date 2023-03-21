@@ -2,6 +2,7 @@ package com.programmers.controller;
 
 import com.programmers.domain.Food;
 import com.programmers.dto.FoodRequestDto;
+import com.programmers.dto.FoodResponseDto;
 import com.programmers.service.FoodServiceImpl;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
-import java.util.Optional;
 
 import lombok.RequiredArgsConstructor;
 
@@ -51,6 +51,4 @@ public class FoodController {
     public void deleteFoodId(@RequestBody Food food) {
         foodServiceImpl.delete(food);
     }
-
-
 }

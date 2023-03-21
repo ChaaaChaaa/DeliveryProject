@@ -5,11 +5,11 @@ import com.programmers.dto.FoodRequestDto;
 import com.programmers.dto.FoodResponseDto;
 import com.programmers.repository.FoodRepository;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+
+import javax.persistence.EntityNotFoundException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -51,5 +51,4 @@ public class FoodServiceImpl implements FoodService {
     public void delete(Food food) {
         foodRepository.delete(food);
     }
-
 }

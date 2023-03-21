@@ -3,7 +3,6 @@ package com.programmers.dto;
 import com.programmers.domain.Food;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
