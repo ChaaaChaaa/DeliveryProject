@@ -2,6 +2,11 @@ package com.programmers.dto;
 
 import com.programmers.domain.Food;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 

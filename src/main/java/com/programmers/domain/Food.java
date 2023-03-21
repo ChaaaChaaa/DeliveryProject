@@ -25,8 +25,9 @@ public class Food {
     @Column(length = 30, nullable = false)
     private int price;
 
-    @Column(columnDefinition="TEXT")
+    @Column(columnDefinition = "TEXT")
     private String description;
+
     private String image;
 
     @Builder

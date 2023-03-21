@@ -2,9 +2,9 @@ package com.programmers.service;
 
 import com.programmers.domain.Food;
 import com.programmers.dto.FoodRequestDto;
+import com.programmers.dto.FoodResponseDto;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface FoodService {
     Food save(Food food);

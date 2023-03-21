@@ -22,7 +22,7 @@ import lombok.RequiredArgsConstructor;
 public class FoodController {
     private final FoodServiceImpl foodServiceImpl;
 
-      //음식 등록
+    //음식 등록
     @PostMapping("/save")
     public void saveFood(@RequestBody Food food) {
         foodServiceImpl.save(food);
