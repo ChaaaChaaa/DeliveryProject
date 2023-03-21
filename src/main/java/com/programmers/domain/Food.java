@@ -16,13 +16,13 @@ public class Food {
     @Id
     private Long id;
 
-    @Column(length=100, nullable=false)
+    @Column(length = 30, nullable = false)
     private String category;
 
-    @Column(length=500, nullable=false)
+    @Column(length = 30, nullable = false)
     private String name;
 
-    @Column(length=100, nullable=false)
+    @Column(length = 30, nullable = false)
     private int price;
 
     @Column(columnDefinition="TEXT")
