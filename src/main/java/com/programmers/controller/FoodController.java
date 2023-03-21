@@ -35,8 +35,8 @@ public class FoodController {
     }
 
     //음식 조회(포함 단어)
-    @GetMapping("/search/{name}")
-    public List<Food> searchFoodContainName(@PathVariable String name) {
+    @GetMapping ("/searchByName/{name}")
+    public List<FoodResponseDto> searchFoodContainName(@PathVariable String name) {
         return foodServiceImpl.findByNameContaining(name);
     }
 

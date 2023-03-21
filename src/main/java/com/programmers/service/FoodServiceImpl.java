@@ -30,8 +30,8 @@ public class FoodServiceImpl implements FoodService {
     }
 
     @Override
-    public List<Food> findByNameContaining(String Name) {
-        return foodRepository.findByNameContaining(Name);
+    public List<FoodResponseDto> findByNameContaining(String Name) {
+        return FoodResponseDto.from(foodRepository.findByNameContaining(Name));
     }
 
     @Override

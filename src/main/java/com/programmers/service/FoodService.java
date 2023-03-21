@@ -11,7 +11,7 @@ public interface FoodService {
 
     FoodResponseDto findById(Long id);
 
-    List<Food> findByNameContaining(String Name);
+    List<FoodResponseDto> findByNameContaining(String Name);
 
     void update(long id, FoodRequestDto foodRequestDto);
 
