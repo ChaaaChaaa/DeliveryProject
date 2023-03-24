@@ -15,8 +15,6 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 import java.util.Optional;
 
-import javax.persistence.EntityNotFoundException;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -67,7 +65,7 @@ class FoodServiceTest {
         Long nonExistingId = newFood.getId() + 100;
 
         //when & then
-        assertThrows(EntityNotFoundException.class, () -> foodService.findById(nonExistingId));
+        assertThrows(ResponseStatusException.class, () -> foodService.findById(nonExistingId));
     }
 
     @Test
