@@ -16,9 +16,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @AutoConfigureMockMvc
 @SpringBootTest
@@ -90,7 +90,27 @@ class FoodControllerTest {
     }
 
     @Test
-    void deleteFoodId() {
+    @DisplayName("음식 삭제 테스트")
+    void deleteFoodId() throws Exception {
+        //given
+        Food food = basicFoodData();
+        Food savedFood = foodRepository.save(food);
+
+        //expected
+        mockMvc.perform(delete("/foods/{id}",savedFood.getId())
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andDo(print());
+        assertEquals(0L,foodRepository.count());
+    }
+
+    @Test
+    @DisplayName("존재하지 않는 음식 조회")
+    void getNotExistPost() throws Exception {
+        mockMvc.perform(get("/foods/{id}",1L)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound())
+                .andDo(print());
     }
 
     private Food basicFoodData() {
