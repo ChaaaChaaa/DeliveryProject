@@ -33,14 +33,14 @@ class FoodControllerTest {
     private FoodService foodService;
 
     @BeforeEach
-    void clean(){
+    void clean() {
         mockMvc = MockMvcBuilders.standaloneSetup(new FoodController(foodService)).build();
         foodRepository.deleteAll();
     }
 
     @Test
     @DisplayName("/posts 요청시 db에 저장이 된다.")
-    void saveFood() throws Exception{
+    void saveFood() throws Exception {
         //given
         ObjectMapper objectMapper = new ObjectMapper();
         Food food = basicFoodData();
@@ -57,50 +57,58 @@ class FoodControllerTest {
                 .andDo(print());
 
         //then
-        assertEquals(1,foodRepository.count());
+        assertEquals(1, foodRepository.count());
         Food getFood = foodRepository.findAll().get(0);
-        assertEquals("맛있는라면",getFood.getDescription());
-        assertEquals(1000,getFood.getPrice());
+        assertEquals("맛있는라면", getFood.getDescription());
+        assertEquals(1000, getFood.getPrice());
+    }
+
+
+    @Test
+    @DisplayName("글 1개 조회")
+    void searchFoodById() throws Exception {
+        //given
+        Food food = basicFoodData();
+        Food newFood = foodService.save(food);
+
+        //when,then
+
+        mockMvc.perform(get("/foods/{id}", newFood.getId())
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andExpect(jsonPath("$.id").value(String.valueOf(newFood.getId())))
+                .andExpect(jsonPath("$.name").value("lamen"))
+                .andExpect(jsonPath("$.price").value(1000));
     }
 
 
 //    @Test
-//    @DisplayName("글 1개 조회")
-//    void searchFoodById() throws Exception {
-//        //given
-//        Food food = basicFoodData();
-//        Food newFood = foodService.save(food);
-//
-//        //when,then
-//        mockMvc.perform(get("/foods/{id}", newFood.getName())
-//                        .contentType(MediaType.APPLICATION_JSON))
-//                .andExpect(status().isOk())
-//                .andDo(print())
-//                .andExpect(jsonPath("$.id").value(newFood.getId()))
-//                .andExpect(jsonPath("$.name").value("라면"))
-//                .andExpect(jsonPath("$.price").value(1000));
-//    }
-//
-//
-//    @Test
 //    void searchFoodContainName() throws Exception {
 //        //given
-//        Food food = basicFoodData();
-//        Food newFood = foodService.save(food);
+//        String name = "lamen";
+//        List<FoodResponseDto> expectedFoods = Arrays.asList(
+//                FoodResponseDto.of(basicFoodData()),
+//                FoodResponseDto.of(dummyFoodData())
+//        );
 //
 //        //when,then
-//        mockMvc.perform(get("/foods/name/{name}", newFood.getName())
+//        mockMvc.perform(get("/foods/name/{name}", name)
 //                        .contentType(MediaType.APPLICATION_JSON))
 //                .andExpect(status().isOk())
-//                .andDo(print())
-//                .andExpect(jsonPath("$.id").value(newFood.getId()))
-//                .andExpect(jsonPath("$.name").value("라면"))
-//                .andExpect(jsonPath("$.price").value(1000));
+//                .andExpect(jsonPath("$.[0].id").value(expectedFoods.get(0).getId()))
+//                .andExpect(jsonPath("$.[0].name").value(expectedFoods.get(0).getName()))
+//                .andExpect(jsonPath("$.[0].price").value(expectedFoods.get(0).getPrice()))
+//                .andExpect(jsonPath("$.[0].description").value(expectedFoods.get(0).getDescription()))
+//                .andExpect(jsonPath("$.[0].category").value(expectedFoods.get(0).getCategory()));
 //    }
 
     @Test
+    @DisplayName("음식 내용 수정 테스트")
     void updateFood() {
-
+        //given
+        //when
+        //then
     }
 
     @Test
@@ -111,18 +119,18 @@ class FoodControllerTest {
         Food savedFood = foodRepository.save(food);
 
         //expected
-        mockMvc.perform(delete("/foods/{id}",savedFood.getId())
-                .contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(delete("/foods/{id}", savedFood.getId())
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andDo(print());
-        assertEquals(0L,foodRepository.count());
+        assertEquals(0L, foodRepository.count());
     }
 
     @Test
     @DisplayName("존재하지 않는 음식 조회")
     void getNotExistPost() throws Exception {
-        mockMvc.perform(get("/foods/{id}",1L)
-                .contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/foods/{id}", 1L)
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound())
                 .andDo(print());
     }
@@ -132,7 +140,7 @@ class FoodControllerTest {
                 .id(1L)
                 .price(1000)
                 .description("맛있는라면")
-                .name("라면")
+                .name("lamen")
                 .category("noodle")
                 .build();
     }

@@ -30,6 +30,7 @@ public class Food {
 
     private String image;
 
+
     @Builder
     public Food(Long id, String category, String name, int price, String description, String image) {
         this.id = id;
