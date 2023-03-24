@@ -2,6 +2,7 @@ package com.programmers.repository;
 
 import com.programmers.domain.Food;
 
+import org.hibernate.annotations.SQLUpdate;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

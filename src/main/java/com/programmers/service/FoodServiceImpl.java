@@ -9,8 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import javax.persistence.EntityNotFoundException;
-
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
