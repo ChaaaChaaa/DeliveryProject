@@ -22,14 +22,14 @@ import lombok.RequiredArgsConstructor;
 public class FoodController {
     private final FoodServiceImpl foodServiceImpl;
 
-    //음식 등록
+
     @PostMapping("/save")
     public void saveFood(@RequestBody Food food) {
         foodServiceImpl.save(food);
     }
 
-    //음식 조회(foodId)
-    @GetMapping("/searchById/{id}")
+
+    @GetMapping("/{id}")
     public FoodResponseDto searchFoodById(@PathVariable Long id) {
         return foodServiceImpl.findById(id);
     }
@@ -40,8 +40,7 @@ public class FoodController {
         return foodServiceImpl.findByNameContaining(name);
     }
 
-    //음식 수정
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public void updateFood(@PathVariable Long id, @RequestBody FoodRequestDto foodRequestDto) {
         foodServiceImpl.update(id, foodRequestDto);
     }
