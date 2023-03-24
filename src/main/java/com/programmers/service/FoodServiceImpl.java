@@ -5,7 +5,9 @@ import com.programmers.dto.FoodRequestDto;
 import com.programmers.dto.FoodResponseDto;
 import com.programmers.repository.FoodRepository;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -24,7 +26,8 @@ public class FoodServiceImpl implements FoodService {
 
     @Override
     public FoodResponseDto findById(Long id) {
-        return FoodResponseDto.of(foodRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("해당 id의 음식이 존재하지 않습니다")));
+        return FoodResponseDto.of(foodRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"해당 id의 음식이 존재하지 않습니다.")));
     }
 
     @Override
