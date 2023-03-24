@@ -3,7 +3,7 @@ package com.programmers.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.programmers.domain.Food;
 import com.programmers.repository.FoodRepository;
-import com.programmers.service.FoodServiceImpl;
+import com.programmers.service.FoodService;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -30,7 +30,7 @@ class FoodControllerTest {
     private FoodRepository foodRepository;
 
     @Autowired
-    private FoodServiceImpl foodService;
+    private FoodService foodService;
 
     @BeforeEach
     void clean(){
