@@ -45,14 +45,7 @@ public class FoodResponseDto {
 
     public static List<FoodResponseDto> from(List<Food> foods) {
         return foods.stream()
-                .map(food -> FoodResponseDto.builder()
-                        .id(food.getId())
-                        .name(food.getName())
-                        .category(food.getCategory())
-                        .price(food.getPrice())
-                        .description(food.getDescription())
-                        .image(food.getImage())
-                        .build())
+                .map(FoodResponseDto::of)
                 .collect(Collectors.toList());
     }
 }
