@@ -34,8 +34,8 @@ public class FoodController {
         return foodServiceImpl.findById(id);
     }
 
-    //음식 조회(포함 단어)
-    @GetMapping ("/searchByName/{name}")
+
+    @GetMapping("/name/{name}")
     public List<FoodResponseDto> searchFoodContainName(@PathVariable String name) {
         return foodServiceImpl.findByNameContaining(name);
     }
@@ -45,9 +45,8 @@ public class FoodController {
         foodServiceImpl.update(id, foodRequestDto);
     }
 
-    //음식 삭제
-    @DeleteMapping("/delete")
-    public void deleteFoodId(@RequestBody Food food) {
-        foodServiceImpl.delete(food);
+    @DeleteMapping("/{id}")
+    public void deleteFoodId(@PathVariable Long id) {
+        foodServiceImpl.deleteById(id);
     }
 }
