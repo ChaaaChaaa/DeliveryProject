@@ -3,17 +3,45 @@ package com.programmers.service;
 import com.programmers.domain.Food;
 import com.programmers.dto.FoodRequestDto;
 import com.programmers.dto.FoodResponseDto;
+import com.programmers.repository.FoodRepository;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
-public interface FoodService {
-    Food save(Food food);
+import lombok.RequiredArgsConstructor;
 
-    FoodResponseDto findById(Long id);
+@RequiredArgsConstructor
+@Service
+public class FoodService {
 
-    List<FoodResponseDto> findByNameContaining(String Name);
+    private final FoodRepository foodRepository;
 
-    void update(long id, FoodRequestDto foodRequestDto);
 
-    void deleteById(long id);
+    public Food save(Food food) {
+        return foodRepository.save(food);
+    }
+
+
+    public FoodResponseDto findById(Long id) {
+        return FoodResponseDto.of(foodRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"해당 id의 음식이 존재하지 않습니다.")));
+    }
+
+
+    public List<FoodResponseDto> findByNameContaining(String Name) {
+        return FoodResponseDto.from(foodRepository.findByNameContaining(Name));
+    }
+
+    public void update(long id, FoodRequestDto foodRequestDto) {
+        foodRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 존재하지 않습니다."));
+        foodRepository.save(foodRequestDto.toEntity());
+    }
+
+    public void deleteById(long id) {
+        foodRepository.deleteById(id);
+    }
 }
