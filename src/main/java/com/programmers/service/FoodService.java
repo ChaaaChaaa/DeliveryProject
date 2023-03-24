@@ -15,5 +15,5 @@ public interface FoodService {
 
     void update(long id, FoodRequestDto foodRequestDto);
 
-    void delete(Food food);
+    void deleteById(long id);
 }

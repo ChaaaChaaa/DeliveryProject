@@ -40,7 +40,7 @@ public class FoodServiceImpl implements FoodService {
     }
 
     @Override
-    public void delete(Food food) {
-        foodRepository.delete(food);
+    public void deleteById(long id) {
+        foodRepository.deleteById(id);
     }
 }
