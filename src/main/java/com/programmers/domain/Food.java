@@ -39,13 +39,4 @@ public class Food {
         this.description = description;
         this.image = image;
     }
-
-    @Builder
-    public Food(String category, String name, int price, String description, String image) {
-        this.category = category;
-        this.name = name;
-        this.price = price;
-        this.description = description;
-        this.image = image;
-    }
 }
