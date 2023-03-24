@@ -72,7 +72,24 @@ class FoodControllerTest {
 //        Food newFood = foodService.save(food);
 //
 //        //when,then
-//        mockMvc.perform(patch("/searchById/{id}", newFood.getId())
+//        mockMvc.perform(get("/foods/{id}", newFood.getName())
+//                        .contentType(MediaType.APPLICATION_JSON))
+//                .andExpect(status().isOk())
+//                .andDo(print())
+//                .andExpect(jsonPath("$.id").value(newFood.getId()))
+//                .andExpect(jsonPath("$.name").value("라면"))
+//                .andExpect(jsonPath("$.price").value(1000));
+//    }
+//
+//
+//    @Test
+//    void searchFoodContainName() throws Exception {
+//        //given
+//        Food food = basicFoodData();
+//        Food newFood = foodService.save(food);
+//
+//        //when,then
+//        mockMvc.perform(get("/foods/name/{name}", newFood.getName())
 //                        .contentType(MediaType.APPLICATION_JSON))
 //                .andExpect(status().isOk())
 //                .andDo(print())
@@ -82,11 +99,8 @@ class FoodControllerTest {
 //    }
 
     @Test
-    void searchFoodContainName() {
-    }
-
-    @Test
     void updateFood() {
+
     }
 
     @Test
