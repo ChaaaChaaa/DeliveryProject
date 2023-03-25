@@ -26,7 +26,13 @@ public class MenuService {
     private final FoodRepository foodRepository;
     private final StoreRepository storeRepository;
 
-
+    public Menu save(MenuRequestDto menuRequestDto) {
+        Menu savedMenu = Menu.builder()
+                .food(foodRepository.findByName(menuRequestDto.getFoodName()))
+                .store(storeRepository.findByStoreName(menuRequestDto.getStoreName()))
+                .build();
+        return menuRepository.save(savedMenu);
+    }
 
 
     public MenuResponseDto findById(Long id) {
