@@ -162,8 +162,7 @@ class FoodControllerTest {
                 .id(1L)
                 .price(1000)
                 .description("맛있는라면")
-                .name("lamen")
-                .category("noodle")
+                .name("라면")
                 .build();
     }
 
@@ -173,7 +172,6 @@ class FoodControllerTest {
                 .price(2000)
                 .description("매콤한라면")
                 .name("신라면")
-                .category("noodle")
                 .build();
     }
 }

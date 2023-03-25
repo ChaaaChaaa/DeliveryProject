@@ -100,7 +100,8 @@ class FoodServiceTest {
                 .price(modifiedPrice)
                 .description(dummyFood.getDescription())
                 .name(modifiedName)
-                .category(dummyFood.getCategory())
+                .price(modifiedPrice)
+                .description(modifiedDescription)
                 .build();
 
         //when
