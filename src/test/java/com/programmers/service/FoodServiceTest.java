@@ -96,17 +96,14 @@ class FoodServiceTest {
         Food dummyFood = foodRepository.save(dummyFoodData());
         Long dummyId = dummyFood.getId();
 
-        Food food = Food.builder()
-                .id(dummyFood.getId())
-                .price(modifiedPrice)
-                .description(dummyFood.getDescription())
+        FoodUpdateRequestDto foodUpdateRequestDto = FoodUpdateRequestDto.builder()
                 .name(modifiedName)
                 .price(modifiedPrice)
                 .description(modifiedDescription)
                 .build();
 
         //when
-        foodRepository.save(food);
+        foodService.update(dummyId,foodUpdateRequestDto);
 
         //then
         Food findFood = foodRepository.findById(dummyId).orElseThrow();
@@ -137,7 +134,6 @@ class FoodServiceTest {
                 .price(1000)
                 .description("맛있는라면")
                 .name("라면")
-                .category("noodle")
                 .build();
     }
 

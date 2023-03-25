@@ -1,9 +1,9 @@
 package com.programmers.service;
 
 import com.programmers.domain.Food;
-import com.programmers.dto.FoodRequestDto;
-import com.programmers.dto.FoodResponseDto;
-import com.programmers.repository.FoodRepository;
+import com.programmers.dto.food.FoodResponseDto;
+import com.programmers.dto.food.FoodUpdateRequestDto;
+import com.programmers.repository.food.FoodRepository;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -35,10 +35,13 @@ public class FoodService {
         return FoodResponseDto.from(foodRepository.findByNameContaining(Name));
     }
 
-    public void update(long id, FoodRequestDto foodRequestDto) {
-        foodRepository.findById(id)
+
+    @Transactional
+    public void update(long id, FoodUpdateRequestDto foodUpdateRequestDto) {
+        Food food = foodRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 존재하지 않습니다."));
-        foodRepository.save(foodRequestDto.toEntity());
+        food.update(foodUpdateRequestDto.getName(),foodUpdateRequestDto.getPrice(),foodUpdateRequestDto.getDescription());
+        //foodRepository.save(foodUpdateRequestDto);
     }
 
     public void deleteById(long id) {
