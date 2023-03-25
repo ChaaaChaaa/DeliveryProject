@@ -18,6 +18,7 @@ public interface FoodRepository extends JpaRepository<Food, Long> {
 
     List<Food> findByNameContaining(String Name);
 
+    Food findByName(String name);
     Food save(@Nullable Food food);
 
     void delete(@Nullable Food food);
