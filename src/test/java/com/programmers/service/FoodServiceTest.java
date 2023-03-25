@@ -72,7 +72,7 @@ class FoodServiceTest {
     @DisplayName("이름으로 음식 조회")
     void findByNameContaining() {
         //given
-        Food requestFood = dummyFoodData();
+        Food requestFood = basicFoodData();
         Food newFood = foodRepository.save(requestFood);
 
         //when
@@ -88,10 +88,12 @@ class FoodServiceTest {
     @DisplayName("update test")
     void update() {
         //given
-        String modifiedName = "비빔라면";
+        String modifiedName = "냉면";
         int modifiedPrice = 3000;
+        String modifiedDescription ="시뭔한 냉면";
+
         Food dummyFood = foodRepository.save(dummyFoodData());
-        Long dummyFoodId = dummyFood.getId();
+        Long dummyId = dummyFood.getId();
 
         Food food = Food.builder()
                 .id(dummyFood.getId())
@@ -105,9 +107,9 @@ class FoodServiceTest {
         foodRepository.save(food);
 
         //then
-        Food findFood = foodRepository.findById(dummyFoodId).orElseThrow();
+        Food findFood = foodRepository.findById(dummyId).orElseThrow();
 
-        assertEquals(dummyFoodId, findFood.getId());
+        assertEquals(dummyId, findFood.getId());
         assertEquals(modifiedName, findFood.getName());
         assertEquals(modifiedPrice, findFood.getPrice());
     }
