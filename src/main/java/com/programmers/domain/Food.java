@@ -16,9 +16,6 @@ public class Food {
     private Long id;
 
     @Column(length = 30, nullable = false)
-    private String category;
-
-    @Column(length = 30, nullable = false)
     private String name;
 
     @Column(length = 30, nullable = false)

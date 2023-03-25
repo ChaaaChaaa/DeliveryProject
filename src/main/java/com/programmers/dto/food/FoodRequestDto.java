@@ -16,8 +16,6 @@ import lombok.Setter;
 public class FoodRequestDto {
     @NotNull
     private final Long id;
-    @NotNull
-    private final String category;
     @NotBlank
     @Length(min = 1, max = 30)
     private final String name;
@@ -28,9 +26,8 @@ public class FoodRequestDto {
     private final String image;
 
     @Builder //이거랑 @NoArgsConstructor의 차이는 뭐지?
-    public FoodRequestDto(Long id, String category, String name, int price, String description, String image) {
+    public FoodRequestDto(Long id, String name, int price, String description, String image) {
         this.id = id;
-        this.category = category;
         this.name = name;
         this.price = price;
         this.description = description;

@@ -143,7 +143,6 @@ class FoodServiceTest {
                 .price(2000)
                 .description("매콤한라면")
                 .name("신라면")
-                .category("noodle")
                 .build();
     }
 
