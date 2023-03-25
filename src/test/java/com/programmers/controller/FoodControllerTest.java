@@ -104,10 +104,33 @@ class FoodControllerTest {
 
     @Test
     @DisplayName("음식 내용 수정 테스트")
-    void updateFood() {
+    void updateFood() throws Exception {
         //given
-        //when
-        //then
+        ObjectMapper objectMapper = new ObjectMapper();
+        Food food = dummyFoodData();
+        Food savedFood = foodService.save(food);
+
+        Long updatedId = savedFood.getId();
+        String expectedName = "냉면";
+        int expectedPrice = 5000;
+        String expectedDescription = "시원한 냉면";
+        /*
+        UPDATE foods set name = :name, price = :price, description = :description where id = :id;
+        delete where
+         */
+
+        FoodUpdateRequestDto foodUpdateRequestDto = FoodUpdateRequestDto.builder()
+                .name(expectedName)
+                .price(expectedPrice)
+                .description(expectedDescription)
+                .build();
+
+        //when,then
+        mockMvc.perform(put("/foods/{id}",updatedId)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(foodUpdateRequestDto)))
+                .andExpect(status().isOk())
+                .andDo(print());
     }
 
     @Test
