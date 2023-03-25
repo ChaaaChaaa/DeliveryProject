@@ -79,8 +79,7 @@ class FoodControllerTest {
 
         //when,then
 
-        mockMvc.perform(get("/foods/{id}", newFood.getId())
-                        .contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/foods/{id}", newFood.getId()))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(jsonPath("$.id").value(String.valueOf(newFood.getId())))
