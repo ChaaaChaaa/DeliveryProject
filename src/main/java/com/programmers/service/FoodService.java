@@ -7,6 +7,7 @@ import com.programmers.repository.food.FoodRepository;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -31,8 +32,8 @@ public class FoodService {
     }
 
 
-    public List<FoodResponseDto> findByNameContaining(String Name) {
-        return FoodResponseDto.from(foodRepository.findByNameContaining(Name));
+    public List<FoodResponseDto> findByNameContaining(String name) {
+        return FoodResponseDto.from(foodRepository.findByNameContaining(name));
     }
 
 
