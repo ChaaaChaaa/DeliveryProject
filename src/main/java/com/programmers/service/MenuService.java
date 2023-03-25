@@ -27,7 +27,6 @@ public class MenuService {
     private final StoreRepository storeRepository;
 
 
-
     @Transactional
     public void update(long id, MenuUpdateRequestDto menuUpdateRequestDto) {
         Menu menu = menuRepository.findById(id)
@@ -37,5 +36,7 @@ public class MenuService {
         menu.update(store, food);
     }
 
-
+    public void deleteById(long id) {
+        menuRepository.deleteById(id);
+    }
 }
