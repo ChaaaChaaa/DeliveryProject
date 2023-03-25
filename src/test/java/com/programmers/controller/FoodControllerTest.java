@@ -83,7 +83,7 @@ class FoodControllerTest {
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(jsonPath("$.id").value(String.valueOf(newFood.getId())))
-                .andExpect(jsonPath("$.name").value("lamen"))
+                .andExpect(jsonPath("$.name").value("라면"))
                 .andExpect(jsonPath("$.price").value(1000));
     }
 
@@ -140,7 +140,7 @@ class FoodControllerTest {
 
     @Test
     @DisplayName("음식 삭제 테스트")
-    void deleteFoodId() throws Exception {
+    void deleteId() throws Exception {
         //given
         Food food = basicFoodData();
         Food savedFood = foodRepository.save(food);
