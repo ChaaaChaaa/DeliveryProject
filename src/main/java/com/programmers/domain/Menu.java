@@ -29,5 +29,12 @@ public class Menu {
     @JoinColumn(name = "foodId", foreignKey = @ForeignKey(name = "fk_menu_food"))
     private Food food;
 
+    @Builder
+    public Menu(Long menuId, Store store, Food food) {
+        this.menuId = menuId;
+        this.store = store;
+        this.food = food;
+    }
+
 
 }
