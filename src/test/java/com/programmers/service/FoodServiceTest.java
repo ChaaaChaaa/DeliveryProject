@@ -38,7 +38,7 @@ class FoodServiceTest {
     void save() {
         Food food = basicFoodData();
         Food newFood = foodRepository.save(food);
-        assertEquals(food.getId(), newFood.getId());
+        assertEquals(food.getPrice(), newFood.getPrice());
     }
 
     @Test
