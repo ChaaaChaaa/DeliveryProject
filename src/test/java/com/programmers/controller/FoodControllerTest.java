@@ -2,7 +2,9 @@ package com.programmers.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.programmers.domain.Food;
-import com.programmers.repository.FoodRepository;
+import com.programmers.dto.food.FoodResponseDto;
+import com.programmers.dto.food.FoodUpdateRequestDto;
+import com.programmers.repository.food.FoodRepository;
 import com.programmers.service.FoodService;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -15,6 +17,9 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
@@ -23,6 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @SpringBootTest
 class FoodControllerTest {
+
 
     private MockMvc mockMvc;
 

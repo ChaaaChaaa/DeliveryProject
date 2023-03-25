@@ -1,8 +1,9 @@
 package com.programmers.service;
 
 import com.programmers.domain.Food;
-import com.programmers.dto.FoodResponseDto;
-import com.programmers.repository.FoodRepository;
+import com.programmers.dto.food.FoodResponseDto;
+import com.programmers.dto.food.FoodUpdateRequestDto;
+import com.programmers.repository.food.FoodRepository;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
