@@ -83,25 +83,24 @@ class FoodControllerTest {
     }
 
 
-//    @Test
-//    void searchFoodContainName() throws Exception {
-//        //given
-//        String name = "lamen";
-//        List<FoodResponseDto> expectedFoods = Arrays.asList(
-//                FoodResponseDto.of(basicFoodData()),
-//                FoodResponseDto.of(dummyFoodData())
-//        );
-//
-//        //when,then
-//        mockMvc.perform(get("/foods/name/{name}", name)
-//                        .contentType(MediaType.APPLICATION_JSON))
-//                .andExpect(status().isOk())
-//                .andExpect(jsonPath("$.[0].id").value(expectedFoods.get(0).getId()))
-//                .andExpect(jsonPath("$.[0].name").value(expectedFoods.get(0).getName()))
-//                .andExpect(jsonPath("$.[0].price").value(expectedFoods.get(0).getPrice()))
-//                .andExpect(jsonPath("$.[0].description").value(expectedFoods.get(0).getDescription()))
-//                .andExpect(jsonPath("$.[0].category").value(expectedFoods.get(0).getCategory()));
-//    }
+    @Test
+    @DisplayName("음식 이름 포함 테스트")
+    public void searchFoodContainNameTest() throws Exception {
+        //given
+        String name = "라면";
+        List<FoodResponseDto> expectedFoods = new ArrayList<>();
+        expectedFoods.add(FoodResponseDto.of(basicFoodData()));
+
+        foodService.save(basicFoodData());
+
+        //when,then
+        mockMvc.perform(get("/foods/search?name={name}", name))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andExpect(jsonPath("$[0].name").value(expectedFoods.get(0).getName()))
+                .andExpect(jsonPath("$[0].price").value(expectedFoods.get(0).getPrice()))
+                .andExpect(jsonPath("$[0].description").value(expectedFoods.get(0).getDescription()));
+    }
 
     @Test
     @DisplayName("음식 내용 수정 테스트")
