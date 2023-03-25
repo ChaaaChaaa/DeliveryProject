@@ -1,5 +1,4 @@
-package com.programmers.repository;
-
+package com.programmers.repository.food;
 import com.programmers.domain.Food;
 
 
