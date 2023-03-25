@@ -9,8 +9,6 @@ import javax.persistence.Id;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-
 @Getter
 @NoArgsConstructor
 @Entity
@@ -27,6 +25,7 @@ public class Food {
 
     @Column(columnDefinition = "TEXT")
     private String description;
+
     private String image;
 
 
