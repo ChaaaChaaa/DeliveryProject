@@ -1,6 +1,4 @@
-package com.programmers.dto;
-
-import com.programmers.domain.Food;
+package com.programmers.dto.food;
 
 import org.hibernate.validator.constraints.Length;
 
@@ -32,16 +30,5 @@ public class FoodRequestDto {
         this.price = price;
         this.description = description;
         this.image = image;
-    }
-
-    public Food toEntity() {
-        return Food.builder()
-                .id(id)
-                .category(category)
-                .name(name)
-                .price(price)
-                .description(description)
-                .image(image)
-                .build();
     }
 }
