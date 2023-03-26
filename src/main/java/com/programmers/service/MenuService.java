@@ -45,7 +45,6 @@ public class MenuService {
                 .build();
     }
 
-
     @Transactional
     public void update(long id, Menu menu) {
         Menu updatedMenu = menuRepository.findById(id)

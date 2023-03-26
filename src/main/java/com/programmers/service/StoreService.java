@@ -1,5 +1,6 @@
 package com.programmers.service;
 
+
 import com.programmers.domain.Store;
 import com.programmers.dto.store.StoreResponseDto;
 import com.programmers.exception.StoreNotFoundException;

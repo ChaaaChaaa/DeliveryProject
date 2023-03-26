@@ -1,6 +1,7 @@
 package com.programmers.controller;
 
 
+import com.programmers.domain.Menu;
 import com.programmers.dto.menu.MenuRequestDto;
 import com.programmers.dto.menu.MenuResponseDto;
 import com.programmers.service.MenuService;
@@ -35,8 +36,8 @@ public class MenuController {
 
 
     @PutMapping("/{menuId}")
-    public void updateMenu(@PathVariable Long menuId, @RequestBody MenuUpdateRequestDto menuUpdateRequestDto) {
-        menuService.update(menuId, menuUpdateRequestDto);
+    public void updateMenu(@PathVariable Long menuId, @RequestBody Menu menu) {
+        menuService.update(menuId, menu);
     }
 
     @DeleteMapping("/{menuId}")
