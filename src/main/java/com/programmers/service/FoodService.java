@@ -40,8 +40,10 @@ public class FoodService {
     public void update(long id, Food food) {
         Food updatedFood = foodRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 존재하지 않습니다."));
-        food.update(foodUpdateRequestDto.getName(),foodUpdateRequestDto.getPrice(),foodUpdateRequestDto.getDescription());
-        //foodRepository.save(foodUpdateRequestDto);
+        updatedFood.changeName(food.getName());
+        updatedFood.changePrice(food.getPrice());
+        updatedFood.changeDescription(food.getDescription());
+        foodRepository.save(updatedFood);
     }
 
     public void deleteById(long id) {
