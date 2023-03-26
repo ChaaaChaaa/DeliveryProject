@@ -43,6 +43,9 @@ public class Store {
 
     public void changeStoreName(String storeName) {
         this.storeName = storeName;
+    }
+
+    public void changeCategory(String category) {
         this.category = category;
     }
 }
