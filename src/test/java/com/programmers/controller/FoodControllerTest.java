@@ -3,7 +3,6 @@ package com.programmers.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.programmers.domain.Food;
 import com.programmers.dto.food.FoodResponseDto;
-import com.programmers.dto.food.FoodUpdateRequestDto;
 import com.programmers.repository.food.FoodRepository;
 import com.programmers.service.FoodService;
 
@@ -119,12 +118,8 @@ class FoodControllerTest {
         String expectedName = "냉면";
         int expectedPrice = 5000;
         String expectedDescription = "시원한 냉면";
-        /*
-        UPDATE foods set name = :name, price = :price, description = :description where id = :id;
-        delete where
-         */
 
-        FoodUpdateRequestDto foodUpdateRequestDto = FoodUpdateRequestDto.builder()
+        Food updatedFood = Food.builder()
                 .name(expectedName)
                 .price(expectedPrice)
                 .description(expectedDescription)
@@ -133,7 +128,7 @@ class FoodControllerTest {
         //when,then
         mockMvc.perform(put("/foods/{id}",updatedId)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(foodUpdateRequestDto)))
+                        .content(objectMapper.writeValueAsString(updatedFood)))
                 .andExpect(status().isOk())
                 .andDo(print());
     }
