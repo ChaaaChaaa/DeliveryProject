@@ -39,8 +39,11 @@ public class Menu {
         this.food = food;
     }
 
-    public void update(Store store, Food food) {
+    public void changeStore(Store store) {
         this.store = store;
+    }
+
+    public void changeFood(Food food) {
         this.food = food;
     }
 }
