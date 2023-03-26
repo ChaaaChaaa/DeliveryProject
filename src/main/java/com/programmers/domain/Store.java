@@ -43,7 +43,5 @@ public class Store {
     public void update(String storeName, String category, int reviewCount, float rating) {
         this.storeName = storeName;
         this.category = category;
-        this.reviewCount = reviewCount;
-        this.rating = rating;
     }
 }
