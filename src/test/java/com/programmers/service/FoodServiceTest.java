@@ -2,7 +2,6 @@ package com.programmers.service;
 
 import com.programmers.domain.Food;
 import com.programmers.dto.food.FoodResponseDto;
-import com.programmers.dto.food.FoodUpdateRequestDto;
 import com.programmers.repository.food.FoodRepository;
 
 import org.junit.jupiter.api.Assertions;
@@ -96,14 +95,14 @@ class FoodServiceTest {
         Food dummyFood = foodRepository.save(dummyFoodData());
         Long dummyId = dummyFood.getId();
 
-        FoodUpdateRequestDto foodUpdateRequestDto = FoodUpdateRequestDto.builder()
+        Food updatedFood = Food.builder()
                 .name(modifiedName)
                 .price(modifiedPrice)
                 .description(modifiedDescription)
                 .build();
 
         //when
-        foodService.update(dummyId,foodUpdateRequestDto);
+        foodService.update(dummyId,updatedFood);
 
         //then
         Food findFood = foodRepository.findById(dummyId).orElseThrow();
