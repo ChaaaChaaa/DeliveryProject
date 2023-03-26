@@ -47,12 +47,12 @@ public class MenuService {
 
 
     @Transactional
-    public void update(long id, MenuUpdateRequestDto menuUpdateRequestDto) {
-        Menu menu = menuRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 존재하지 않습니다."));
-        Food food = foodRepository.findById(menuUpdateRequestDto.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "food가 존재하지 않습니다."));
-        Store store = storeRepository.findById(menuUpdateRequestDto.getStoreId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "store가 존재하지 않습니다."));
-        menu.update(store, food);
+    public void update(long id, Menu menu) {
+        Menu updatedMenu = menuRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 메뉴가 존재하지 않습니다."));
+        updatedMenu.changeFood(menu.getFood());
+        updatedMenu.changeStore(menu.getStore());
+        menuRepository.save(updatedMenu);
     }
 
     public void deleteById(long id) {
