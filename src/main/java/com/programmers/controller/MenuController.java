@@ -3,7 +3,6 @@ package com.programmers.controller;
 
 import com.programmers.dto.menu.MenuRequestDto;
 import com.programmers.dto.menu.MenuResponseDto;
-import com.programmers.dto.menu.MenuUpdateRequestDto;
 import com.programmers.service.MenuService;
 
 import org.springframework.web.bind.annotation.DeleteMapping;

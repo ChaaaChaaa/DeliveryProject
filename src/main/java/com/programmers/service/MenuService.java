@@ -6,7 +6,6 @@ import com.programmers.domain.Store;
 
 import com.programmers.dto.menu.MenuRequestDto;
 import com.programmers.dto.menu.MenuResponseDto;
-import com.programmers.dto.menu.MenuUpdateRequestDto;
 import com.programmers.repository.food.FoodRepository;
 import com.programmers.repository.menu.MenuRepository;
 import com.programmers.repository.store.StoreRepository;

@@ -2,7 +2,6 @@ package com.programmers.service;
 
 import com.programmers.domain.Store;
 import com.programmers.dto.store.StoreResponseDto;
-import com.programmers.dto.store.StoreUpdateRequestDto;
 import com.programmers.exception.StoreNotFoundException;
 import com.programmers.repository.store.StoreRepository;
 

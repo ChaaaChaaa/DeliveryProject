@@ -2,7 +2,6 @@ package com.programmers.controller;
 
 import com.programmers.domain.Store;
 import com.programmers.dto.store.StoreResponseDto;
-import com.programmers.dto.store.StoreUpdateRequestDto;
 import com.programmers.service.StoreService;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
