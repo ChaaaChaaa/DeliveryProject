@@ -37,22 +37,16 @@ public class StoreService {
 
 
     @Transactional
-    public void update(long id, StoreUpdateRequestDto storeUpdateRequestDto) {
-        Store store = storeRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "해당 가게가 존재하지 않습니다."));
-
-        getStoreInfo(store, storeUpdateRequestDto);
+    public void update(long id, Store store) {
+        Store updatedStore = storeRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 존재하지 않습니다."));
+        updatedStore.changeStoreName(store.getStoreName());
+        updatedStore.changeCategory(store.getCategory());
+        storeRepository.save(updatedStore);
     }
 
     public void deleteById(long id) {
         storeRepository.deleteById(id);
     }
 
-    private void getStoreInfo(Store store, StoreUpdateRequestDto storeUpdateRequestDto) {
-        String updatedName = storeUpdateRequestDto.getStoreName();
-        String updatedCategory = storeUpdateRequestDto.getCategory();
-        int updatedReviewCount = storeUpdateRequestDto.getReviewCount();
-        float updatedRating = storeUpdateRequestDto.getRating();
-        store.update(updatedName, updatedCategory, updatedReviewCount, updatedRating);
-    }
 }
