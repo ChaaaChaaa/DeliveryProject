@@ -40,7 +40,8 @@ public class Store {
         this.rating = rating;
     }
 
-    public void update(String storeName, String category, int reviewCount, float rating) {
+
+    public void changeStoreName(String storeName) {
         this.storeName = storeName;
         this.category = category;
     }
