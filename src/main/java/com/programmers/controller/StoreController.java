@@ -40,8 +40,8 @@ public class StoreController {
     }
 
     @PutMapping("/{storeId}")
-    public void updateStore(@PathVariable Long storeId, @RequestBody StoreUpdateRequestDto storeUpdateRequestDto) {
-        storeService.update(storeId, storeUpdateRequestDto);
+    public void updateStore(@PathVariable Long storeId, @RequestBody Store store) {
+        storeService.update(storeId, store);
     }
 
     @DeleteMapping("/{storeId}")
