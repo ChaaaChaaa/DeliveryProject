@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @Entity
+@DynamicUpdate
 public class Food {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
