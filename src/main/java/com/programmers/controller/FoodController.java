@@ -1,8 +1,8 @@
 package com.programmers.controller;
 
 import com.programmers.domain.Food;
-import com.programmers.dto.FoodRequestDto;
-import com.programmers.dto.FoodResponseDto;
+import com.programmers.dto.food.FoodResponseDto;
+import com.programmers.dto.food.FoodUpdateRequestDto;
 import com.programmers.service.FoodService;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -42,12 +42,12 @@ public class FoodController {
     }
 
     @PutMapping("/{id}")
-    public void updateFood(@PathVariable Long id, @RequestBody FoodRequestDto foodRequestDto) {
-        foodService.update(id, foodRequestDto);
+    public void updateFood(@PathVariable Long id, @RequestBody FoodUpdateRequestDto foodUpdateRequestDto) {
+        foodService.update(id, foodUpdateRequestDto);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteFoodId(@PathVariable Long id) {
+    public void deleteId(@PathVariable Long id) {
         foodService.deleteById(id);
     }
 }

@@ -1,5 +1,4 @@
-package com.programmers.repository;
-
+package com.programmers.repository.food;
 import com.programmers.domain.Food;
 
 
@@ -17,8 +16,9 @@ public interface FoodRepository extends JpaRepository<Food, Long> {
     @NonNull
     Optional<Food> findById(@Nullable Long id);
 
-    List<Food> findByNameContaining(String Name);
+    List<Food> findByNameContaining(String name);
 
+    Food findByName(String name);
     Food save(@Nullable Food food);
 
     void delete(@Nullable Food food);

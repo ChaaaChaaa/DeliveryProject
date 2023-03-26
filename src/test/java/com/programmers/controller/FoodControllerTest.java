@@ -2,7 +2,9 @@ package com.programmers.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.programmers.domain.Food;
-import com.programmers.repository.FoodRepository;
+import com.programmers.dto.food.FoodResponseDto;
+import com.programmers.dto.food.FoodUpdateRequestDto;
+import com.programmers.repository.food.FoodRepository;
 import com.programmers.service.FoodService;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -15,6 +17,9 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
@@ -23,6 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @SpringBootTest
 class FoodControllerTest {
+
 
     private MockMvc mockMvc;
 
@@ -73,47 +79,68 @@ class FoodControllerTest {
 
         //when,then
 
-        mockMvc.perform(get("/foods/{id}", newFood.getId())
-                        .contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/foods/{id}", newFood.getId()))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(jsonPath("$.id").value(String.valueOf(newFood.getId())))
-                .andExpect(jsonPath("$.name").value("lamen"))
+                .andExpect(jsonPath("$.name").value("라면"))
                 .andExpect(jsonPath("$.price").value(1000));
     }
 
 
-//    @Test
-//    void searchFoodContainName() throws Exception {
-//        //given
-//        String name = "lamen";
-//        List<FoodResponseDto> expectedFoods = Arrays.asList(
-//                FoodResponseDto.of(basicFoodData()),
-//                FoodResponseDto.of(dummyFoodData())
-//        );
-//
-//        //when,then
-//        mockMvc.perform(get("/foods/name/{name}", name)
-//                        .contentType(MediaType.APPLICATION_JSON))
-//                .andExpect(status().isOk())
-//                .andExpect(jsonPath("$.[0].id").value(expectedFoods.get(0).getId()))
-//                .andExpect(jsonPath("$.[0].name").value(expectedFoods.get(0).getName()))
-//                .andExpect(jsonPath("$.[0].price").value(expectedFoods.get(0).getPrice()))
-//                .andExpect(jsonPath("$.[0].description").value(expectedFoods.get(0).getDescription()))
-//                .andExpect(jsonPath("$.[0].category").value(expectedFoods.get(0).getCategory()));
-//    }
+    @Test
+    @DisplayName("음식 이름 포함 테스트")
+    public void searchFoodContainNameTest() throws Exception {
+        //given
+        String name = "라면";
+        List<FoodResponseDto> expectedFoods = new ArrayList<>();
+        expectedFoods.add(FoodResponseDto.of(basicFoodData()));
+
+        foodService.save(basicFoodData());
+
+        //when,then
+        mockMvc.perform(get("/foods/search?name={name}", name))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andExpect(jsonPath("$[0].name").value(expectedFoods.get(0).getName()))
+                .andExpect(jsonPath("$[0].price").value(expectedFoods.get(0).getPrice()))
+                .andExpect(jsonPath("$[0].description").value(expectedFoods.get(0).getDescription()));
+    }
 
     @Test
     @DisplayName("음식 내용 수정 테스트")
-    void updateFood() {
+    void updateFood() throws Exception {
         //given
-        //when
-        //then
+        ObjectMapper objectMapper = new ObjectMapper();
+        Food food = dummyFoodData();
+        Food savedFood = foodService.save(food);
+
+        Long updatedId = savedFood.getId();
+        String expectedName = "냉면";
+        int expectedPrice = 5000;
+        String expectedDescription = "시원한 냉면";
+        /*
+        UPDATE foods set name = :name, price = :price, description = :description where id = :id;
+        delete where
+         */
+
+        FoodUpdateRequestDto foodUpdateRequestDto = FoodUpdateRequestDto.builder()
+                .name(expectedName)
+                .price(expectedPrice)
+                .description(expectedDescription)
+                .build();
+
+        //when,then
+        mockMvc.perform(put("/foods/{id}",updatedId)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(foodUpdateRequestDto)))
+                .andExpect(status().isOk())
+                .andDo(print());
     }
 
     @Test
     @DisplayName("음식 삭제 테스트")
-    void deleteFoodId() throws Exception {
+    void deleteId() throws Exception {
         //given
         Food food = basicFoodData();
         Food savedFood = foodRepository.save(food);
@@ -140,8 +167,7 @@ class FoodControllerTest {
                 .id(1L)
                 .price(1000)
                 .description("맛있는라면")
-                .name("lamen")
-                .category("noodle")
+                .name("라면")
                 .build();
     }
 
@@ -151,7 +177,6 @@ class FoodControllerTest {
                 .price(2000)
                 .description("매콤한라면")
                 .name("신라면")
-                .category("noodle")
                 .build();
     }
 }

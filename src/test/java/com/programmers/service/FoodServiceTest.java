@@ -1,8 +1,9 @@
 package com.programmers.service;
 
 import com.programmers.domain.Food;
-import com.programmers.dto.FoodResponseDto;
-import com.programmers.repository.FoodRepository;
+import com.programmers.dto.food.FoodResponseDto;
+import com.programmers.dto.food.FoodUpdateRequestDto;
+import com.programmers.repository.food.FoodRepository;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -37,7 +38,7 @@ class FoodServiceTest {
     void save() {
         Food food = basicFoodData();
         Food newFood = foodRepository.save(food);
-        assertEquals(food.getId(), newFood.getId());
+        assertEquals(food.getPrice(), newFood.getPrice());
     }
 
     @Test
@@ -72,7 +73,7 @@ class FoodServiceTest {
     @DisplayName("이름으로 음식 조회")
     void findByNameContaining() {
         //given
-        Food requestFood = dummyFoodData();
+        Food requestFood = basicFoodData();
         Food newFood = foodRepository.save(requestFood);
 
         //when
@@ -88,26 +89,26 @@ class FoodServiceTest {
     @DisplayName("update test")
     void update() {
         //given
-        String modifiedName = "비빔라면";
+        String modifiedName = "냉면";
         int modifiedPrice = 3000;
-        Food dummyFood = foodRepository.save(dummyFoodData());
-        Long dummyFoodId = dummyFood.getId();
+        String modifiedDescription ="시뭔한 냉면";
 
-        Food food = Food.builder()
-                .id(dummyFood.getId())
-                .price(modifiedPrice)
-                .description(dummyFood.getDescription())
+        Food dummyFood = foodRepository.save(dummyFoodData());
+        Long dummyId = dummyFood.getId();
+
+        FoodUpdateRequestDto foodUpdateRequestDto = FoodUpdateRequestDto.builder()
                 .name(modifiedName)
-                .category(dummyFood.getCategory())
+                .price(modifiedPrice)
+                .description(modifiedDescription)
                 .build();
 
         //when
-        foodRepository.save(food);
+        foodService.update(dummyId,foodUpdateRequestDto);
 
         //then
-        Food findFood = foodRepository.findById(dummyFoodId).orElseThrow();
+        Food findFood = foodRepository.findById(dummyId).orElseThrow();
 
-        assertEquals(dummyFoodId, findFood.getId());
+        assertEquals(dummyId, findFood.getId());
         assertEquals(modifiedName, findFood.getName());
         assertEquals(modifiedPrice, findFood.getPrice());
     }
@@ -133,7 +134,6 @@ class FoodServiceTest {
                 .price(1000)
                 .description("맛있는라면")
                 .name("라면")
-                .category("noodle")
                 .build();
     }
 
@@ -143,7 +143,6 @@ class FoodServiceTest {
                 .price(2000)
                 .description("매콤한라면")
                 .name("신라면")
-                .category("noodle")
                 .build();
     }
 

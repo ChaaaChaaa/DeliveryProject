@@ -1,4 +1,4 @@
-package com.programmers.dto;
+package com.programmers.dto.food;
 
 import com.programmers.domain.Food;
 
@@ -16,16 +16,14 @@ import lombok.Setter;
 public class FoodResponseDto {
     private final Long id;
     private final String name;
-    private final String category;
     private final int price;
     private final String description;
     private final String image;
 
     @Builder
-    public FoodResponseDto(Long id, String name, String category, int price, String description, String image) {
+    public FoodResponseDto(Long id, String name, int price, String description, String image) {
         this.id = id;
         this.name = name;
-        this.category = category;
         this.price = price;
         this.description = description;
         this.image = image;
@@ -34,7 +32,6 @@ public class FoodResponseDto {
     public static FoodResponseDto of(Food food) {
         return FoodResponseDto.builder()
                 .id(food.getId())
-                .category(food.getCategory())
                 .name(food.getName())
                 .price(food.getPrice())
                 .description(food.getDescription())
