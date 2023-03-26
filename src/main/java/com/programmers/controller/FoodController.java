@@ -42,8 +42,8 @@ public class FoodController {
     }
 
     @PutMapping("/{id}")
-    public void updateFood(@PathVariable Long id, @RequestBody FoodUpdateRequestDto foodUpdateRequestDto) {
-        foodService.update(id, foodUpdateRequestDto);
+    public void updateFood(@PathVariable Long id, @RequestBody Food food) {
+        foodService.update(id, food);
     }
 
     @DeleteMapping("/{id}")
