@@ -6,6 +6,9 @@ import com.programmers.domain.Store;
 
 import com.programmers.dto.menu.MenuRequestDto;
 import com.programmers.dto.menu.MenuResponseDto;
+import com.programmers.exception.FoodNotFoundException;
+import com.programmers.exception.MenuNotFoundException;
+import com.programmers.exception.StoreNotFoundException;
 import com.programmers.repository.food.FoodRepository;
 import com.programmers.repository.menu.MenuRepository;
 import com.programmers.repository.store.StoreRepository;
@@ -26,9 +29,19 @@ public class MenuService {
     private final StoreRepository storeRepository;
 
     public Menu save(MenuRequestDto menuRequestDto) {
+        Store store = storeRepository.findByStoreName(menuRequestDto.getStoreName());
+        if(store == null) {
+            throw new StoreNotFoundException();
+        }
+
+        Food food = foodRepository.findByName(menuRequestDto.getFoodName());
+        if(food == null) {
+            throw new FoodNotFoundException();
+        }
+
         Menu savedMenu = Menu.builder()
-                .food(foodRepository.findByName(menuRequestDto.getFoodName()))
-                .store(storeRepository.findByStoreName(menuRequestDto.getStoreName()))
+                .food(food)
+                .store(store)
                 .build();
         return menuRepository.save(savedMenu);
     }
