@@ -29,20 +29,25 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String userId;
+
     @NotBlank(message = "이름은 필수 입력 값입니다.")
     @Column(nullable = false)
     private String name;
+
     @NotBlank(message = "비밀번호는 필수 입력 값입니다.")
     @Column(nullable = false)
     private String password;
+
     @NotBlank(message = "닉네임은 필수 입력 값입니다.")
     @Column(nullable = false, unique = true)
     private String nickName;
     private String grade;
+
     @NotBlank(message = "전화번호는 필수 입력 값입니다.")
     @Column(nullable = false, unique = true)
     private int phoneNumber;
     private String role;
+
 
     @CreatedDate
     private LocalDateTime createdAt;
