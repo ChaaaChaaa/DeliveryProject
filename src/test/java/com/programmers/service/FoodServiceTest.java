@@ -33,7 +33,7 @@ class FoodServiceTest {
     }
 
     @Test
-    @DisplayName("save test")
+    @DisplayName("저장된 음식 조회")
     void save() {
         Food food = basicFoodData();
         Food newFood = foodRepository.save(food);
@@ -85,7 +85,7 @@ class FoodServiceTest {
 
 
     @Test
-    @DisplayName("update test")
+    @DisplayName("음식 수정 테스트")
     void update() {
         //given
         String modifiedName = "냉면";
@@ -113,7 +113,7 @@ class FoodServiceTest {
     }
 
     @Test
-    @DisplayName("delete")
+    @DisplayName("음식 삭제 테스트")
     void delete() {
         //given
         Food food = basicFoodData();

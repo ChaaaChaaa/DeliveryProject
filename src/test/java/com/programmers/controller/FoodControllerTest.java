@@ -44,7 +44,7 @@ class FoodControllerTest {
     }
 
     @Test
-    @DisplayName("/posts 요청시 db에 저장이 된다.")
+    @DisplayName("/post 요청시 db에 저장이 된다.")
     void saveFood() throws Exception {
         //given
         ObjectMapper objectMapper = new ObjectMapper();
@@ -70,7 +70,7 @@ class FoodControllerTest {
 
 
     @Test
-    @DisplayName("글 1개 조회")
+    @DisplayName("/get 요청시 db에서 id를 찾아온다.")
     void searchFoodById() throws Exception {
         //given
         Food food = basicFoodData();
@@ -88,7 +88,7 @@ class FoodControllerTest {
 
 
     @Test
-    @DisplayName("음식 이름 포함 테스트")
+    @DisplayName("/get 요청시 db에서 음식에 포함된 이름이 있을경우 찾아온다.")
     public void searchFoodContainNameTest() throws Exception {
         //given
         String name = "라면";
@@ -107,7 +107,7 @@ class FoodControllerTest {
     }
 
     @Test
-    @DisplayName("음식 내용 수정 테스트")
+    @DisplayName("/put 요청시 db에서 음식 내용을 수정한다.")
     void updateFood() throws Exception {
         //given
         ObjectMapper objectMapper = new ObjectMapper();
@@ -134,7 +134,7 @@ class FoodControllerTest {
     }
 
     @Test
-    @DisplayName("음식 삭제 테스트")
+    @DisplayName("/delete 요청시 db에서 음식을 삭제한다.")
     void deleteId() throws Exception {
         //given
         Food food = basicFoodData();
