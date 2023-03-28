@@ -44,8 +44,8 @@ class FoodServiceTest {
     @DisplayName("Id로 음식 조회")
     void findById() {
         //given
-        Food requestFood = basicFoodData();
-        Food newFood = foodService.save(requestFood);
+        Food food = basicFoodData();
+        Food newFood = foodService.save(food);
 
         //when
         FoodResponseDto foodResponseDto = foodService.findById(newFood.getId());
@@ -60,8 +60,8 @@ class FoodServiceTest {
     @DisplayName("Id 조회 실패")
     void findByIdFail() {
         //given
-        Food requestFood = basicFoodData();
-        Food newFood = foodService.save(requestFood);
+        Food food = basicFoodData();
+        Food newFood = foodService.save(food);
         Long nonExistingId = newFood.getId() + 100;
 
         //when & then
@@ -72,8 +72,8 @@ class FoodServiceTest {
     @DisplayName("이름으로 음식 조회")
     void findByNameContaining() {
         //given
-        Food requestFood = basicFoodData();
-        Food newFood = foodRepository.save(requestFood);
+        Food food = basicFoodData();
+        Food newFood = foodRepository.save(food);
 
         //when
         List<FoodResponseDto> foods = foodService.findByNameContaining(newFood.getName());
@@ -93,7 +93,7 @@ class FoodServiceTest {
         String modifiedDescription ="시뭔한 냉면";
 
         Food dummyFood = foodRepository.save(dummyFoodData());
-        Long dummyId = dummyFood.getId();
+        Long dummyFoodId = dummyFood.getId();
 
         Food updatedFood = Food.builder()
                 .name(modifiedName)
@@ -102,14 +102,13 @@ class FoodServiceTest {
                 .build();
 
         //when
-        foodService.update(dummyId,updatedFood);
+        foodService.update(dummyFoodId,updatedFood);
 
         //then
-        Food findFood = foodRepository.findById(dummyId).orElseThrow();
-
-        assertEquals(dummyId, findFood.getId());
-        assertEquals(modifiedName, findFood.getName());
-        assertEquals(modifiedPrice, findFood.getPrice());
+        Food targetFood = foodRepository.findById(dummyFoodId).orElseThrow();
+        assertEquals(dummyFoodId, targetFood.getId());
+        assertEquals(modifiedName, targetFood.getName());
+        assertEquals(modifiedPrice, targetFood.getPrice());
     }
 
     @Test

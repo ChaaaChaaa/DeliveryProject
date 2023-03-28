@@ -63,9 +63,9 @@ class FoodControllerTest {
 
         //then
         assertEquals(1, foodRepository.count());
-        Food getFood = foodRepository.findAll().get(0);
-        assertEquals("맛있는라면", getFood.getDescription());
-        assertEquals(1000, getFood.getPrice());
+        Food targetFood = foodRepository.findAll().get(0);
+        assertEquals("맛있는라면", targetFood.getDescription());
+        assertEquals(1000, targetFood.getPrice());
     }
 
 
