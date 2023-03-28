@@ -23,15 +23,15 @@ import lombok.RequiredArgsConstructor;
 public class MenuController {
     private final MenuService menuService;
 
-    @PostMapping("/save")
+    @PostMapping(path = "/save", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void saveMenu(@RequestBody MenuRequestDto menuRequestDto) {
         menuService.save(menuRequestDto);
     }
 
 
     @GetMapping("/{menuId}")
-    public MenuResponseDto searchMenuById(@PathVariable Long menuId) {
-        return menuService.findById(menuId);
+    public MenuResponseDto searchMenuById(@PathVariable Long menuId, @RequestBody Menu menu) {
+        return menuService.findById(menuId, menu);
     }
 
 
