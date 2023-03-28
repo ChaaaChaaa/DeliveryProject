@@ -1,4 +1,4 @@
-package com.programmers.service;
+package com.programmers.service.food;
 
 import com.programmers.domain.Food;
 import com.programmers.dto.food.FoodResponseDto;

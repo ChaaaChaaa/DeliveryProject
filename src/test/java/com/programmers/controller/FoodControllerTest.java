@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.programmers.domain.Food;
 import com.programmers.dto.food.FoodResponseDto;
 import com.programmers.repository.food.FoodRepository;
-import com.programmers.service.FoodService;
+import com.programmers.service.food.FoodService;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

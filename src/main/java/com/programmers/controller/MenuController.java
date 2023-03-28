@@ -4,7 +4,7 @@ package com.programmers.controller;
 import com.programmers.domain.Menu;
 import com.programmers.dto.menu.MenuRequestDto;
 import com.programmers.dto.menu.MenuResponseDto;
-import com.programmers.service.MenuService;
+import com.programmers.service.menu.MenuService;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;

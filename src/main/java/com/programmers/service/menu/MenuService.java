@@ -1,4 +1,4 @@
-package com.programmers.service;
+package com.programmers.service.menu;
 
 import com.programmers.domain.Food;
 import com.programmers.domain.Menu;

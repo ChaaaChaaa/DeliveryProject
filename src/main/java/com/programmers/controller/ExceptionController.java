@@ -1,6 +1,13 @@
 package com.programmers.controller;
 
-import com.programmers.dto.exception.ErrorResponseDto;
+import com.programmers.dto.error.ErrorResponseDto;
+import com.programmers.exception.DuplicateNickNameException;
+import com.programmers.exception.DuplicatePhoneNumberException;
+import com.programmers.exception.FoodNotFoundException;
+import com.programmers.exception.InvalidTokenException;
+import com.programmers.exception.JwtTokenProviderException;
+import com.programmers.exception.LoginFailedException;
+import com.programmers.exception.MenuNotFoundException;
 import com.programmers.exception.StoreNotFoundException;
 
 import org.springframework.http.HttpStatus;

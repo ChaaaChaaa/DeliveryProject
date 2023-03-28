@@ -2,7 +2,7 @@ package com.programmers.controller;
 
 import com.programmers.domain.Food;
 import com.programmers.dto.food.FoodResponseDto;
-import com.programmers.service.FoodService;
+import com.programmers.service.food.FoodService;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;

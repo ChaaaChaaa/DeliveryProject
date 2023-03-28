@@ -1,4 +1,4 @@
-package com.programmers.service;
+package com.programmers.service.store;
 
 
 import com.programmers.domain.Store;
