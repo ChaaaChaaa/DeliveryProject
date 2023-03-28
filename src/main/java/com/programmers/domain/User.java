@@ -1,10 +1,12 @@
 package com.programmers.domain;
 
+import org.hibernate.Hibernate;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,16 +16,13 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
-@Setter
 @NoArgsConstructor
 @Entity
 @DynamicUpdate
-@EqualsAndHashCode
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,11 +54,28 @@ public class User {
     private LocalDateTime updatedAt;
 
     @Builder
-    public User(String userId, String name, String password, String nickName, int phoneNumber) {
+    public User(String userId, String name, String password, String nickName, String grade, int phoneNumber, String role, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.userId = userId;
         this.name = name;
         this.password = password;
         this.nickName = nickName;
+        this.grade = grade;
         this.phoneNumber = phoneNumber;
+        this.role = role;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        User user = (User) o;
+        return userId != null && Objects.equals(userId, user.userId);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }
