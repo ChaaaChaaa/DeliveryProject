@@ -54,4 +54,7 @@ public class AuthService {
         return generateToken(user);
     }
 
+    public void invalidateToken(HttpServletResponse httpServletResponse) {
+        CookieUtil.deleteCookie(httpServletResponse, SessionConstants.ACCESS_TOKEN);
+    }
 }
