@@ -47,15 +47,16 @@ public class MenuService {
     }
 
 
-    public MenuResponseDto findById(Long id) {
-        Menu menu = menuRepository.findById(id).orElseThrow();
+    @Transactional
+    public MenuResponseDto findById(Long id,Menu menu) {
+        Menu updateMenu = menuRepository.findById(id).orElseThrow(MenuNotFoundException::new);
         Food food = foodRepository.findById(menu.getFood().getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "해당 id의 음식이 존재하지 않습니다."));
         Store store = storeRepository.findById(menu.getStore().getStoreId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "해당 id의 가게가 존재하지 않습니다."));
 
-        return MenuResponseDto.builder()
-                .storeName(store.getStoreName())
-                .foodName(food.getName())
-                .build();
+        updateMenu.changeStore(store);
+        updateMenu.changeFood(food);
+
+        return MenuResponseDto.convertIdToName(menuRepository.save(updateMenu));
     }
 
     @Transactional
