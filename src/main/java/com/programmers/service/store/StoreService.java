@@ -40,7 +40,7 @@ public class StoreService {
     @Transactional
     public void update(long id, Store store) {
         Store updatedStore = storeRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 존재하지 않습니다."));
+                .orElseThrow(() -> new IllegalArgumentException("해당 가게가 존재하지 않습니다."));
         updatedStore.changeStoreName(store.getStoreName());
         updatedStore.changeCategory(store.getCategory());
         storeRepository.save(updatedStore);
