@@ -35,7 +35,7 @@ public class StoreController {
     }
 
     @GetMapping("/search")
-    public StoreResponseDto searchStoreByName(@RequestParam("name") String storeName) {
+    public StoreResponseDto searchStoreByName(@RequestParam("storeName") String storeName) {
         return storeService.findByStoreName(storeName);
     }
 
