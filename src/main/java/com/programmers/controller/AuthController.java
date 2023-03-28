@@ -23,7 +23,7 @@ import javax.validation.Valid;
 public class AuthController {
     private final AuthService authService;
 
-    @PostMapping("/login")
+    @PostMapping("/signup")
     public ResponseEntity<TokenResponseDto> signUp(@RequestBody @Valid SignUpFormRequestDto signUpFormRequestDto) {
         TokenResponseDto tokenResponseDto = authService.signUp(signUpFormRequestDto);
         return ResponseEntity.ok().body(tokenResponseDto);
