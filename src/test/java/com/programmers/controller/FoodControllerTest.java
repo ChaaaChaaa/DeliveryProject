@@ -140,7 +140,7 @@ class FoodControllerTest {
         Food food = basicFoodData();
         Food savedFood = foodRepository.save(food);
 
-        //expected
+        //when,then
         mockMvc.perform(delete("/foods/{id}", savedFood.getId())
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())

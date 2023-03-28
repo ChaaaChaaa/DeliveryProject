@@ -39,7 +39,7 @@ public class FoodService {
     @Transactional
     public void update(long id, Food food) {
         Food updatedFood = foodRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 존재하지 않습니다."));
+                .orElseThrow(() -> new IllegalArgumentException("해당 음식이 존재하지 않습니다."));
         updatedFood.changeName(food.getName());
         updatedFood.changePrice(food.getPrice());
         updatedFood.changeDescription(food.getDescription());

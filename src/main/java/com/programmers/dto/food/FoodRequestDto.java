@@ -23,7 +23,7 @@ public class FoodRequestDto {
     private final String description;
     private final String image;
 
-    @Builder //이거랑 @NoArgsConstructor의 차이는 뭐지?
+    @Builder
     public FoodRequestDto(Long id, String name, int price, String description, String image) {
         this.id = id;
         this.name = name;
