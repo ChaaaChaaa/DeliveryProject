@@ -7,7 +7,6 @@ import lombok.Getter;
 public class MenuRequestDto {
     private final String storeName;
     private final String foodName;
-
     @Builder
     public MenuRequestDto(@JsonProperty("storeName") String storeName, @JsonProperty("foodName") String foodName) {
         this.storeName = storeName;

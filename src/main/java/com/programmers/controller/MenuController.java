@@ -6,6 +6,7 @@ import com.programmers.dto.menu.MenuRequestDto;
 import com.programmers.dto.menu.MenuResponseDto;
 import com.programmers.service.menu.MenuService;
 
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,7 +34,6 @@ public class MenuController {
     public MenuResponseDto searchMenuById(@PathVariable Long menuId, @RequestBody Menu menu) {
         return menuService.findById(menuId, menu);
     }
-
 
     @PutMapping("/{menuId}")
     public void updateMenu(@PathVariable Long menuId, @RequestBody Menu menu) {
