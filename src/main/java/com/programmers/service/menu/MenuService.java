@@ -64,7 +64,10 @@ public class MenuService {
                 .orElseThrow(() -> new IllegalArgumentException("해당 메뉴가 존재하지 않습니다."));
         updatedMenu.changeFood(menu.getFood());
         updatedMenu.changeStore(menu.getStore());
-        menuRepository.save(updatedMenu);
+    }
+
+    public Menu findById(Long id) {
+        return menuRepository.findById(id).orElseThrow(MenuNotFoundException::new);
     }
 
     public void deleteById(long id) {
