@@ -1,5 +1,5 @@
 package com.programmers.dto.menu;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -9,7 +9,7 @@ public class MenuRequestDto {
     private final String foodName;
 
     @Builder
-    public MenuRequestDto(String storeName, String foodName) {
+    public MenuRequestDto(@JsonProperty("storeName") String storeName, @JsonProperty("foodName") String foodName) {
         this.storeName = storeName;
         this.foodName = foodName;
     }
