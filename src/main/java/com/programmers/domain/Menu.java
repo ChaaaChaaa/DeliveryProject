@@ -25,11 +25,11 @@ public class Menu {
     private Long menuId;
 
     @ManyToOne
-    @JoinColumn(name = "storeId", foreignKey = @ForeignKey(name = "fk_menu_store"))
+    @JoinColumn(name = "storeId", referencedColumnName = "storeId", foreignKey = @ForeignKey(name = "fk_menu_store"))
     private Store store;
 
     @ManyToOne
-    @JoinColumn(name = "foodId", foreignKey = @ForeignKey(name = "fk_menu_food"))
+    @JoinColumn(name = "foodId", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_menu_food"))
     private Food food;
 
     @Builder
