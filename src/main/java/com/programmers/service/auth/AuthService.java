@@ -42,4 +42,16 @@ public class AuthService {
         String accessToken = jwtTokenProvider.createToken(user);
         return new TokenResponseDto(accessToken);
     }
+
+    public TokenResponseDto login(LoginFormRequestDto loginFormRequestDto) {
+        User user = userRepository.findById(loginFormRequestDto.getUserId())
+                .orElseThrow(LoginFailedException::new);
+
+        if (!passwordEncoder.matches(loginFormRequestDto.getPassword(), user.getPassword())) {
+            throw new LoginFailedException();
+        }
+
+        return generateToken(user);
+    }
+
 }
