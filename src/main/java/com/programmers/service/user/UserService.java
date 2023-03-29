@@ -35,10 +35,10 @@ public class UserService {
     public void update(long userId, User user) {
         User updatedUser = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 회원이 존재하지 않습니다."));
-        updatedUser.setName(user.getName());
-        updatedUser.setNickName(user.getNickName());
-        updatedUser.setPassword(user.getPassword());
-        updatedUser.setPhoneNumber(user.getPhoneNumber());
+        updatedUser.changeName(user.getName());
+        updatedUser.changeNickName(user.getNickName());
+        updatedUser.changePassword(user.getPassword());
+        updatedUser.changePhoneNumber(user.getPhoneNumber());
         userRepository.save(updatedUser);
     }
 
