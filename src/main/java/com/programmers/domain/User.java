@@ -66,6 +66,23 @@ public class User {
         this.updatedAt = updatedAt;
     }
 
+
+    public void changeName(String name) {
+        this.name = name;
+    }
+
+    public void changeNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+    public void changePassword(String password) {
+        this.password = password;
+    }
+
+    public void changePhoneNumber(int phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
