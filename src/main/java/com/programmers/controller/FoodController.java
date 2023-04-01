@@ -1,6 +1,7 @@
 package com.programmers.controller;
 
 import com.programmers.domain.Food;
+import com.programmers.dto.food.FoodRequestDto;
 import com.programmers.dto.food.FoodResponseDto;
 import com.programmers.service.food.FoodService;
 
@@ -24,8 +25,8 @@ public class FoodController {
     private final FoodService foodService;
 
     @PostMapping("/save")
-    public void saveFood(@RequestBody Food food) {
-        foodService.save(food);
+    public void saveFood(@RequestBody FoodRequestDto foodRequestDto) {
+        foodService.save(foodRequestDto);
     }
 
 
@@ -41,8 +42,8 @@ public class FoodController {
     }
 
     @PutMapping("/{id}")
-    public void updateFood(@PathVariable Long id, @RequestBody Food food) {
-        foodService.update(id, food);
+    public void updateFood(@PathVariable Long id, @RequestBody FoodRequestDto foodRequestDto) {
+        foodService.update(id, foodRequestDto);
     }
 
     @DeleteMapping("/{id}")

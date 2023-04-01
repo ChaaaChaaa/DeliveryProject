@@ -1,5 +1,6 @@
 package com.programmers.repository.food;
 import com.programmers.domain.Food;
+import com.programmers.dto.food.FoodRequestDto;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -20,7 +21,7 @@ public interface FoodRepository extends JpaRepository<Food, Long> {
 
     Food findByName(String name);
 
-    Food save(@Nullable Food food);
+    Food save(@Nullable FoodRequestDto foodRequestDto);
 
-    void delete(@Nullable Food food);
+    void delete(@Nullable FoodRequestDto foodRequestDto);
 }

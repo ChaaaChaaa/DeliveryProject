@@ -1,6 +1,7 @@
 package com.programmers.service.food;
 
 import com.programmers.domain.Food;
+import com.programmers.dto.food.FoodRequestDto;
 import com.programmers.dto.food.FoodResponseDto;
 import com.programmers.repository.food.FoodRepository;
 
@@ -20,8 +21,8 @@ public class FoodService {
     private final FoodRepository foodRepository;
 
 
-    public Food save(Food food) {
-        return foodRepository.save(food);
+    public Food save(FoodRequestDto foodRequestDto) {
+        return foodRepository.save(foodRequestDto);
     }
 
 
@@ -37,12 +38,12 @@ public class FoodService {
 
 
     @Transactional
-    public void update(long id, Food food) {
+    public void update(long id, FoodRequestDto foodRequestDto) {
         Food updatedFood = foodRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 음식이 존재하지 않습니다."));
-        updatedFood.changeName(food.getName());
-        updatedFood.changePrice(food.getPrice());
-        updatedFood.changeDescription(food.getDescription());
+        updatedFood.changeName(foodRequestDto.getName());
+        updatedFood.changePrice(foodRequestDto.getPrice());
+        updatedFood.changeDescription(foodRequestDto.getDescription());
         foodRepository.save(updatedFood);
     }
 
