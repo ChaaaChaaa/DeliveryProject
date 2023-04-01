@@ -13,20 +13,20 @@ import lombok.Getter;
 public class LoginFormRequestDto {
 
     @NotBlank
-    private final String userId;
+    private final String nickName;
 
     @NotBlank
     private final String password;
 
     @Builder
-    public LoginFormRequestDto(String userId, String password) {
-        this.userId = userId;
+    public LoginFormRequestDto(String nickName, String password) {
+        this.nickName = nickName;
         this.password = password;
     }
 
     public User toEntity() {
         return User.builder()
-                .userId(userId)
+                .nickName(nickName)
                 .password(password)
                 .build();
     }

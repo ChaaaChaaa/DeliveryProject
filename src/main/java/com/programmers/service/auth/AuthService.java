@@ -44,7 +44,7 @@ public class AuthService {
     }
 
     public TokenResponseDto login(LoginFormRequestDto loginFormRequestDto) {
-        User user = userRepository.findById(loginFormRequestDto.getUserId())
+        User user = userRepository.findByNickName(loginFormRequestDto.getNickName())
                 .orElseThrow(LoginFailedException::new);
 
         if (!passwordEncoder.matches(loginFormRequestDto.getPassword(), user.getPassword())) {
