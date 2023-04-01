@@ -19,4 +19,22 @@ public class StoreRequestDto {
         this.reviewCount = reviewCount;
         this.rating = rating;
     }
+
+    public static StoreRequestDto of(Store store) {
+        return StoreRequestDto.builder()
+                .storeName(store.getStoreName())
+                .category(store.getCategory())
+                .reviewCount(store.getReviewCount())
+                .rating(store.getRating())
+                .build();
+    }
+
+    public Store toEntity() {
+        return Store.builder()
+                .storeName(storeName)
+                .category(category)
+                .reviewCount(reviewCount)
+                .rating(rating)
+                .build();
+    }
 }
