@@ -32,6 +32,9 @@ public class Menu {
     @JoinColumn(name = "foodId", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_menu_food"))
     private Food food;
 
+    private String storeName;
+    private String foodName;
+
     @Builder
     public Menu(Long menuId, Store store, Food food) {
         this.menuId = menuId;
