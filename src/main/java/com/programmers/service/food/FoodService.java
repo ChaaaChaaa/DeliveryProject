@@ -22,7 +22,7 @@ public class FoodService {
 
 
     public Food save(FoodRequestDto foodRequestDto) {
-        return foodRepository.save(foodRequestDto);
+        return foodRepository.save(foodRequestDto.toEntity());
     }
 
 
