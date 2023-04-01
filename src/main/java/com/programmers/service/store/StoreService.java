@@ -2,6 +2,7 @@ package com.programmers.service.store;
 
 
 import com.programmers.domain.Store;
+import com.programmers.dto.store.StoreRequestDto;
 import com.programmers.dto.store.StoreResponseDto;
 import com.programmers.exception.StoreNotFoundException;
 import com.programmers.repository.store.StoreRepository;
@@ -38,11 +39,11 @@ public class StoreService {
 
 
     @Transactional
-    public void update(long id, Store store) {
+    public void update(long id, StoreRequestDto storeRequestDto) {
         Store updatedStore = storeRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 가게가 존재하지 않습니다."));
-        updatedStore.changeStoreName(store.getStoreName());
-        updatedStore.changeCategory(store.getCategory());
+        updatedStore.changeStoreName(storeRequestDto.getStoreName());
+        updatedStore.changeCategory(storeRequestDto.getCategory());
         storeRepository.save(updatedStore);
     }
 

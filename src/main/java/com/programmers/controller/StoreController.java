@@ -1,6 +1,7 @@
 package com.programmers.controller;
 
 import com.programmers.domain.Store;
+import com.programmers.dto.store.StoreRequestDto;
 import com.programmers.dto.store.StoreResponseDto;
 import com.programmers.service.store.StoreService;
 
@@ -40,8 +41,8 @@ public class StoreController {
     }
 
     @PutMapping("/{storeId}")
-    public void updateStore(@PathVariable Long storeId, @RequestBody Store store) {
-        storeService.update(storeId, store);
+    public void updateStore(@PathVariable Long storeId, @RequestBody StoreRequestDto storeRequestDto) {
+        storeService.update(storeId, storeRequestDto);
     }
 
     @DeleteMapping("/{storeId}")
