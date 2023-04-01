@@ -48,10 +48,10 @@ public class MenuService {
 
 
     @Transactional
-    public MenuResponseDto findById(Long id,Menu menu) {
+    public MenuResponseDto findById(Long id,MenuRequestDto menuRequestDto) {
         Menu updateMenu = menuRepository.findById(id).orElseThrow(MenuNotFoundException::new);
-        Food food = foodRepository.findById(menu.getFood().getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "해당 id의 음식이 존재하지 않습니다."));
-        Store store = storeRepository.findById(menu.getStore().getStoreId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "해당 id의 가게가 존재하지 않습니다."));
+        Food food = foodRepository.findById(menuRequestDto.getFood().getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "해당 id의 음식이 존재하지 않습니다."));
+        Store store = storeRepository.findById(menuRequestDto.getStore().getStoreId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "해당 id의 가게가 존재하지 않습니다."));
 
         updateMenu.changeStore(store);
         updateMenu.changeFood(food);
@@ -60,11 +60,11 @@ public class MenuService {
     }
 
     @Transactional
-    public void update(long id, Menu menu) {
+    public void update(long id, MenuRequestDto menuRequestDto) {
         Menu updatedMenu = menuRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 메뉴가 존재하지 않습니다."));
-        updatedMenu.changeFood(menu.getFood());
-        updatedMenu.changeStore(menu.getStore());
+        updatedMenu.changeFood(menuRequestDto.getFood());
+        updatedMenu.changeStore(menuRequestDto.getStore());
     }
 
     public Menu findById(Long id) {

@@ -31,13 +31,13 @@ public class MenuController {
 
 
     @GetMapping("/{menuId}")
-    public MenuResponseDto searchMenuById(@PathVariable Long menuId, @RequestBody Menu menu) {
-        return menuService.findById(menuId, menu);
+    public MenuResponseDto searchMenuById(@PathVariable Long menuId, @RequestBody MenuRequestDto menuRequestDto) {
+        return menuService.findById(menuId, menuRequestDto);
     }
 
     @PutMapping("/{menuId}")
-    public void updateMenu(@PathVariable Long menuId, @RequestBody Menu menu) {
-        menuService.update(menuId, menu);
+    public void updateMenu(@PathVariable Long menuId, @RequestBody MenuRequestDto menuRequestDto) {
+        menuService.update(menuId, menuRequestDto);
     }
 
     @DeleteMapping("/{menuId}")
