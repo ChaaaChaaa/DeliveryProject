@@ -19,7 +19,7 @@ public class UserResponseDto {
     private String password;
     private String nickName;
     private String grade;
-    private int phoneNumber;
+    private String phoneNumber;
     private String role;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

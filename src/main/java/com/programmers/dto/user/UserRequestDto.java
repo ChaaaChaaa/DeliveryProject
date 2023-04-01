@@ -27,7 +27,7 @@ public class UserRequestDto {
     private String grade;
     @NotBlank
     @Length(min = 1, max = 30)
-    private int phoneNumber;
+    private String phoneNumber;
     private String role;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
