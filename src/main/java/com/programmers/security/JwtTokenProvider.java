@@ -19,10 +19,10 @@ import io.jsonwebtoken.SignatureAlgorithm;
 public class JwtTokenProvider {
 
     @Value("${app.jwt.secret}")
-    private String secretKey;
+    String secretKey;
 
     @Value("${app.jwt.token-validity-in-seconds}")
-    private int tokenValidityInSeconds;
+    int tokenValidityInSeconds;
 
     public String createToken(User user) {
         LocalDateTime now = LocalDateTime.now();
