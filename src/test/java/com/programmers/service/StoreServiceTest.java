@@ -1,6 +1,7 @@
 package com.programmers.service;
 
 import com.programmers.domain.Store;
+import com.programmers.dto.store.StoreRequestDto;
 import com.programmers.dto.store.StoreResponseDto;
 import com.programmers.repository.store.StoreRepository;
 import com.programmers.service.store.StoreService;
@@ -43,7 +44,7 @@ class StoreServiceTest {
     @DisplayName("Id로 가게 조회")
     void findByStoreId() {
         Store store = basicStoreData();
-        Store newStore = storeService.save(store);
+        Store newStore = storeService.save(StoreRequestDto.of(store));
 
         StoreResponseDto storeResponseDto = storeService.findByStoreId(newStore.getStoreId());
 
@@ -56,7 +57,7 @@ class StoreServiceTest {
     @DisplayName("Id 조회 실패")
     void findNonExistingStoreById() {
         Store store = basicStoreData();
-        Store newStore = storeService.save(store);
+        Store newStore = storeService.save(StoreRequestDto.of(store));
         Long nonExistingId = newStore.getStoreId() + 100;
 
         //when & then
@@ -68,7 +69,7 @@ class StoreServiceTest {
     void findByStoreName() {
         //given
         Store store = basicStoreData();
-        Store newStore = storeService.save(store);
+        Store newStore = storeService.save(StoreRequestDto.of(store));
 
         //when
         StoreResponseDto targetStore = storeService.findByStoreName(newStore.getStoreName());
@@ -91,8 +92,10 @@ class StoreServiceTest {
                 .category(modifiedStoreCategory)
                 .build();
 
+        StoreRequestDto storeRequestDto = StoreRequestDto.of(updatedStore);
+
         //when
-        storeService.update(storeId,updatedStore);
+        storeService.update(storeId,storeRequestDto);
 
         //then
         Store targetStore = storeRepository.findById(storeId).orElseThrow();

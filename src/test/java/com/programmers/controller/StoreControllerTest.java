@@ -2,6 +2,7 @@ package com.programmers.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.programmers.domain.Store;
+import com.programmers.dto.store.StoreRequestDto;
 import com.programmers.repository.store.StoreRepository;
 import com.programmers.service.store.StoreService;
 
@@ -36,14 +37,14 @@ class StoreControllerTest {
     private StoreService storeService;
 
     @BeforeEach
-    void clean(){
+    void clean() {
         mockMvc = MockMvcBuilders.standaloneSetup(new StoreController(storeService)).build();
         storeRepository.deleteAll();
     }
 
     @Test
     @DisplayName("/posts 요청시 db에 저장된다.")
-    void saveStore() throws Exception{
+    void saveStore() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
         Store store = basicStoreData();
         Store newStore = storeRepository.save(store);
@@ -52,27 +53,27 @@ class StoreControllerTest {
 
         //when
         mockMvc.perform(post("/stores/save")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(json))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(json))
                 .andExpect(status().isOk())
                 .andDo(print());
 
         //then
-        assertEquals(1,storeRepository.count());
+        assertEquals(1, storeRepository.count());
         Store targetStore = storeRepository.findAll().get(0);
-        assertEquals("차차네",targetStore.getStoreName());
-        assertEquals("noodle",targetStore.getCategory());
+        assertEquals("차차네", targetStore.getStoreName());
+        assertEquals("noodle", targetStore.getCategory());
     }
 
 
     @Test
     @DisplayName("/get 요청시 db에서 id를 찾아온다.")
-    void searchStoreById() throws Exception{
+    void searchStoreById() throws Exception {
         Store store = basicStoreData();
-        Store newStore = storeService.save(store);
+        Store newStore = storeService.save(StoreRequestDto.of(store));
 
         //when,then
-        mockMvc.perform(get("/stores/{storeId}",newStore.getStoreId()))
+        mockMvc.perform(get("/stores/{storeId}", newStore.getStoreId()))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(jsonPath("$.storeId").value(newStore.getStoreId()))
@@ -83,10 +84,11 @@ class StoreControllerTest {
     @Test
     @DisplayName("/get 요청시 db에서 이름를 찾아온다.")
     void searchStoreByName() throws Exception {
-        String storeName ="만두네";
-        Store newStore = storeService.save(dummyStoreData());
+        String storeName = "만두네";
+        Store store = dummyStoreData();
+        Store newStore = storeService.save(StoreRequestDto.of(store));
 
-        mockMvc.perform(get("/stores/search?storeName={storeName}",storeName))
+        mockMvc.perform(get("/stores/search?storeName={storeName}", storeName))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(jsonPath("$.storeId").value(newStore.getStoreId()))
@@ -96,9 +98,10 @@ class StoreControllerTest {
 
     @Test
     @DisplayName("/put 요청시 db에서 가게 내용을 수정한다.")
-    void updateStore() throws Exception{
+    void updateStore() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
-        Store savedStore = storeService.save(dummyStoreData());
+        Store store = dummyStoreData();
+        Store savedStore = storeService.save(StoreRequestDto.of(store));
 
         Long updatedStoreId = savedStore.getStoreId();
         String expectedStoreName = "니노네";
@@ -109,9 +112,9 @@ class StoreControllerTest {
                 .category(expectedStoreCategory)
                 .build();
 
-        mockMvc.perform(put("/stores/{storeId}",updatedStoreId)
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(updatedStore)))
+        mockMvc.perform(put("/stores/{storeId}", updatedStoreId)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(updatedStore)))
                 .andExpect(status().isOk())
                 .andDo(print());
     }
@@ -119,16 +122,17 @@ class StoreControllerTest {
     @Test
     @DisplayName("/delete 요청시 db에서 가게를 삭제한다.")
     void deleteStoreId() throws Exception {
-        Store savedStore = storeService.save(dummyStoreData());
+        Store store = dummyStoreData();
+        Store savedStore = storeService.save(StoreRequestDto.of(store));
 
-        mockMvc.perform(delete("/stores/{storeId}",savedStore.getStoreId())
-                .contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(delete("/stores/{storeId}", savedStore.getStoreId())
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andDo(print());
-        assertEquals(0L,storeRepository.count());
+        assertEquals(0L, storeRepository.count());
     }
 
-    private Store basicStoreData(){
+    private Store basicStoreData() {
         return Store.builder()
                 .storeId(1L)
                 .category("noodle")
@@ -138,7 +142,7 @@ class StoreControllerTest {
                 .build();
     }
 
-    private Store dummyStoreData(){
+    private Store dummyStoreData() {
         return Store.builder()
                 .storeId(2L)
                 .category("dumpling")
