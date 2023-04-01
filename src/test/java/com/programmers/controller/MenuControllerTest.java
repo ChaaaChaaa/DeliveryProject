@@ -4,7 +4,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.programmers.domain.Food;
 import com.programmers.domain.Menu;
 import com.programmers.domain.Store;
+import com.programmers.dto.food.FoodRequestDto;
 import com.programmers.dto.menu.MenuRequestDto;
+import com.programmers.dto.store.StoreRequestDto;
 import com.programmers.repository.food.FoodRepository;
 import com.programmers.repository.menu.MenuRepository;
 import com.programmers.repository.store.StoreRepository;
@@ -24,14 +26,12 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.nio.charset.StandardCharsets;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @AutoConfigureMockMvc
@@ -57,7 +57,7 @@ class MenuControllerTest {
     MenuService menuService;
 
     @BeforeEach
-    void clean(){
+    void clean() {
         mockMvc = MockMvcBuilders.standaloneSetup(new MenuController(menuService)).build();
         menuRepository.deleteAll();
         foodRepository.deleteAll();
@@ -70,8 +70,12 @@ class MenuControllerTest {
     void saveMenu() throws Exception {
         //given
         ObjectMapper objectMapper = new ObjectMapper();
-        Food savedFood = foodService.save(basicFoodData());
-        Store savedStore = storeService.save(basicStoreData());
+        Food food = basicFoodData();
+        FoodRequestDto foodRequestDto = FoodRequestDto.of(food);
+
+        Food savedFood = foodService.save(foodRequestDto);
+        Store store = basicStoreData();
+        Store savedStore = storeService.save(StoreRequestDto.of(store));
 
         //when
         MenuRequestDto menuRequestDto = MenuRequestDto.builder()
@@ -93,8 +97,11 @@ class MenuControllerTest {
     @DisplayName("/get 요청시 db에서 id를 찾아온다.")
     void searchMenuById() throws Exception {
         //given
-        Food savedFood = foodService.save(basicFoodData());
-        Store savedStore = storeService.save(basicStoreData());
+        Food food = basicFoodData();
+        FoodRequestDto foodRequestDto = FoodRequestDto.of(food);
+        Food savedFood = foodService.save(foodRequestDto);
+        Store store = basicStoreData();
+        Store savedStore = storeService.save(StoreRequestDto.of(store));
         ObjectMapper objectMapper = new ObjectMapper();
 
         Menu menu = Menu.builder()
@@ -106,7 +113,7 @@ class MenuControllerTest {
         String json = objectMapper.writeValueAsString(menu);
 
         //when,then
-        mockMvc.perform(get("/menu/{menuId}",savedMenu.getMenuId())
+        mockMvc.perform(get("/menu/{menuId}", savedMenu.getMenuId())
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding(StandardCharsets.UTF_8)
                         .content(json))
@@ -115,11 +122,14 @@ class MenuControllerTest {
     }
 
     @Test
-    @DisplayName("/put 요청시 db에서 메뉴 내용을 수정한다.")
-    void updateMenu() throws Exception {
+    @DisplayName("/put 요청시 db에서 메뉴 가게 내용을 수정한다.")
+    void updateStoreMenu() throws Exception {
         //given
-        Food savedFood = foodService.save(basicFoodData());
-        Store savedStore = storeService.save(basicStoreData());
+        Food food = basicFoodData();
+        FoodRequestDto foodRequestDto = FoodRequestDto.of(food);
+        Food savedFood = foodService.save(foodRequestDto);
+        Store store = basicStoreData();
+        Store savedStore = storeService.save(StoreRequestDto.of(store));
         ObjectMapper objectMapper = new ObjectMapper();
 
         Menu menu = Menu.builder()
@@ -130,19 +140,69 @@ class MenuControllerTest {
         menuRepository.save(menu);
 
         //when
-        Food updateFood = foodService.save(updateFoodData());
-        Store updateStore = storeService.save(updateStoreData());
+        Food updateFood = updateFoodData();
+        FoodRequestDto updateFoodRequestDto = FoodRequestDto.of(updateFood);
+        Food updateSavedFood = foodService.save(updateFoodRequestDto);
+
+        Store updateStore = updateStoreData();
+        StoreRequestDto storeRequestDto = StoreRequestDto.of(updateStore);
+        Store updateSavedStore = storeService.save(storeRequestDto);
 
         Menu updateMenu = Menu.builder()
-                .food(updateFood)
-                .store(updateStore)
+                .food(updateSavedFood)
+                .store(updateSavedStore)
                 .build();
 
         Menu savedMenu = menuRepository.save(updateMenu);
         String json = objectMapper.writeValueAsString(menu);
 
         //then
-        mockMvc.perform(put("/menu/{menuId}",savedMenu.getMenuId())
+        mockMvc.perform(put("/menu/{menuId}/updateStore", savedMenu.getMenuId())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .characterEncoding(StandardCharsets.UTF_8)
+                        .content(json))
+                .andExpect(status().isOk())
+                .andDo(print());
+    }
+
+    @Test
+    @DisplayName("/put 요청시 db에서 메뉴 음식 내용을 수정한다.")
+    void updateFoodMenu() throws Exception {
+        //given
+        Food food = basicFoodData();
+        FoodRequestDto foodRequestDto = FoodRequestDto.of(food);
+        Food savedFood = foodService.save(foodRequestDto);
+
+        Store store = basicStoreData();
+        Store savedStore = storeService.save(StoreRequestDto.of(store));
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        Menu menu = Menu.builder()
+                .food(savedFood)
+                .store(savedStore)
+                .build();
+
+        menuRepository.save(menu);
+
+        //when
+        Food updateFood = updateFoodData();
+        FoodRequestDto updateFoodRequestDto = FoodRequestDto.of(updateFood);
+        Food updateSavedFood = foodService.save(updateFoodRequestDto);
+
+        Store updateStore = updateStoreData();
+        StoreRequestDto storeRequestDto = StoreRequestDto.of(updateStore);
+        Store updateSavedStore = storeService.save(storeRequestDto);
+
+        Menu updateMenu = Menu.builder()
+                .food(updateSavedFood)
+                .store(updateSavedStore)
+                .build();
+
+        Menu savedMenu = menuRepository.save(updateMenu);
+        String json = objectMapper.writeValueAsString(menu);
+
+        //then
+        mockMvc.perform(put("/menu/{menuId}/updateFood", savedMenu.getMenuId())
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding(StandardCharsets.UTF_8)
                         .content(json))
@@ -154,8 +214,12 @@ class MenuControllerTest {
     @DisplayName("/delete 요청시 db에서 메뉴를 삭제한다.")
     void deleteMenuId() throws Exception {
         //given
-        Food savedFood = foodService.save(basicFoodData());
-        Store savedStore = storeService.save(basicStoreData());
+        Food food = basicFoodData();
+        FoodRequestDto foodRequestDto = FoodRequestDto.of(food);
+        Food savedFood = foodService.save(foodRequestDto);
+
+        Store store = basicStoreData();
+        Store savedStore = storeService.save(StoreRequestDto.of(store));
         ObjectMapper objectMapper = new ObjectMapper();
 
         Menu menu = Menu.builder()
@@ -167,7 +231,7 @@ class MenuControllerTest {
         String json = objectMapper.writeValueAsString(menu);
 
         //when,then
-        mockMvc.perform(delete("/menu/{menuId}",savedMenu.getMenuId())
+        mockMvc.perform(delete("/menu/{menuId}", savedMenu.getMenuId())
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding(StandardCharsets.UTF_8)
                         .content(json))

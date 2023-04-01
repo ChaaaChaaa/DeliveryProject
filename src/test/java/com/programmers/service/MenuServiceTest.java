@@ -3,7 +3,10 @@ package com.programmers.service;
 import com.programmers.domain.Food;
 import com.programmers.domain.Menu;
 import com.programmers.domain.Store;
+import com.programmers.dto.food.FoodRequestDto;
+import com.programmers.dto.menu.MenuRequestDto;
 import com.programmers.dto.menu.MenuResponseDto;
+import com.programmers.dto.store.StoreRequestDto;
 import com.programmers.repository.food.FoodRepository;
 import com.programmers.repository.menu.MenuRepository;
 import com.programmers.repository.store.StoreRepository;
@@ -54,60 +57,72 @@ class MenuServiceTest {
     @DisplayName("저장된 메뉴 조회")
     void save() {
         //given
-        Food savedFood = foodService.save(basicFoodData());
-        Store savedStore = storeService.save(basicStoreData());
+        Food food = basicFoodData();
+        FoodRequestDto foodRequestDto = FoodRequestDto.of(food);
+        Food savedFood = foodService.save(foodRequestDto);
+
+        Store store = basicStoreData();
+        Store savedStore = storeService.save(StoreRequestDto.of(store));
 
         Menu menu = Menu.builder()
                 .food(savedFood)
                 .store(savedStore)
                 .build();
         //when
-        Menu savedMenu =menuRepository.save(menu);
+        Menu savedMenu = menuRepository.save(menu);
 
         // then
-        assertEquals(savedMenu.getFood(),savedFood);
-        assertEquals(savedMenu.getStore(),savedStore);
+        assertEquals(savedMenu.getFood(), savedFood);
+        assertEquals(savedMenu.getStore(), savedStore);
     }
 
     @Test
     @DisplayName("Id로 메뉴 조회")
     void findById() {
         Food food = basicFoodData();
-        Store store = basicStoreData();
+        FoodRequestDto foodRequestDto = FoodRequestDto.of(food);
+        Food savedFood = foodService.save(foodRequestDto);
 
-        Food savedFood = foodService.save(food);
-        Store savedStore = storeService.save(store);
+        Store store = basicStoreData();
+        Store savedStore = storeService.save(StoreRequestDto.of(store));
 
         Menu menu = Menu.builder()
                 .food(savedFood)
                 .store(savedStore)
                 .build();
 
-        Menu savedMenu =menuRepository.save(menu);
+        MenuRequestDto menuRequestDto = MenuRequestDto.of(menu);
+        Menu savedMenu = menuRepository.save(menu);
 
         //when
-        MenuResponseDto menuResponseDto = menuService.findById(savedMenu.getMenuId(),menu);
-        assertEquals(savedFood.getName(),menuResponseDto.getFoodName());
-        assertEquals(savedStore.getStoreName(),menuResponseDto.getStoreName());
+        MenuResponseDto menuResponseDto = menuService.findById(savedMenu.getMenuId(), menuRequestDto);
+        assertEquals(savedFood.getName(), menuResponseDto.getFoodName());
+        assertEquals(savedStore.getStoreName(), menuResponseDto.getStoreName());
     }
 
     @Test
-    @DisplayName("메뉴 수정 테스트")
-    void update() {
+    @DisplayName("메뉴 중 가게 수정 테스트")
+    void updateStore() {
         Food food = basicFoodData();
-        Food savedFood = foodService.save(food);
-        Food updatedFood = foodService.save(updateFoodData());
+        FoodRequestDto foodRequestDto = FoodRequestDto.of(food);
+        Food savedFood = foodService.save(foodRequestDto);
+
+        Food updateFood = updateFoodData();
+        FoodRequestDto updateFoodRequestDto = FoodRequestDto.of(updateFood);
+        Food updatedFood = foodService.save(updateFoodRequestDto);
 
         Store store = basicStoreData();
-        Store savedStore = storeService.save(store);
-        Store updatedStore = storeService.save(updateStoreData());
+        Store savedStore = storeService.save(StoreRequestDto.of(store));
+
+        Store updateStore = updateStoreData();
+        Store updatedStore = storeService.save(StoreRequestDto.of(updateStore));
 
         Menu menu = Menu.builder()
                 .food(savedFood)
                 .store(savedStore)
                 .build();
 
-        Menu savedMenu =menuRepository.save(menu);
+        Menu savedMenu = menuRepository.save(menu);
         Long savedMenuId = savedMenu.getMenuId();
 
 
@@ -117,27 +132,69 @@ class MenuServiceTest {
                 .build();
 
         //when
-        menuService.update(savedMenuId,updatedMenu);
+        menuService.updateStore(savedMenuId, updatedMenu.getStore());
 
         //then
         Menu targetMenu = menuService.findById(savedMenuId);
         assertEquals(savedMenuId, targetMenu.getMenuId());
-        assertEquals(updatedMenu.getFood().getId(), targetMenu.getFood().getId());
         assertEquals(updatedMenu.getStore().getStoreId(), targetMenu.getStore().getStoreId());
     }
 
     @Test
-    @DisplayName("메뉴 삭제 테스트")
-    void deleteById() {
-        Food savedFood = foodService.save(basicFoodData());
-        Store savedStore = storeService.save(basicStoreData());
+    @DisplayName("메뉴 중 음식 수정 테스트")
+    void updateFood() {
+        Food food = basicFoodData();
+        FoodRequestDto foodRequestDto = FoodRequestDto.of(food);
+        Food savedFood = foodService.save(foodRequestDto);
+
+        Food updateFood = updateFoodData();
+        FoodRequestDto updateFoodRequestDto = FoodRequestDto.of(updateFood);
+        Food savedUpdatedFood = foodService.save(updateFoodRequestDto);
+
+        Store store = basicStoreData();
+        Store savedStore = storeService.save(StoreRequestDto.of(store));
+
+        Store updatedStore= updateStoreData();
+        Store savedUpdatedStore = storeService.save(StoreRequestDto.of(updatedStore));
 
         Menu menu = Menu.builder()
                 .food(savedFood)
                 .store(savedStore)
                 .build();
 
-        Menu savedMenu =menuRepository.save(menu);
+        Menu savedMenu = menuRepository.save(menu);
+        Long savedMenuId = savedMenu.getMenuId();
+
+
+        Menu updatedMenu = Menu.builder()
+                .food(savedUpdatedFood)
+                .store(savedUpdatedStore)
+                .build();
+
+        //when
+        menuService.updateFood(savedMenuId, updatedMenu.getFood());
+
+        //then
+        Menu targetMenu = menuService.findById(savedMenuId);
+        assertEquals(savedMenuId, targetMenu.getMenuId());
+        assertEquals(updatedMenu.getFood().getId(), targetMenu.getFood().getId());
+    }
+
+    @Test
+    @DisplayName("메뉴 삭제 테스트")
+    void deleteById() {
+        Food food = basicFoodData();
+        Food savedFood = foodService.save(FoodRequestDto.of(food));
+
+        Store store = basicStoreData();
+        Store savedStore = storeService.save(StoreRequestDto.of(store));
+
+        Menu menu = Menu.builder()
+                .food(savedFood)
+                .store(savedStore)
+                .build();
+
+        Menu savedMenu = menuRepository.save(menu);
 
         //when
         menuRepository.delete(savedMenu);
