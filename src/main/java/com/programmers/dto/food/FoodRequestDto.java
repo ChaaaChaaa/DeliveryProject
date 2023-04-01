@@ -31,4 +31,24 @@ public class FoodRequestDto {
         this.description = description;
         this.image = image;
     }
+
+    public static FoodRequestDto of(Food food){
+        return FoodRequestDto.builder()
+                .id(food.getId())
+                .name(food.getName())
+                .price(food.getPrice())
+                .description(food.getDescription())
+                .image(food.getImage())
+                .build();
+    }
+
+    public Food toEntity() {
+        return Food.builder()
+                .id(id)
+                .name(name)
+                .price(price)
+                .description(description)
+                .image(image)
+                .build();
+    }
 }
