@@ -19,4 +19,20 @@ public class MenuRequestDto {
         this.storeName = storeName;
         this.foodName = foodName;
     }
+
+    public static MenuRequestDto of(Menu menu) {
+        return MenuRequestDto.builder()
+                .store(menu.getStore())
+                .food(menu.getFood())
+                .storeName(menu.getStoreName())
+                .foodName(menu.getFoodName())
+                .build();
+    }
+
+    public Menu toEntity() {
+        return Menu.builder()
+                .store(store)
+                .food(food)
+                .build();
+    }
 }
