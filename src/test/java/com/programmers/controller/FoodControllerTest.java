@@ -2,6 +2,7 @@ package com.programmers.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.programmers.domain.Food;
+import com.programmers.dto.food.FoodRequestDto;
 import com.programmers.dto.food.FoodResponseDto;
 import com.programmers.repository.food.FoodRepository;
 import com.programmers.service.food.FoodService;
@@ -74,7 +75,8 @@ class FoodControllerTest {
     void searchFoodById() throws Exception {
         //given
         Food food = basicFoodData();
-        Food newFood = foodService.save(food);
+        FoodRequestDto foodRequestDto = FoodRequestDto.of(food);
+        Food newFood = foodService.save(foodRequestDto);
 
         //when,then
 
@@ -95,7 +97,9 @@ class FoodControllerTest {
         List<FoodResponseDto> expectedFoods = new ArrayList<>();
         expectedFoods.add(FoodResponseDto.of(basicFoodData()));
 
-        foodService.save(basicFoodData());
+        Food food = basicFoodData();
+        FoodRequestDto foodRequestDto = FoodRequestDto.of(food);
+        foodService.save(foodRequestDto);
 
         //when,then
         mockMvc.perform(get("/foods/search?name={name}", name))
@@ -112,7 +116,8 @@ class FoodControllerTest {
         //given
         ObjectMapper objectMapper = new ObjectMapper();
         Food food = dummyFoodData();
-        Food savedFood = foodService.save(food);
+        FoodRequestDto foodRequestDto = FoodRequestDto.of(food);
+        Food savedFood = foodService.save(foodRequestDto);
 
         Long updatedId = savedFood.getId();
         String expectedName = "냉면";

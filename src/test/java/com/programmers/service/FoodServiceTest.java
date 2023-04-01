@@ -1,6 +1,7 @@
 package com.programmers.service;
 
 import com.programmers.domain.Food;
+import com.programmers.dto.food.FoodRequestDto;
 import com.programmers.dto.food.FoodResponseDto;
 import com.programmers.repository.food.FoodRepository;
 import com.programmers.service.food.FoodService;
@@ -19,7 +20,6 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 class FoodServiceTest {
@@ -30,7 +30,7 @@ class FoodServiceTest {
     FoodService foodService;
 
     @BeforeEach
-    void clean(){
+    void clean() {
         foodRepository.deleteAll();
     }
 
@@ -47,7 +47,8 @@ class FoodServiceTest {
     void findById() {
         //given
         Food food = basicFoodData();
-        Food newFood = foodService.save(food);
+        FoodRequestDto foodRequestDto = FoodRequestDto.of(food);
+        Food newFood = foodService.save(foodRequestDto);
 
         //when
         FoodResponseDto foodResponseDto = foodService.findById(newFood.getId());
@@ -63,7 +64,8 @@ class FoodServiceTest {
     void findByIdFail() {
         //given
         Food food = basicFoodData();
-        Food newFood = foodService.save(food);
+        FoodRequestDto foodRequestDto = FoodRequestDto.of(food);
+        Food newFood = foodService.save(foodRequestDto);
         Long nonExistingId = newFood.getId() + 100;
 
         //when & then
@@ -92,7 +94,7 @@ class FoodServiceTest {
         //given
         String modifiedName = "냉면";
         int modifiedPrice = 3000;
-        String modifiedDescription ="시뭔한 냉면";
+        String modifiedDescription = "시뭔한 냉면";
 
         Food dummyFood = foodRepository.save(dummyFoodData());
         Long dummyFoodId = dummyFood.getId();
@@ -103,8 +105,10 @@ class FoodServiceTest {
                 .description(modifiedDescription)
                 .build();
 
+        FoodRequestDto foodRequestDto = FoodRequestDto.of(updatedFood);
+
         //when
-        foodService.update(dummyFoodId,updatedFood);
+        foodService.update(dummyFoodId, foodRequestDto);
 
         //then
         Food targetFood = foodRepository.findById(dummyFoodId).orElseThrow();
