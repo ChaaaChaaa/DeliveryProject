@@ -21,7 +21,7 @@ public interface FoodRepository extends JpaRepository<Food, Long> {
 
     Food findByName(String name);
 
-    Food save(@Nullable FoodRequestDto foodRequestDto);
+    Food save(@Nullable Food food);
 
-    void delete(@Nullable FoodRequestDto foodRequestDto);
+    void delete(@Nullable Food food);
 }
