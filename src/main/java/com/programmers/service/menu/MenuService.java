@@ -60,12 +60,23 @@ public class MenuService {
     }
 
     @Transactional
-    public void update(long id, MenuRequestDto menuRequestDto) {
-        Menu updatedMenu = menuRepository.findById(id)
+    public void updateFood(long id, Food food) {
+        Menu menu = menuRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 메뉴가 존재하지 않습니다."));
-        updatedMenu.changeFood(menuRequestDto.getFood());
-        updatedMenu.changeStore(menuRequestDto.getStore());
+
+        menu.changeFood(food);
+        menuRepository.save(menu);
     }
+    @Transactional
+    public void updateStore(long id, Store store) {
+        Menu menu = menuRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 메뉴가 존재하지 않습니다."));
+
+        menu.changeStore(store);
+        menuRepository.save(menu);
+    }
+
+
 
     public Menu findById(Long id) {
         return menuRepository.findById(id).orElseThrow(MenuNotFoundException::new);

@@ -35,9 +35,14 @@ public class MenuController {
         return menuService.findById(menuId, menuRequestDto);
     }
 
-    @PutMapping("/{menuId}")
-    public void updateMenu(@PathVariable Long menuId, @RequestBody MenuRequestDto menuRequestDto) {
-        menuService.update(menuId, menuRequestDto);
+    @PutMapping("/{menuId}/updateFood")
+    public void updateFoodInMenu(@PathVariable Long menuId, @RequestBody MenuRequestDto menuRequestDto) {
+        menuService.updateFood(menuId, menuRequestDto.getFood());
+    }
+
+    @PutMapping("/{menuId}/updateStore")
+    public void updateStoreInMenu(@PathVariable Long menuId, @RequestBody MenuRequestDto menuRequestDto) {
+        menuService.updateStore(menuId, menuRequestDto.getStore());
     }
 
     @DeleteMapping("/{menuId}")
