@@ -1,11 +1,15 @@
 package com.programmers.dto.store;
 
+import com.programmers.domain.Store;
+
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Setter
 @Getter
+@NoArgsConstructor
 public class StoreRequestDto {
     private String storeName;
     private String category;
