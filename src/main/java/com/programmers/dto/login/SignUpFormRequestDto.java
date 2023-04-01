@@ -16,7 +16,7 @@ import lombok.Setter;
 public class SignUpFormRequestDto {
     @NotBlank
     @Length(min = 5, max = 20)
-    private final String userId;
+    private final Long userId;
     @NotBlank(message = "이름은 필수 입력 값입니다.")
     private String name;
     @NotBlank(message = "비밀번호는 필수 입력 값입니다.")
@@ -28,11 +28,11 @@ public class SignUpFormRequestDto {
 
     @NotBlank
     @Size(min = 10, max = 11, message = "핸드폰 번호 숫자가 맞지 않습니다.")
-    private int phoneNumber;
+    private String phoneNumber;
     private String role;
 
     @Builder
-    public SignUpFormRequestDto(String userId,String name, String password, String nickName,int phoneNumber) {
+    public SignUpFormRequestDto(Long userId,String name, String password, String nickName,String phoneNumber) {
         this.userId = userId;
         this.name = name;
         this.password = password;

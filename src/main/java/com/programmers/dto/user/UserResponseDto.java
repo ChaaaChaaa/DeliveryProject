@@ -14,7 +14,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode
 public class UserResponseDto {
-    private String userId;
+    private Long userId;
     private String name;
     private String password;
     private String nickName;
@@ -25,7 +25,7 @@ public class UserResponseDto {
     private LocalDateTime updatedAt;
 
     @Builder
-    public UserResponseDto(String userId, String name, String password, String nickName, String grade, int phoneNumber, String role, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public UserResponseDto(Long userId, String name, String password, String nickName, String grade, String phoneNumber, String role, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.userId = userId;
         this.name = name;
         this.password = password;

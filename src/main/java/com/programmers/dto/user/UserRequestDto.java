@@ -14,7 +14,7 @@ import lombok.Builder;
 
 public class UserRequestDto {
     @NotNull
-    private String userId;
+    private Long userId;
     @NotBlank
     @Length(min = 1, max = 30)
     private String name;
@@ -33,7 +33,7 @@ public class UserRequestDto {
     private LocalDateTime updatedAt;
 
     @Builder
-    public UserRequestDto(String userId, String name, String password, String nickName, int phoneNumber) {
+    public UserRequestDto(Long userId, String name, String password, String nickName, String phoneNumber) {
         this.userId = userId;
         this.name = name;
         this.password = password;

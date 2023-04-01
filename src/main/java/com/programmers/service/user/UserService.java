@@ -21,7 +21,7 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User findById(String userId) {
+    public User findById(Long userId) {
         return userRepository.findById(userId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "해당 id의 회원이 존재하지 않습니다."));
     }

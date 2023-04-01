@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String userId;
+    private Long userId;
 
     @NotBlank(message = "이름은 필수 입력 값입니다.")
     @Column(nullable = false)
@@ -43,7 +43,7 @@ public class User {
 
     @NotBlank(message = "전화번호는 필수 입력 값입니다.")
     @Column(nullable = false, unique = true)
-    private int phoneNumber;
+    private String phoneNumber;
     private String role;
 
 
@@ -54,7 +54,7 @@ public class User {
     private LocalDateTime updatedAt;
 
     @Builder
-    public User(String userId, String name, String password, String nickName, String grade, int phoneNumber, String role, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public User(Long userId, String name, String password, String nickName, String grade, String phoneNumber, String role, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.userId = userId;
         this.name = name;
         this.password = password;
@@ -79,7 +79,7 @@ public class User {
         this.password = password;
     }
 
-    public void changePhoneNumber(int phoneNumber) {
+    public void changePhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
