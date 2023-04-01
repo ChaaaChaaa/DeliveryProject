@@ -21,8 +21,8 @@ import lombok.RequiredArgsConstructor;
 public class StoreService {
     private final StoreRepository storeRepository;
 
-    public Store save(Store store) {
-        return storeRepository.save(store);
+    public Store save(StoreRequestDto storeRequestDto) {
+        return storeRepository.save(storeRequestDto.toEntity());
     }
 
     public StoreResponseDto findByStoreId(Long id) {
