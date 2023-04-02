@@ -21,22 +21,22 @@ public class OrderController {
         return orderService.save(orderRequestDto);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{orderId}")
     public OrderResponseDto searchOrderById(@PathVariable Long orderId){
         return orderService.findById(orderId);
     }
 
-    @GetMapping("/search/user")
+    @GetMapping("/search/user/{orderId}")
     public User searchUserByOrderId(@PathVariable Long orderId){
         return orderService.findUserByOrderId(orderId);
     }
 
-    @GetMapping("/search/menu")
+    @GetMapping("/search/menu/{orderId}")
     public Menu searchMenuByOrderId(@PathVariable Long orderId){
         return orderService.findMenuByOrderId(orderId);
     }
 
-    @GetMapping("/search/delivery")
+    @GetMapping("/search/delivery/{orderId}")
     public Delivery searchDeliveryByOrderId(@PathVariable Long orderId){
         return orderService.findDeliveryByOrderId(orderId);
     }
