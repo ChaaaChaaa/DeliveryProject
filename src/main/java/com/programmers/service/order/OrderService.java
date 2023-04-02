@@ -52,21 +52,18 @@ public class OrderService {
 
     public User findUserByOrderId(Long orderId){
         Order order = orderRepository.findById(orderId).orElseThrow(UserNotFoundException::new);
-        User user = userRepository.findByUser(order.getUser().getUserId()).orElseThrow(UserNotFoundException::new);
-        return user;
+        return userRepository.findByUser(order.getUser().getUserId()).orElseThrow(UserNotFoundException::new);
     }
 
     public Menu findMenuByOrderId(Long orderId){
         Order order = orderRepository.findById(orderId).orElseThrow(UserNotFoundException::new);
-        Menu menu = menuRepository.findByMenu(order.getMenu().getMenuId()).orElseThrow(MenuNotFoundException::new);
-        return menu;
+        return menuRepository.findByMenu(order.getMenu().getMenuId()).orElseThrow(MenuNotFoundException::new);
     }
 
 
     public Delivery findDeliveryByOrderId(Long orderId){
         Order order = orderRepository.findById(orderId).orElseThrow(UserNotFoundException::new);
-        Delivery delivery = deliveryRepository.findById(order.getDelivery().getDeliveryId()).orElseThrow(DeliveryNotFoundException::new);
-        return delivery;
+        return deliveryRepository.findById(order.getDelivery().getDeliveryId()).orElseThrow(DeliveryNotFoundException::new);
     }
 
     public void deleteById(long orderId){
