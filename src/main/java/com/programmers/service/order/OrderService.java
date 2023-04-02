@@ -69,5 +69,7 @@ public class OrderService {
         return delivery;
     }
 
-
+    public void deleteById(long orderId){
+        orderRepository.deleteById(orderId);
+    }
 }
