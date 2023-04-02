@@ -16,7 +16,7 @@ public class DeliveryController {
         deliveryService.save(deliveryResponseDto);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{deliveryId}")
     public DeliveryResponseDto searchDeliveryById(@PathVariable Long deliveryId){
         return deliveryService.findById(deliveryId);
     }
