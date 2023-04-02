@@ -46,5 +46,28 @@ public class OrderService {
         return orderRepository.save(savedOrder);
     }
 
+    public OrderResponseDto findById(Long orderId) {
+        return OrderResponseDto.of(orderRepository.findById(orderId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "해당 id의 주문이 존재하지 않습니다.")));
+    }
+
+    public User findUserByOrderId(Long orderId){
+        Order order = orderRepository.findById(orderId).orElseThrow(UserNotFoundException::new);
+        User user = userRepository.findByUser(order.getUser().getUserId()).orElseThrow(UserNotFoundException::new);
+        return user;
+    }
+
+    public Menu findMenuByOrderId(Long orderId){
+        Order order = orderRepository.findById(orderId).orElseThrow(UserNotFoundException::new);
+        Menu menu = menuRepository.findByMenu(order.getMenu().getMenuId()).orElseThrow(MenuNotFoundException::new);
+        return menu;
+    }
+
+
+    public Delivery findDeliveryByOrderId(Long orderId){
+        Order order = orderRepository.findById(orderId).orElseThrow(UserNotFoundException::new);
+        Delivery delivery = deliveryRepository.findById(order.getDelivery().getDeliveryId()).orElseThrow(DeliveryNotFoundException::new);
+        return delivery;
+    }
+
 
 }
