@@ -1,7 +1,7 @@
 package com.programmers.security;
 
-import com.programmers.domain.User;
-import com.programmers.exception.InvalidTokenException;
+import com.programmers.domain.user.User;
+import com.programmers.exception.security.InvalidTokenException;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

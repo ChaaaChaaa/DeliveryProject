@@ -1,6 +1,6 @@
 package com.programmers.repository.menu;
 
-import com.programmers.domain.Menu;
+import com.programmers.domain.menu.Menu;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.lang.Nullable;

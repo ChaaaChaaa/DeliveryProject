@@ -1,6 +1,6 @@
 package com.programmers.repository.store;
 
-import com.programmers.domain.Store;
+import com.programmers.domain.store.Store;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

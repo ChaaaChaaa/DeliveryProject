@@ -1,6 +1,5 @@
 package com.programmers.repository.food;
-import com.programmers.domain.Food;
-import com.programmers.dto.food.FoodRequestDto;
+import com.programmers.domain.food.Food;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;

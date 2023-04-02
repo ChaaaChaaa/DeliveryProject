@@ -1,7 +1,6 @@
 package com.programmers.repository.user;
 
-import com.programmers.domain.Food;
-import com.programmers.domain.User;
+import com.programmers.domain.user.User;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.lang.Nullable;

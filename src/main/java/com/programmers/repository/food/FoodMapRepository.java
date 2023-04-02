@@ -1,6 +1,6 @@
 package com.programmers.repository.food;
 
-import com.programmers.domain.Food;
+import com.programmers.domain.food.Food;
 
 import java.util.HashMap;
 import java.util.Map;
