@@ -18,5 +18,18 @@ public class UserController {
         userService.save(userRequestDto);
     }
 
+    @GetMapping("/{userId}")
+    public UserResponseDto searchUserById(@PathVariable Long userId) {
+        return userService.findById(userId);
+    }
 
+    @GetMapping("/search/nickname")
+    public UserResponseDto searchUserByNickName(@RequestParam("nickName") String nickName) {
+        return userService.findByNickName(nickName);
+    }
+
+    @GetMapping("/search/findByPhoneNumber")
+    public UserResponseDto searchUserByPhoneNumber(@RequestParam("phoneNumber") String phoneNumber) {
+        return userService.findByPhoneNumber(phoneNumber);
+    }
 }
