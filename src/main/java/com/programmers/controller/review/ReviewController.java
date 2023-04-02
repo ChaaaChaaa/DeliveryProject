@@ -22,4 +22,15 @@ public class ReviewController {
         reviewService.save(reviewRequestDto);
     }
 
+    @GetMapping("/search/{reviewId}")
+    public ReviewResponseDto searchReviewById(@PathVariable Long reviewId) {
+        return reviewService.findById(reviewId);
+    }
+
+    @GetMapping("/search")
+    public List<Store> searchReviewByStore(@RequestBody ReviewRequestDto reviewRequestDto) {
+        return reviewService.findStoreById(reviewRequestDto);
+    }
+
+
 }
