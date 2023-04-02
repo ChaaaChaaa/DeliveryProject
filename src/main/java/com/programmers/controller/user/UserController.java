@@ -32,4 +32,10 @@ public class UserController {
     public UserResponseDto searchUserByPhoneNumber(@RequestParam("phoneNumber") String phoneNumber) {
         return userService.findByPhoneNumber(phoneNumber);
     }
+
+    @PutMapping("/{userId}")
+    public void updateUser(@PathVariable Long userId, @RequestBody UserResponseDto userResponseDto) {
+        userService.update(userId, userResponseDto);
+    }
+
 }
