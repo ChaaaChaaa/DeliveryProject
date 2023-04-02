@@ -43,4 +43,7 @@ public class ReviewService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "해당 id의 리뷰가 존재하지 않습니다.")));
     }
 
+    public void deleteById(long reviewId) {
+        reviewRepository.deleteById(reviewId);
+    }
 }
