@@ -1,12 +1,11 @@
 package com.programmers.dto.user;
 
+import com.programmers.domain.user.User;
+
 import org.hibernate.validator.constraints.Length;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -39,5 +38,15 @@ public class UserRequestDto {
         this.password = password;
         this.nickName = nickName;
         this.phoneNumber = phoneNumber;
+    }
+
+    public User toEntity() {
+        return User.builder()
+                .userId(userId)
+                .name(name)
+                .password(password)
+                .nickName(nickName)
+                .phoneNumber(phoneNumber)
+                .build();
     }
 }

@@ -1,7 +1,6 @@
 package com.programmers.dto.user;
 
-import com.programmers.domain.User;
-import com.programmers.dto.menu.MenuResponseDto;
+import com.programmers.domain.user.User;
 
 import java.time.LocalDateTime;
 
@@ -37,8 +36,6 @@ public class UserResponseDto {
         this.updatedAt = updatedAt;
     }
 
-
-    //role과 grade는 빼고 만들수있는가?
     public static UserResponseDto of(User user){
         return UserResponseDto.builder()
                 .userId(user.getUserId())
