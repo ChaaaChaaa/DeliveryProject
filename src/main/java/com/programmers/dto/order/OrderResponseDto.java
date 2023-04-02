@@ -9,13 +9,13 @@ import lombok.Builder;
 
 
 public class OrderResponseDto {
-    private Long orderId;
-    private User user;
-    private Menu menu;
-    private Delivery delivery;
-    private String paymentMethod;
-    private String state;
-    private int price;
+    private final Long orderId;
+    private final User user;
+    private final Menu menu;
+    private final Delivery delivery;
+    private final String paymentMethod;
+    private final String state;
+    private final int price;
 
     @Builder
     public OrderResponseDto(Long orderId, User user, Menu menu, Delivery delivery, String paymentMethod, String state, int price) {

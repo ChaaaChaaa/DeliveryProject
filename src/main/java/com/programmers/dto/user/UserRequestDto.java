@@ -13,23 +13,19 @@ import lombok.Builder;
 
 public class UserRequestDto {
     @NotNull
-    private Long userId;
+    private final Long userId;
     @NotBlank
     @Length(min = 1, max = 30)
-    private String name;
+    private final String name;
     @NotBlank
     @Length(min = 1, max = 30)
-    private String password;
+    private final String password;
     @NotBlank
     @Length(min = 1, max = 30)
-    private String nickName;
-    private String grade;
+    private final String nickName;
     @NotBlank
     @Length(min = 1, max = 30)
-    private String phoneNumber;
-    private String role;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    private final String phoneNumber;
 
     @Builder
     public UserRequestDto(Long userId, String name, String password, String nickName, String phoneNumber) {

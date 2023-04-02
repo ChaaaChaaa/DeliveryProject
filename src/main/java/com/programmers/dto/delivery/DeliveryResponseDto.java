@@ -11,9 +11,9 @@ import javax.validation.constraints.NotNull;
 @EqualsAndHashCode
 public class DeliveryResponseDto {
     @NotNull
-    private long deliveryId;
+    private final long deliveryId;
     @NotNull
-    private String deliveryState;
+    private final String deliveryState;
 
     @Builder
     public DeliveryResponseDto(long deliveryId, String deliveryState) {

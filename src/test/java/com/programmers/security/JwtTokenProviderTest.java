@@ -1,6 +1,6 @@
 package com.programmers.security;
 
-import com.programmers.domain.User;
+import com.programmers.domain.user.User;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
