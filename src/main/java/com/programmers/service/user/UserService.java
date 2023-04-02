@@ -18,8 +18,13 @@ import lombok.RequiredArgsConstructor;
 public class UserService {
     private final UserRepository userRepository;
 
-    public User save(User user) {
-        return userRepository.save(user);
+    public User save(UserRequestDto userRequestDto) {
+        return userRepository.save(userRequestDto.toEntity());
+    }
+
+    public UserResponseDto findById(Long userId) {
+        return UserResponseDto.of(userRepository.findById(userId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "해당 id의 회원이 존재하지 않습니다.")));
     }
 
     public User findById(Long userId) {
