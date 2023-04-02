@@ -31,5 +31,13 @@ public class OrderController {
         return orderService.findUserByOrderId(orderId);
     }
 
+    @GetMapping("/search/menu")
+    public Menu searchMenuByOrderId(@PathVariable Long orderId){
+        return orderService.findMenuByOrderId(orderId);
+    }
 
+    @GetMapping("/search/delivery")
+    public Delivery searchDeliveryByOrderId(@PathVariable Long orderId){
+        return orderService.findDeliveryByOrderId(orderId);
+    }
 }
