@@ -32,5 +32,8 @@ public class ReviewController {
         return reviewService.findStoreById(reviewRequestDto);
     }
 
-
+    @DeleteMapping("/{reviewId}")
+    public void deleteReview(@PathVariable Long reviewId) {
+        reviewService.deleteById(reviewId);
+    }
 }
