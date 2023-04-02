@@ -2,6 +2,7 @@ package com.programmers.repository.menu;
 
 import com.programmers.domain.menu.Menu;
 
+import com.programmers.domain.store.Store;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Repository;
@@ -13,7 +14,7 @@ import javax.validation.constraints.NotNull;
 
 @Repository
 public interface MenuRepository extends JpaRepository<Menu,Long> {
-   @NotNull
+    @NotNull
     Optional<Menu> findById(@Nullable Long menuId);
 
     Optional<Menu> findByMenu(Long menuId);
