@@ -33,13 +33,20 @@ public class UserService {
     }
 
     @Transactional
-    public void update(long userId, User user) {
+    public void update(long userId, UserResponseDto userResponseDto) {
         User updatedUser = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 회원이 존재하지 않습니다."));
-        updatedUser.changeName(user.getName());
-        updatedUser.changeNickName(user.getNickName());
-        updatedUser.changePassword(user.getPassword());
-        updatedUser.changePhoneNumber(user.getPhoneNumber());
+
+        Optional<User> existingUser = userRepository.findByNickName(userResponseDto.getNickName());
+
+        if (existingUser.isPresent() && !existingUser.get().equals(updatedUser)) {
+            throw new DuplicateNickNameException();
+        }
+
+        updatedUser.setName(userResponseDto.getName());
+        updatedUser.setNickName(userResponseDto.getNickName());
+        updatedUser.setPassword(userResponseDto.getPassword());
+        updatedUser.setPhoneNumber(userResponseDto.getPhoneNumber());
         userRepository.save(updatedUser);
     }
 
