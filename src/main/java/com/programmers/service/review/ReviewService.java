@@ -30,5 +30,17 @@ public class ReviewService {
         return reviewRepository.save(reviewRequestDto.toEntity());
     }
 
+    public List<Store> findStoreById(ReviewRequestDto reviewRequestDto){
+        stores = new ArrayList<>();
+        Order order = orderRepository.findById(reviewRequestDto.getOrder().getOrderId()).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "해당 id의 주문이 존재하지 않습니다."));
+        Menu menu = menuRepository.findById(order.getMenu().getMenuId()).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "해당 id의 메뉴가 존재하지 않습니다."));
+        stores.add(menu.getStore());
+        return stores;
+    }
+
+    public ReviewResponseDto findById(Long reviewId) {
+        return ReviewResponseDto.of(reviewRepository.findById(reviewId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "해당 id의 리뷰가 존재하지 않습니다.")));
+    }
 
 }
