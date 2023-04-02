@@ -26,4 +26,10 @@ public class OrderController {
         return orderService.findById(orderId);
     }
 
+    @GetMapping("/search/user")
+    public User searchUserByOrderId(@PathVariable Long orderId){
+        return orderService.findUserByOrderId(orderId);
+    }
+
+
 }
