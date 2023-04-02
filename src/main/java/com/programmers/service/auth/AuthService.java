@@ -7,7 +7,6 @@ import com.programmers.exception.user.DuplicateNickNameException;
 import com.programmers.exception.security.LoginFailedException;
 import com.programmers.dto.token.TokenResponseDto;
 import com.programmers.repository.user.UserRepository;
-import com.programmers.dto.token.TokenResponseDto;
 import com.programmers.security.JwtTokenProvider;
 import com.programmers.security.PasswordEncoder;
 
