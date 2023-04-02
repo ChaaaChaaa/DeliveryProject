@@ -1,5 +1,7 @@
 package com.programmers.domain;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,9 +11,11 @@ import javax.persistence.Id;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
 @Getter
 @NoArgsConstructor
 @Entity
+@DynamicUpdate
 public class Food {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -38,9 +42,15 @@ public class Food {
         this.image = image;
     }
 
-    public void update(String name, int price, String description) {
+    public void changeName(String name) {
         this.name = name;
+    }
+
+    public void changePrice(int price) {
         this.price = price;
+    }
+
+    public void changeDescription(String description) {
         this.description = description;
     }
 }

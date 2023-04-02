@@ -9,8 +9,11 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+import javax.validation.constraints.NotNull;
+
 @Repository
 public interface MenuRepository extends JpaRepository<Menu,Long> {
+   @NotNull
     Optional<Menu> findById(@Nullable Long menuId);
 
     Menu save(@Nullable Menu menu);

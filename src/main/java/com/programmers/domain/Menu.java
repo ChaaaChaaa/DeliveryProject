@@ -1,5 +1,7 @@
 package com.programmers.domain;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
@@ -15,6 +17,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @Entity
+@DynamicUpdate
 public class Menu {
 
     @Id
@@ -22,12 +25,15 @@ public class Menu {
     private Long menuId;
 
     @ManyToOne
-    @JoinColumn(name = "storeId", foreignKey = @ForeignKey(name = "fk_menu_store"))
+    @JoinColumn(name = "storeId", referencedColumnName = "storeId", foreignKey = @ForeignKey(name = "fk_menu_store"))
     private Store store;
 
     @ManyToOne
-    @JoinColumn(name = "foodId", foreignKey = @ForeignKey(name = "fk_menu_food"))
+    @JoinColumn(name = "foodId", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_menu_food"))
     private Food food;
+
+    private String storeName;
+    private String foodName;
 
     @Builder
     public Menu(Long menuId, Store store, Food food) {
@@ -36,8 +42,11 @@ public class Menu {
         this.food = food;
     }
 
-    public void update(Store store, Food food) {
+    public void changeStore(Store store) {
         this.store = store;
+    }
+
+    public void changeFood(Food food) {
         this.food = food;
     }
 }

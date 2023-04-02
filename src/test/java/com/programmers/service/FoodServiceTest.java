@@ -1,9 +1,10 @@
 package com.programmers.service;
 
 import com.programmers.domain.Food;
+import com.programmers.dto.food.FoodRequestDto;
 import com.programmers.dto.food.FoodResponseDto;
-import com.programmers.dto.food.FoodUpdateRequestDto;
 import com.programmers.repository.food.FoodRepository;
+import com.programmers.service.food.FoodService;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,12 +30,12 @@ class FoodServiceTest {
     FoodService foodService;
 
     @BeforeEach
-    void clean(){
+    void clean() {
         foodRepository.deleteAll();
     }
 
     @Test
-    @DisplayName("save test")
+    @DisplayName("저장된 음식 조회")
     void save() {
         Food food = basicFoodData();
         Food newFood = foodRepository.save(food);
@@ -45,8 +46,9 @@ class FoodServiceTest {
     @DisplayName("Id로 음식 조회")
     void findById() {
         //given
-        Food requestFood = basicFoodData();
-        Food newFood = foodService.save(requestFood);
+        Food food = basicFoodData();
+        FoodRequestDto foodRequestDto = FoodRequestDto.of(food);
+        Food newFood = foodService.save(foodRequestDto);
 
         //when
         FoodResponseDto foodResponseDto = foodService.findById(newFood.getId());
@@ -61,8 +63,9 @@ class FoodServiceTest {
     @DisplayName("Id 조회 실패")
     void findByIdFail() {
         //given
-        Food requestFood = basicFoodData();
-        Food newFood = foodService.save(requestFood);
+        Food food = basicFoodData();
+        FoodRequestDto foodRequestDto = FoodRequestDto.of(food);
+        Food newFood = foodService.save(foodRequestDto);
         Long nonExistingId = newFood.getId() + 100;
 
         //when & then
@@ -73,8 +76,8 @@ class FoodServiceTest {
     @DisplayName("이름으로 음식 조회")
     void findByNameContaining() {
         //given
-        Food requestFood = basicFoodData();
-        Food newFood = foodRepository.save(requestFood);
+        Food food = basicFoodData();
+        Food newFood = foodRepository.save(food);
 
         //when
         List<FoodResponseDto> foods = foodService.findByNameContaining(newFood.getName());
@@ -86,35 +89,36 @@ class FoodServiceTest {
 
 
     @Test
-    @DisplayName("update test")
+    @DisplayName("음식 수정 테스트")
     void update() {
         //given
         String modifiedName = "냉면";
         int modifiedPrice = 3000;
-        String modifiedDescription ="시뭔한 냉면";
+        String modifiedDescription = "시뭔한 냉면";
 
         Food dummyFood = foodRepository.save(dummyFoodData());
-        Long dummyId = dummyFood.getId();
+        Long dummyFoodId = dummyFood.getId();
 
-        FoodUpdateRequestDto foodUpdateRequestDto = FoodUpdateRequestDto.builder()
+        Food updatedFood = Food.builder()
                 .name(modifiedName)
                 .price(modifiedPrice)
                 .description(modifiedDescription)
                 .build();
 
+        FoodRequestDto foodRequestDto = FoodRequestDto.of(updatedFood);
+
         //when
-        foodService.update(dummyId,foodUpdateRequestDto);
+        foodService.update(dummyFoodId, foodRequestDto);
 
         //then
-        Food findFood = foodRepository.findById(dummyId).orElseThrow();
-
-        assertEquals(dummyId, findFood.getId());
-        assertEquals(modifiedName, findFood.getName());
-        assertEquals(modifiedPrice, findFood.getPrice());
+        Food targetFood = foodRepository.findById(dummyFoodId).orElseThrow();
+        assertEquals(dummyFoodId, targetFood.getId());
+        assertEquals(modifiedName, targetFood.getName());
+        assertEquals(modifiedPrice, targetFood.getPrice());
     }
 
     @Test
-    @DisplayName("delete")
+    @DisplayName("음식 삭제 테스트")
     void delete() {
         //given
         Food food = basicFoodData();

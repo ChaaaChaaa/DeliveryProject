@@ -1,9 +1,9 @@
 package com.programmers.controller;
 
 import com.programmers.domain.Store;
+import com.programmers.dto.store.StoreRequestDto;
 import com.programmers.dto.store.StoreResponseDto;
-import com.programmers.dto.store.StoreUpdateRequestDto;
-import com.programmers.service.StoreService;
+import com.programmers.service.store.StoreService;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,8 +25,8 @@ public class StoreController {
     private final StoreService storeService;
 
     @PostMapping("/save")
-    public void saveStore(@RequestBody Store store) {
-        storeService.save(store);
+    public void saveStore(@RequestBody StoreRequestDto storeRequestDto) {
+        storeService.save(storeRequestDto);
     }
 
 
@@ -36,13 +36,13 @@ public class StoreController {
     }
 
     @GetMapping("/search")
-    public StoreResponseDto searchStoreByName(@RequestParam("name") String storeName) {
+    public StoreResponseDto searchStoreByName(@RequestParam("storeName") String storeName) {
         return storeService.findByStoreName(storeName);
     }
 
     @PutMapping("/{storeId}")
-    public void updateStore(@PathVariable Long storeId, @RequestBody StoreUpdateRequestDto storeUpdateRequestDto) {
-        storeService.update(storeId, storeUpdateRequestDto);
+    public void updateStore(@PathVariable Long storeId, @RequestBody StoreRequestDto storeRequestDto) {
+        storeService.update(storeId, storeRequestDto);
     }
 
     @DeleteMapping("/{storeId}")

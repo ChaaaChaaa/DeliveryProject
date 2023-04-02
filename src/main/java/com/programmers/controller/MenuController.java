@@ -1,11 +1,12 @@
 package com.programmers.controller;
 
 
+import com.programmers.domain.Menu;
 import com.programmers.dto.menu.MenuRequestDto;
 import com.programmers.dto.menu.MenuResponseDto;
-import com.programmers.dto.menu.MenuUpdateRequestDto;
-import com.programmers.service.MenuService;
+import com.programmers.service.menu.MenuService;
 
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,26 +19,30 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-@RequestMapping("/menus")
+@RequestMapping("/menu")
 @RestController
 public class MenuController {
     private final MenuService menuService;
 
-    @PostMapping("/save")
+    @PostMapping(path = "/save", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void saveMenu(@RequestBody MenuRequestDto menuRequestDto) {
         menuService.save(menuRequestDto);
     }
 
 
     @GetMapping("/{menuId}")
-    public MenuResponseDto searchMenuById(@PathVariable Long menuId) {
-        return menuService.findById(menuId);
+    public MenuResponseDto searchMenuById(@PathVariable Long menuId, @RequestBody MenuRequestDto menuRequestDto) {
+        return menuService.findById(menuId, menuRequestDto);
     }
 
+    @PutMapping("/{menuId}/updateFood")
+    public void updateFoodInMenu(@PathVariable Long menuId, @RequestBody MenuRequestDto menuRequestDto) {
+        menuService.updateFood(menuId, menuRequestDto.getFood());
+    }
 
-    @PutMapping("/{menuId}")
-    public void updateMenu(@PathVariable Long menuId, @RequestBody MenuUpdateRequestDto menuUpdateRequestDto) {
-        menuService.update(menuId, menuUpdateRequestDto);
+    @PutMapping("/{menuId}/updateStore")
+    public void updateStoreInMenu(@PathVariable Long menuId, @RequestBody MenuRequestDto menuRequestDto) {
+        menuService.updateStore(menuId, menuRequestDto.getStore());
     }
 
     @DeleteMapping("/{menuId}")

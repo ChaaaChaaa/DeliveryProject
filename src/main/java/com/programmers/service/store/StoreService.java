@@ -1,8 +1,9 @@
-package com.programmers.service;
+package com.programmers.service.store;
+
 
 import com.programmers.domain.Store;
+import com.programmers.dto.store.StoreRequestDto;
 import com.programmers.dto.store.StoreResponseDto;
-import com.programmers.dto.store.StoreUpdateRequestDto;
 import com.programmers.exception.StoreNotFoundException;
 import com.programmers.repository.store.StoreRepository;
 
@@ -20,8 +21,8 @@ import lombok.RequiredArgsConstructor;
 public class StoreService {
     private final StoreRepository storeRepository;
 
-    public Store save(Store store) {
-        return storeRepository.save(store);
+    public Store save(StoreRequestDto storeRequestDto) {
+        return storeRepository.save(storeRequestDto.toEntity());
     }
 
     public StoreResponseDto findByStoreId(Long id) {
@@ -38,22 +39,16 @@ public class StoreService {
 
 
     @Transactional
-    public void update(long id, StoreUpdateRequestDto storeUpdateRequestDto) {
-        Store store = storeRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "해당 가게가 존재하지 않습니다."));
-
-        getStoreInfo(store, storeUpdateRequestDto);
+    public void update(long id, StoreRequestDto storeRequestDto) {
+        Store updatedStore = storeRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 가게가 존재하지 않습니다."));
+        updatedStore.changeStoreName(storeRequestDto.getStoreName());
+        updatedStore.changeCategory(storeRequestDto.getCategory());
+        storeRepository.save(updatedStore);
     }
 
     public void deleteById(long id) {
         storeRepository.deleteById(id);
     }
 
-    private void getStoreInfo(Store store, StoreUpdateRequestDto storeUpdateRequestDto) {
-        String updatedName = storeUpdateRequestDto.getStoreName();
-        String updatedCategory = storeUpdateRequestDto.getCategory();
-        int updatedReviewCount = storeUpdateRequestDto.getReviewCount();
-        float updatedRating = storeUpdateRequestDto.getRating();
-        store.update(updatedName, updatedCategory, updatedReviewCount, updatedRating);
-    }
 }

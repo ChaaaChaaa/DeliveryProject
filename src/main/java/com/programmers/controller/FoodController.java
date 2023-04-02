@@ -1,9 +1,9 @@
 package com.programmers.controller;
 
 import com.programmers.domain.Food;
+import com.programmers.dto.food.FoodRequestDto;
 import com.programmers.dto.food.FoodResponseDto;
-import com.programmers.dto.food.FoodUpdateRequestDto;
-import com.programmers.service.FoodService;
+import com.programmers.service.food.FoodService;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,8 +25,8 @@ public class FoodController {
     private final FoodService foodService;
 
     @PostMapping("/save")
-    public void saveFood(@RequestBody Food food) {
-        foodService.save(food);
+    public void saveFood(@RequestBody FoodRequestDto foodRequestDto) {
+        foodService.save(foodRequestDto);
     }
 
 
@@ -42,8 +42,8 @@ public class FoodController {
     }
 
     @PutMapping("/{id}")
-    public void updateFood(@PathVariable Long id, @RequestBody FoodUpdateRequestDto foodUpdateRequestDto) {
-        foodService.update(id, foodUpdateRequestDto);
+    public void updateFood(@PathVariable Long id, @RequestBody FoodRequestDto foodRequestDto) {
+        foodService.update(id, foodRequestDto);
     }
 
     @DeleteMapping("/{id}")

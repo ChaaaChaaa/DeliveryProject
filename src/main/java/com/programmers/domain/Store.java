@@ -1,5 +1,7 @@
 package com.programmers.domain;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,6 +15,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor
+@DynamicUpdate
 public class Store {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,10 +40,12 @@ public class Store {
         this.rating = rating;
     }
 
-    public void update(String storeName, String category, int reviewCount, float rating) {
+
+    public void changeStoreName(String storeName) {
         this.storeName = storeName;
+    }
+
+    public void changeCategory(String category) {
         this.category = category;
-        this.reviewCount = reviewCount;
-        this.rating = rating;
     }
 }
