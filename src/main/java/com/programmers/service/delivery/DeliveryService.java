@@ -22,5 +22,7 @@ public class DeliveryService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "해당 id의 배달이 존대하지 않습니다.")));
     }
 
-
+    public void deleteById(Long deliveryId) {
+        deliveryRepository.deleteById(deliveryId);
+    }
 }
