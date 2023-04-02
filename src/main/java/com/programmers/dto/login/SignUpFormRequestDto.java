@@ -1,6 +1,6 @@
 package com.programmers.dto.login;
 
-import com.programmers.domain.User;
+import com.programmers.domain.user.User;
 
 import org.hibernate.validator.constraints.Length;
 

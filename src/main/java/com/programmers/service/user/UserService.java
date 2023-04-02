@@ -1,6 +1,7 @@
 package com.programmers.service.user;
 
-import com.programmers.domain.User;
+import com.programmers.domain.user.User;
+import com.programmers.dto.user.UserRequestDto;
 import com.programmers.dto.user.UserResponseDto;
 import com.programmers.repository.user.UserRepository;
 

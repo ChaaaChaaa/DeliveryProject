@@ -1,6 +1,6 @@
 package com.programmers.dto.store;
 
-import com.programmers.domain.Store;
+import com.programmers.domain.store.Store;
 
 import lombok.Builder;
 import lombok.Getter;

@@ -1,8 +1,8 @@
 package com.programmers.dto.menu;
 
-import com.programmers.domain.Food;
-import com.programmers.domain.Menu;
-import com.programmers.domain.Store;
+import com.programmers.domain.food.Food;
+import com.programmers.domain.menu.Menu;
+import com.programmers.domain.store.Store;
 
 import lombok.Builder;
 import lombok.Getter;

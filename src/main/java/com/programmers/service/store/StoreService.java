@@ -1,10 +1,10 @@
 package com.programmers.service.store;
 
 
-import com.programmers.domain.Store;
+import com.programmers.domain.store.Store;
 import com.programmers.dto.store.StoreRequestDto;
 import com.programmers.dto.store.StoreResponseDto;
-import com.programmers.exception.StoreNotFoundException;
+import com.programmers.exception.store.StoreNotFoundException;
 import com.programmers.repository.store.StoreRepository;
 
 import org.springframework.http.HttpStatus;

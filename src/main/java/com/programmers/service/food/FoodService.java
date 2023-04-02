@@ -1,6 +1,6 @@
 package com.programmers.service.food;
 
-import com.programmers.domain.Food;
+import com.programmers.domain.food.Food;
 import com.programmers.dto.food.FoodRequestDto;
 import com.programmers.dto.food.FoodResponseDto;
 import com.programmers.repository.food.FoodRepository;

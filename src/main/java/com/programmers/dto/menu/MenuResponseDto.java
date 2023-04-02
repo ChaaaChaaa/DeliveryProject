@@ -1,6 +1,6 @@
 package com.programmers.dto.menu;
 
-import com.programmers.domain.Menu;
+import com.programmers.domain.menu.Menu;
 
 
 import lombok.Builder;

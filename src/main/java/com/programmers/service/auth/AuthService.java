@@ -1,10 +1,11 @@
 package com.programmers.service.auth;
 
-import com.programmers.domain.User;
+import com.programmers.domain.user.User;
 import com.programmers.dto.login.LoginFormRequestDto;
 import com.programmers.dto.login.SignUpFormRequestDto;
-import com.programmers.exception.DuplicateNickNameException;
-import com.programmers.exception.LoginFailedException;
+import com.programmers.exception.user.DuplicateNickNameException;
+import com.programmers.exception.security.LoginFailedException;
+import com.programmers.dto.token.TokenResponseDto;
 import com.programmers.repository.user.UserRepository;
 import com.programmers.dto.token.TokenResponseDto;
 import com.programmers.security.JwtTokenProvider;

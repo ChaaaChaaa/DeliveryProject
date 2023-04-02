@@ -1,14 +1,14 @@
 package com.programmers.service.menu;
 
-import com.programmers.domain.Food;
-import com.programmers.domain.Menu;
-import com.programmers.domain.Store;
+import com.programmers.domain.food.Food;
+import com.programmers.domain.menu.Menu;
+import com.programmers.domain.store.Store;
 
 import com.programmers.dto.menu.MenuRequestDto;
 import com.programmers.dto.menu.MenuResponseDto;
-import com.programmers.exception.FoodNotFoundException;
-import com.programmers.exception.MenuNotFoundException;
-import com.programmers.exception.StoreNotFoundException;
+import com.programmers.exception.food.FoodNotFoundException;
+import com.programmers.exception.menu.MenuNotFoundException;
+import com.programmers.exception.store.StoreNotFoundException;
 import com.programmers.repository.food.FoodRepository;
 import com.programmers.repository.menu.MenuRepository;
 import com.programmers.repository.store.StoreRepository;

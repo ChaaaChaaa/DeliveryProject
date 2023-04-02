@@ -1,6 +1,6 @@
 package com.programmers.dto.food;
 
-import com.programmers.domain.Food;
+import com.programmers.domain.food.Food;
 
 import java.util.List;
 import java.util.stream.Collectors;
