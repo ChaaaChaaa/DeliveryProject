@@ -16,9 +16,12 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
+@Transactional
 class StoreServiceTest {
     @Autowired
     StoreRepository storeRepository;

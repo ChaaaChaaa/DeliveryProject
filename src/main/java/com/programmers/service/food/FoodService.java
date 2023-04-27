@@ -19,7 +19,7 @@ import lombok.RequiredArgsConstructor;
 public class FoodService {
     private final FoodRepository foodRepository;
 
-
+    @Transactional
     public Food save(FoodRequestDto foodRequestDto) {
         return foodRepository.save(foodRequestDto.toEntity());
     }

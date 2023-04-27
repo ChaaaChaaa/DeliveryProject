@@ -20,6 +20,7 @@ import java.util.Optional;
 public class UserService {
     private final UserRepository userRepository;
 
+    @Transactional
     public User save(UserRequestDto userRequestDto) {
         return userRepository.save(userRequestDto.toEntity());
     }

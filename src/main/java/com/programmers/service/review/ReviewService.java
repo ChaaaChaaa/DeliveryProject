@@ -27,6 +27,7 @@ public class ReviewService {
     private final MenuRepository menuRepository;
     List<Store> stores;
 
+    @Transactional
     public Review save(ReviewRequestDto reviewRequestDto) {
         return reviewRepository.save(reviewRequestDto.toEntity());
     }

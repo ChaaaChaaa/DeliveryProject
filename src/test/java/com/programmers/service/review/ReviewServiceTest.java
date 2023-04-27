@@ -22,12 +22,12 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-import lombok.RequiredArgsConstructor;
+import javax.transaction.Transactional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@RequiredArgsConstructor
-@Service
+@SpringBootTest
+@Transactional
 class ReviewServiceTest {
     @Autowired
     ReviewRepository reviewRepository;
