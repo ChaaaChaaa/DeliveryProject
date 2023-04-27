@@ -1,9 +1,11 @@
-package com.programmers.domain.menu;
+package com.programmers.domain.storeMenu;
 
+import com.programmers.domain.food.Food;
 import com.programmers.domain.store.Store;
 
 import org.hibernate.annotations.DynamicUpdate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
@@ -20,26 +22,24 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @DynamicUpdate
-public class Menu {
+public class StoreMenu {
 
     @Id
+    @Column(name = "storeMenuId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long menuId;
+    private Long storeMenuId;
 
     @ManyToOne
-    @JoinColumn(name = "storeId", referencedColumnName = "storeId", foreignKey = @ForeignKey(name = "fk_menu_store"))
+    @JoinColumn(name = "storeId", referencedColumnName = "storeId", foreignKey = @ForeignKey(name = "fk_store_menu_store"))
     private Store store;
 
     @ManyToOne
-    @JoinColumn(name = "foodId", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_menu_food"))
+    @JoinColumn(name = "foodId", referencedColumnName = "foodId", foreignKey = @ForeignKey(name = "fk_store_menu_food"))
     private Food food;
 
-    private String storeName;
-    private String foodName;
 
     @Builder
-    public Menu(Long menuId, Store store, Food food) {
-        this.menuId = menuId;
+    public StoreMenu(Store store, Food food) {
         this.store = store;
         this.food = food;
     }
