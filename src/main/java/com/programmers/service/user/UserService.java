@@ -24,8 +24,8 @@ public class UserService {
         return userRepository.save(userRequestDto.toEntity());
     }
 
-    public UserResponseDto findById(Long userId) {
-        return UserResponseDto.of(userRepository.findById(userId)
+    public UserResponseDto findByUserId(Long userId) {
+        return UserResponseDto.of(userRepository.findByUserId(userId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "해당 id의 회원이 존재하지 않습니다.")));
     }
 

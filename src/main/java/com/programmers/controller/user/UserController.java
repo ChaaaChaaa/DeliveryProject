@@ -29,7 +29,7 @@ public class UserController {
 
     @GetMapping("/{userId}")
     public UserResponseDto searchUserById(@PathVariable Long userId) {
-        return userService.findById(userId);
+        return userService.findByUserId(userId);
     }
 
     @GetMapping("/search/nickname/{nickName}")
