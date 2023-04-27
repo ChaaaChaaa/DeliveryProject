@@ -56,7 +56,9 @@ public class OrderList {
     private Payment paymentMethod;
 
     @NotNull
-    private String state;
+    @Column(columnDefinition = "ENUM('READY','SHIPPING','DELIVERED')")
+    @Enumerated(EnumType.STRING)
+    private OrderState orderState;
 
     @NotNull
     private int price;
