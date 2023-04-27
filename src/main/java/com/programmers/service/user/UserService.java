@@ -41,11 +41,11 @@ public class UserService {
     }
 
     @Transactional
-    public void update(long userId, UserResponseDto userResponseDto) {
+    public void update(long userId, UserRequestDto userRequestDto) {
         User updatedUser = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 회원이 존재하지 않습니다."));
-
-        Optional<User> existingUser = userRepository.findByNickName(userResponseDto.getNickName());
+        updatedUser.setUserId(userId);
+        Optional<User> existingUser = userRepository.findByNickName(userRequestDto.getNickName());
 
         if (existingUser.isPresent() && !existingUser.get().equals(updatedUser)) {
             throw new DuplicateNickNameException();
