@@ -12,9 +12,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @DynamicUpdate
-public class Order {
+@Table(name = "OrderList")
+public class OrderList {
     @Id
-    private Long orderId;
+    @Column(name = "orderlistId")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long orderListId;
 
     @ManyToOne
     @JoinColumn(name = "userId", referencedColumnName = "userId", foreignKey = @ForeignKey(name = "fk_order_user"))
@@ -39,8 +42,7 @@ public class Order {
     private int price;
 
     @Builder
-    public Order(Long orderId, User user, Menu menu, Delivery delivery, String paymentMethod, String state, int price) {
-        this.orderId = orderId;
+    public OrderList(User user, Delivery delivery, Payment paymentMethod, OrderState orderState, int totalPrice) {
         this.user = user;
         this.menu = menu;
         this.delivery = delivery;

@@ -19,30 +19,26 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/order")
 @RestController
 public class OrderController {
-    private final OrderService orderService;
+    private final OrderListService orderListService;
 
     @PostMapping("/save")
-    public Order save(OrderRequestDto orderRequestDto){
-        return orderService.save(orderRequestDto);
+    public OrderList save(OrderRequestDto orderRequestDto) {
+        return orderListService.save(orderRequestDto);
     }
 
-    @GetMapping("/{orderId}")
-    public OrderResponseDto searchOrderById(@PathVariable Long orderId){
-        return orderService.findById(orderId);
+    @GetMapping("/{orderListId}")
+    public OrderResponseDto searchOrderById(@PathVariable Long orderListId) {
+        return orderListService.findById(orderListId);
     }
 
-    @GetMapping("/search/user/{orderId}")
-    public User searchUserByOrderId(@PathVariable Long orderId){
-        return orderService.findUserByOrderId(orderId);
+    @GetMapping("/search/user/{orderListId}")
+    public User searchUserByOrderListId(@PathVariable Long orderListId) {
+        return orderListService.findUserByOrderListId(orderListId);
     }
 
-    @GetMapping("/search/menu/{orderId}")
-    public Menu searchMenuByOrderId(@PathVariable Long orderId){
-        return orderService.findMenuByOrderId(orderId);
-    }
 
-    @GetMapping("/search/delivery/{orderId}")
-    public Delivery searchDeliveryByOrderId(@PathVariable Long orderId){
-        return orderService.findDeliveryByOrderId(orderId);
+    @GetMapping("/search/delivery/{orderListId}")
+    public Delivery searchDeliveryByOrderListId(@PathVariable Long orderListId) {
+        return orderListService.findDeliveryByOrderListId(orderListId);
     }
 }

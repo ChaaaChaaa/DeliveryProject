@@ -1,7 +1,10 @@
 package com.programmers.dto.order;
 
 import com.programmers.domain.delivery.Delivery;
-import com.programmers.domain.menu.Menu;
+import com.programmers.domain.order.OrderList;
+import com.programmers.domain.order.OrderState;
+import com.programmers.domain.order.Payment;
+import com.programmers.domain.orderItem.OrderItem;
 import com.programmers.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,7 +15,7 @@ import lombok.Setter;
 @Setter
 public class OrderRequestDto {
     @NotNull
-    private Long orderId;
+    private Long orderListId;
     @NotNull
     private User user;
     @NotNull

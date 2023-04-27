@@ -1,6 +1,6 @@
 package com.programmers.dto.review;
 
-import com.programmers.domain.order.Order;
+import com.programmers.domain.order.OrderList;
 import com.programmers.domain.review.Review;
 
 import lombok.Builder;
@@ -13,16 +13,15 @@ public class ReviewRequestDto {
     @NotNull
     private Long reviewId;
     @NotNull
-    private Order order;
+    private OrderList orderList;
     @NotBlank
     private float rating;
     private String content;
     private String reviewPicture;
 
     @Builder
-    public ReviewRequestDto(Long reviewId, Order order, float rating, String content, String reviewPicture) {
-        this.reviewId = reviewId;
-        this.order = order;
+    public ReviewRequestDto(OrderList orderList, float rating, String content, String reviewPicture) {
+        this.orderList = orderList;
         this.rating = rating;
         this.content = content;
         this.reviewPicture = reviewPicture;
@@ -30,8 +29,7 @@ public class ReviewRequestDto {
 
     public static ReviewRequestDto of(Review review){
         return ReviewRequestDto.builder()
-                .reviewId(review.getReviewId())
-                .order(review.getOrder())
+                .orderList(review.getOrderList())
                 .rating(review.getRating())
                 .content(review.getContent())
                 .reviewPicture(review.getReviewPicture())
@@ -40,8 +38,7 @@ public class ReviewRequestDto {
 
     public Review toEntity(){
         return Review.builder()
-                .reviewId(reviewId)
-                .order(order)
+                .orderList(orderList)
                 .rating(rating)
                 .content(content)
                 .reviewPicture(reviewPicture)
