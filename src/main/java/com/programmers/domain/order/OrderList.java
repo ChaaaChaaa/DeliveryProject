@@ -1,8 +1,26 @@
 package com.programmers.domain.order;
 
 import com.programmers.domain.user.User;
-import com.programmers.domain.delivery.Delivery;
-import com.programmers.domain.menu.Menu;
+
+import org.hibernate.annotations.DynamicUpdate;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.ForeignKey;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -33,7 +51,9 @@ public class OrderList {
 
 
     @NotNull
-    private String paymentMethod;
+    @Column(columnDefinition = "ENUM('CREDIT_CARD','CASH')")
+    @Enumerated(EnumType.STRING)
+    private Payment paymentMethod;
 
     @NotNull
     private String state;
