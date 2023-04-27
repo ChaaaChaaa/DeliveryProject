@@ -41,9 +41,6 @@ public class OrderList {
     @JoinColumn(name = "userId", referencedColumnName = "userId", foreignKey = @ForeignKey(name = "fk_order_user"))
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "menuId", referencedColumnName = "menuId", foreignKey = @ForeignKey(name = "fk_order_menu"))
-    private Menu menu;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "deliveryId", referencedColumnName = "deliveryId", foreignKey = @ForeignKey(name = "fk_order_delivery"))
