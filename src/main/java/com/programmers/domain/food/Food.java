@@ -37,8 +37,7 @@ public class Food {
 
 
     @Builder
-    public Food(Long id, String name, int price, String description, String image) {
-        this.id = id;
+    public Food(String name, int price, String description, String image) {
         this.name = name;
         this.price = price;
         this.description = description;

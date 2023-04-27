@@ -137,7 +137,6 @@ class FoodServiceTest {
 
     private Food basicFoodData() {
         return Food.builder()
-                .id(1L)
                 .price(1000)
                 .description("맛있는라면")
                 .name("라면")
@@ -146,7 +145,6 @@ class FoodServiceTest {
 
     private Food dummyFoodData() {
         return Food.builder()
-                .id(2L)
                 .price(2000)
                 .description("매콤한라면")
                 .name("신라면")

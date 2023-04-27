@@ -27,8 +27,7 @@ public class FoodRequestDto {
     private String image;
 
     @Builder
-    public FoodRequestDto(Long id, String name, Integer price, String description, String image) {
-        this.id = id;
+    public FoodRequestDto(String name, Integer price, String description, String image) {
         this.name = name;
         this.price = price;
         this.description = description;
@@ -37,7 +36,6 @@ public class FoodRequestDto {
 
     public static FoodRequestDto of(Food food){
         return FoodRequestDto.builder()
-                .id(food.getId())
                 .name(food.getName())
                 .price(food.getPrice())
                 .description(food.getDescription())
@@ -47,7 +45,6 @@ public class FoodRequestDto {
 
     public Food toEntity() {
         return Food.builder()
-                .id(id)
                 .name(name)
                 .price(price)
                 .description(description)
