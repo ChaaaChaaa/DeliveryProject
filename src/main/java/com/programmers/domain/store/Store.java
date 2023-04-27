@@ -32,8 +32,7 @@ public class Store {
     private float rating;
 
     @Builder
-    public Store(Long storeId, String storeName, String category, int reviewCount, float rating) {
-        this.storeId = storeId;
+    public Store(String storeName, String category, int reviewCount, float rating) {
         this.storeName = storeName;
         this.category = category;
         this.reviewCount = reviewCount;

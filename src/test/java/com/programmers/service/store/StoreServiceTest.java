@@ -119,7 +119,6 @@ class StoreServiceTest {
 
     private Store basicStoreData(){
         return Store.builder()
-                .storeId(1L)
                 .category("noodle")
                 .storeName("차차네")
                 .rating(5.0f)
@@ -129,7 +128,6 @@ class StoreServiceTest {
 
     private Store dummyStoreData(){
         return Store.builder()
-                .storeId(2L)
                 .category("dumpling")
                 .storeName("만두네")
                 .rating(4.5f)
