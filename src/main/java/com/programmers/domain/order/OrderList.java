@@ -1,5 +1,8 @@
 package com.programmers.domain.order;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.programmers.domain.delivery.Delivery;
+import com.programmers.domain.orderItem.OrderItem;
 import com.programmers.domain.user.User;
 
 import org.hibernate.annotations.DynamicUpdate;
@@ -58,15 +61,19 @@ public class OrderList {
     private OrderState orderState;
 
     @NotNull
-    private int price;
+    private int totalPrice;
+
+    @OneToMany(mappedBy = "orderList")
+    @JsonIgnore
+    private List<OrderItem> orderItems;
 
     @Builder
     public OrderList(User user, Delivery delivery, Payment paymentMethod, OrderState orderState, int totalPrice) {
         this.user = user;
-        this.menu = menu;
         this.delivery = delivery;
         this.paymentMethod = paymentMethod;
-        this.state = state;
-        this.price = price;
+        this.orderState = orderState;
+        this.totalPrice = totalPrice;
+        this.orderItems = new ArrayList<>();
     }
 }
