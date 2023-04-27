@@ -26,7 +26,7 @@ public class DeliveryController {
     }
 
     @GetMapping("/{deliveryId}")
-    public DeliveryResponseDto searchDeliveryById(@PathVariable Long deliveryId){
-        return deliveryService.findById(deliveryId);
+    public DeliveryResponseDto searchDeliveryById(@PathVariable Long deliveryId) {
+        return deliveryService.findByDeliveryId(deliveryId);
     }
 }

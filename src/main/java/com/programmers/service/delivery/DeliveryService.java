@@ -15,7 +15,7 @@ public class DeliveryService {
         return deliveryRepository.save(deliveryRequestDto.toEntity());
     }
 
-    public void deleteById(Long deliveryId) {
-        deliveryRepository.deleteById(deliveryId);
+    public DeliveryResponseDto findByDeliveryId(Long deliveryId) {
+        return DeliveryResponseDto.of(deliveryRepository.findByDeliveryId(deliveryId));
     }
 }
