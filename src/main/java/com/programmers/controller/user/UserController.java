@@ -32,13 +32,13 @@ public class UserController {
         return userService.findById(userId);
     }
 
-    @GetMapping("/search/nickname")
-    public UserResponseDto searchUserByNickName(@RequestParam("nickName") String nickName) {
+    @GetMapping("/search/nickname/{nickName}")
+    public UserResponseDto searchUserByNickName(@PathVariable String nickName) {
         return userService.findByNickName(nickName);
     }
 
-    @GetMapping("/search/findByPhoneNumber")
-    public UserResponseDto searchUserByPhoneNumber(@RequestParam("phoneNumber") String phoneNumber) {
+    @GetMapping("/search/phoneNumber/{phoneNumber}")
+    public UserResponseDto searchUserByPhoneNumber(@PathVariable String phoneNumber) {
         return userService.findByPhoneNumber(phoneNumber);
     }
 
