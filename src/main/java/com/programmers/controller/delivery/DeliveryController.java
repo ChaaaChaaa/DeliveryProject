@@ -15,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/delivery")
+@RequestMapping("/deliveries")
 @RequiredArgsConstructor
 public class DeliveryController {
     private final DeliveryService deliveryService;
