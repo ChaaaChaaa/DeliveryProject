@@ -19,7 +19,7 @@ public class OrderList {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderListId;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userId", referencedColumnName = "userId", foreignKey = @ForeignKey(name = "fk_order_user"))
     private User user;
 
@@ -27,7 +27,7 @@ public class OrderList {
     @JoinColumn(name = "menuId", referencedColumnName = "menuId", foreignKey = @ForeignKey(name = "fk_order_menu"))
     private Menu menu;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "deliveryId", referencedColumnName = "deliveryId", foreignKey = @ForeignKey(name = "fk_order_delivery"))
     private Delivery delivery;
 
