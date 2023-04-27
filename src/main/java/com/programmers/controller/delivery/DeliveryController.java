@@ -21,8 +21,8 @@ public class DeliveryController {
     private final DeliveryService deliveryService;
 
     @PostMapping("/save")
-    public void saveDelivery(@RequestBody DeliveryResponseDto deliveryResponseDto){
-        deliveryService.save(deliveryResponseDto);
+    public void saveDelivery(@RequestBody DeliveryRequestDto deliveryRequestDto) {
+        deliveryService.save(deliveryRequestDto);
     }
 
     @GetMapping("/{deliveryId}")
