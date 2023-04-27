@@ -1,7 +1,6 @@
 package com.programmers.controller.food;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.programmers.controller.food.FoodController;
 import com.programmers.domain.food.Food;
 import com.programmers.dto.food.FoodRequestDto;
 import com.programmers.dto.food.FoodResponseDto;

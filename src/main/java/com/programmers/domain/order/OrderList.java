@@ -7,10 +7,6 @@ import com.programmers.domain.menu.Menu;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.DynamicUpdate;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Getter
 @NoArgsConstructor

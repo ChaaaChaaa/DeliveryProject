@@ -17,7 +17,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Service
 public class FoodService {
-
     private final FoodRepository foodRepository;
 
 

@@ -1,7 +1,6 @@
 package com.programmers.domain.menu;
 
 import com.programmers.domain.store.Store;
-import com.programmers.domain.food.Food;
 
 import org.hibernate.annotations.DynamicUpdate;
 

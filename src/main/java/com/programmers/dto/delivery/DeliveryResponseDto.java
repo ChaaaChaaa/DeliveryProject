@@ -4,8 +4,7 @@ import com.programmers.domain.delivery.Delivery;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-
-import javax.validation.constraints.NotNull;
+import lombok.Setter;
 
 @Getter
 @EqualsAndHashCode

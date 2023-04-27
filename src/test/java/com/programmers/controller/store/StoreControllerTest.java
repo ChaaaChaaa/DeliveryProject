@@ -1,7 +1,6 @@
 package com.programmers.controller.store;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.programmers.controller.store.StoreController;
 import com.programmers.domain.store.Store;
 import com.programmers.dto.store.StoreRequestDto;
 import com.programmers.repository.store.StoreRepository;

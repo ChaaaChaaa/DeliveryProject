@@ -4,7 +4,6 @@ import com.programmers.domain.food.Food;
 import com.programmers.dto.food.FoodRequestDto;
 import com.programmers.dto.food.FoodResponseDto;
 import com.programmers.repository.food.FoodRepository;
-import com.programmers.service.food.FoodService;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -77,6 +76,7 @@ class FoodServiceTest {
     void findByNameContaining() {
         //given
         Food food = basicFoodData();
+
         Food newFood = foodRepository.save(food);
 
         //when

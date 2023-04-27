@@ -1,15 +1,19 @@
 package com.programmers.controller.review;
 
-import com.programmers.domain.review.Review;
-import com.programmers.domain.store.Store;
 import com.programmers.dto.review.ReviewRequestDto;
 import com.programmers.dto.review.ReviewResponseDto;
 import com.programmers.service.review.ReviewService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @RequestMapping("/review")

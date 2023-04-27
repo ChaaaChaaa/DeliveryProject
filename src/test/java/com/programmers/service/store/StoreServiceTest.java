@@ -4,7 +4,6 @@ import com.programmers.domain.store.Store;
 import com.programmers.dto.store.StoreRequestDto;
 import com.programmers.dto.store.StoreResponseDto;
 import com.programmers.repository.store.StoreRepository;
-import com.programmers.service.store.StoreService;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
