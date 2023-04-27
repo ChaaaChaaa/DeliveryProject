@@ -11,26 +11,9 @@ import lombok.Setter;
 public class DeliveryResponseDto {
     @NotNull
     private final long deliveryId;
-    @NotNull
-    private final String deliveryState;
 
     @Builder
-    public DeliveryResponseDto(long deliveryId, String deliveryState) {
+    public DeliveryResponseDto(long deliveryId) {
         this.deliveryId = deliveryId;
-        this.deliveryState = deliveryState;
-    }
-
-    public static DeliveryResponseDto of(Delivery delivery){
-        return DeliveryResponseDto.builder()
-                .deliveryId(delivery.getDeliveryId())
-                .deliveryState(delivery.getDeliveryState())
-                .build();
-    }
-
-    public Delivery toEntity(){
-        return Delivery.builder()
-                .deliveryId(deliveryId)
-                .deliveryState(deliveryState)
-                .build();
     }
 }

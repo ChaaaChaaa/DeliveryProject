@@ -8,13 +8,16 @@ import javax.validation.constraints.NotNull;
 @Getter
 public class DeliveryRequestDto {
     @NotNull
-    private final long deliveryId;
-    @NotNull
-    private final String deliveryState;
+    private long deliveryId;
 
     @Builder
     public DeliveryRequestDto(long deliveryId, String deliveryState) {
         this.deliveryId = deliveryId;
-        this.deliveryState = deliveryState;
+    }
+
+
+    public Delivery toEntity() {
+        return Delivery.builder()
+                .build();
     }
 }

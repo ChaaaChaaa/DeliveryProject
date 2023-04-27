@@ -13,12 +13,8 @@ public class Delivery {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long deliveryId;
 
-    @Column
-    private String deliveryState;
-
     @Builder
-    public Delivery(long deliveryId, String deliveryState) {
+    public Delivery(long deliveryId) {
         this.deliveryId = deliveryId;
-        this.deliveryState = deliveryState;
     }
 }
