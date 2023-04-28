@@ -27,6 +27,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Entity
+//@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"userName","nickName"})})
 @DynamicUpdate
 public class User {
     @Id
