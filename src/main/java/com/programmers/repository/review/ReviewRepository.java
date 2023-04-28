@@ -9,8 +9,8 @@ import java.util.Optional;
 
 @Repository
 public interface ReviewRepository extends JpaRepository<Review, Long> {
-    Optional<Review> findById(@Nullable Long reviewId);
-    Optional<Review> findByStore(@Nullable Long reviewId); //메뉴 테이블에 있는데 findByStore하는게 맞는가?
+    Optional<Review> findByReviewId(@Nullable Long reviewId);
+    Optional<Review> findStoreByReviewId(@Nullable Long reviewId);
 
     Review save(@Nullable Review review);
 
