@@ -32,7 +32,7 @@ public class FoodController {
 
     @GetMapping("/{id}")
     public FoodResponseDto searchFoodById(@PathVariable Long id) {
-        return foodService.findByFoodId(id);
+        return foodService.findById(id);
     }
 
 
