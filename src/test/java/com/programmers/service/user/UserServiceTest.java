@@ -30,9 +30,6 @@ class UserServiceTest {
     void update() {
     }
 
-    @Test
-    void getUserResponse() {
-    }
 
     @Test
     void deleteById() {

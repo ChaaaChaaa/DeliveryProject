@@ -31,11 +31,6 @@ public class ReviewController {
         return reviewService.findById(reviewId);
     }
 
-    @GetMapping("/search")
-    public List<Store> searchReviewByStore(@RequestBody ReviewRequestDto reviewRequestDto) {
-        return reviewService.findStoreById(reviewRequestDto);
-    }
-
     @DeleteMapping("/{reviewId}")
     public void deleteReview(@PathVariable Long reviewId) {
         reviewService.deleteById(reviewId);

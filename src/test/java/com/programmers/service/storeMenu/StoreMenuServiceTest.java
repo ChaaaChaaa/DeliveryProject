@@ -210,7 +210,6 @@ class StoreMenuServiceTest {
 
     private Food basicFoodData() {
         return Food.builder()
-                .id(1L)
                 .price(1000)
                 .description("맛있는라면")
                 .name("라면")
@@ -219,7 +218,6 @@ class StoreMenuServiceTest {
 
     private Food updateFoodData() {
         return Food.builder()
-                .id(2L)
                 .price(2000)
                 .description("매콤한라면")
                 .name("신라면")
@@ -228,7 +226,6 @@ class StoreMenuServiceTest {
 
     private Store basicStoreData() {
         return Store.builder()
-                .storeId(1L)
                 .category("noodle")
                 .storeName("차차네")
                 .rating(5.0f)
@@ -238,7 +235,6 @@ class StoreMenuServiceTest {
 
     private Store updateStoreData() {
         return Store.builder()
-                .storeId(2L)
                 .category("dumpling")
                 .storeName("만두네")
                 .rating(4.5f)

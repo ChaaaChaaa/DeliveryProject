@@ -23,7 +23,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@Entity
 @DynamicUpdate
 public class Review {
     @Id

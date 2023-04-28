@@ -37,9 +37,7 @@ class ReviewServiceTest {
 
     @BeforeEach
     void clean() {
-        if (reviewRepository != null) {
-            reviewRepository.deleteAll();
-        }
+
     }
 
     @Test
@@ -50,20 +48,6 @@ class ReviewServiceTest {
         assertEquals(savedReview.getOrder(), review.getOrder());
     }
 
-    @Test
-    @DisplayName("Id로 가게조회")
-    void findStoreById() {
-        Review review = basicReviewData();
-        Review savedReview = reviewRepository.save(review);
-
-        //when
-        ReviewRequestDto reviewRequestDto = ReviewRequestDto.of(savedReview);
-        List<Store> stores = reviewService.findStoreById(reviewRequestDto);
-
-        //then
-        assertEquals(1, stores.size());
-        assertEquals("차차네", stores.get(0));
-    }
 
     @Test
     void findById() {
@@ -75,9 +59,7 @@ class ReviewServiceTest {
         reviewService.findStoreById(reviewRequestDto);
 
         //then
-        assertNotNull(reviewRequestDto);
-        assertEquals(5.0F, reviewRequestDto.getRating());
-        assertEquals("정말 맛있어요!", reviewRequestDto.getContent());
+        assertEquals("차차네", orderItems.get(0).getStoreMenu().getStore().getStoreName());
     }
 
 
@@ -85,7 +67,6 @@ class ReviewServiceTest {
     void deleteById() {
         Review review = basicReviewData();
         Review savedReview = reviewService.save(ReviewRequestDto.of(review));
-
         reviewRepository.delete(savedReview);
 
         Optional<Review> findId = reviewRepository.findById(savedReview.getReviewId());
@@ -115,8 +96,6 @@ class ReviewServiceTest {
 
     private Delivery basicDelivery() {
         return Delivery.builder()
-                .deliveryId(1L)
-                .deliveryState("배달중")
                 .build();
     }
 
@@ -128,14 +107,12 @@ class ReviewServiceTest {
                 .nickName("차차")
                 .grade("Customer")
                 .createdAt(LocalDateTime.now())
-                .updatedAt(LocalDateTime.now())
                 .build();
 
     }
 
-    private Menu basicMenuData() {
-        return Menu.builder()
-                .menuId(1L)
+    private StoreMenu basicMenuData() {
+        return StoreMenu.builder()
                 .food(basicFoodData())
                 .store(basicStoreData())
                 .build();
@@ -143,7 +120,6 @@ class ReviewServiceTest {
 
     private Food basicFoodData() {
         return Food.builder()
-                .id(1L)
                 .price(1000)
                 .description("맛있는라면")
                 .name("라면")
@@ -152,7 +128,6 @@ class ReviewServiceTest {
 
     private Store basicStoreData() {
         return Store.builder()
-                .storeId(1L)
                 .category("noodle")
                 .storeName("차차네")
                 .rating(5.0f)

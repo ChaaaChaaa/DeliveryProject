@@ -1,6 +1,5 @@
 package com.programmers.controller.delivery;
 
-import com.programmers.domain.delivery.Delivery;
 import com.programmers.dto.delivery.DeliveryRequestDto;
 import com.programmers.service.delivery.DeliveryService;
 
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/deliveries")
