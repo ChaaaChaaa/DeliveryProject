@@ -25,7 +25,7 @@ public class FoodService {
     }
 
 
-    public FoodResponseDto findByFoodId(Long foodId) {
+    public FoodResponseDto findById(Long foodId) {
         return FoodResponseDto.of(foodRepository.findById(foodId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "해당 id의 음식이 존재하지 않습니다.")));
     }
