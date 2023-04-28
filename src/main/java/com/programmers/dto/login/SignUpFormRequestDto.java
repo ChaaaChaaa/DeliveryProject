@@ -18,7 +18,7 @@ public class SignUpFormRequestDto {
     @Length(min = 5, max = 20)
     private final Long userId;
     @NotBlank(message = "이름은 필수 입력 값입니다.")
-    private String name;
+    private String userName;
     @NotBlank(message = "비밀번호는 필수 입력 값입니다.")
     @Size(min = 8, max = 50, message = "비밀번호는 8자 이상 50자 이하로 입력해주세요.")
     private String password;
@@ -32,19 +32,18 @@ public class SignUpFormRequestDto {
     private String role;
 
     @Builder
-    public SignUpFormRequestDto(Long userId,String name, String password, String nickName,String phoneNumber) {
+    public SignUpFormRequestDto(Long userId, String userName, String password, String nickName, String phoneNumber) {
         this.userId = userId;
-        this.name = name;
+        this.userName = userName;
         this.password = password;
         this.nickName = nickName;
         this.phoneNumber = phoneNumber;
     }
 
-    public User toEntity(){
+    public User toEntity() {
         return User.builder()
-                .userId(userId)
                 .password(password)
-                .name(name)
+                .userName(userName)
                 .phoneNumber(phoneNumber)
                 .nickName(nickName)
                 .build();
