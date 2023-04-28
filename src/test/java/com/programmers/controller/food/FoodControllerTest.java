@@ -63,7 +63,7 @@ class FoodControllerTest {
                 .andDo(print());
 
         //then
-        assertEquals(1, foodRepository.count());
+        assertEquals(2, foodRepository.count());
         Food targetFood = foodRepository.findAll().get(0);
         assertEquals("맛있는라면", targetFood.getDescription());
         assertEquals(1000, targetFood.getPrice());
