@@ -6,6 +6,11 @@ import com.programmers.domain.order.OrderState;
 import com.programmers.domain.order.Payment;
 import com.programmers.domain.orderItem.OrderItem;
 import com.programmers.domain.user.User;
+
+import java.util.List;
+
+import javax.validation.constraints.NotNull;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,24 +24,35 @@ public class OrderRequestDto {
     @NotNull
     private User user;
     @NotNull
-    private Menu menu;
-    @NotNull
     private Delivery delivery;
     @NotNull
-    private String paymentMethod;
+    private Payment paymentMethod;
     @NotNull
-    private String state;
+    private OrderState orderState;
     @NotNull
-    private int price;
+    private int totalPrice;
+
+    @NotNull
+    private List<OrderItem> orderItems; //주문 항목에 대한 list가 이미 있기때문에
 
     @Builder
-    public OrderRequestDto(Long orderId, User user, Menu menu, Delivery delivery, String paymentMethod, String state, int price) {
-        this.orderId = orderId;
+    public OrderRequestDto(User user, Delivery delivery, Payment paymentMethod, OrderState orderState, int totalPrice, List<OrderItem> orderItems) {
         this.user = user;
-        this.menu = menu;
         this.delivery = delivery;
         this.paymentMethod = paymentMethod;
-        this.state = state;
-        this.price = price;
+        this.orderState = orderState;
+        this.totalPrice = totalPrice;
+        this.orderItems = orderItems;
+    }
+
+    public static OrderRequestDto of(OrderList orderList) {
+        return OrderRequestDto.builder()
+                .user(orderList.getUser())
+                .delivery(orderList.getDelivery())
+                .paymentMethod(orderList.getPaymentMethod())
+                .orderState(orderList.getOrderState())
+                .totalPrice(orderList.getTotalPrice())
+                .orderItems(orderList.getOrderItems())
+                .build();
     }
 }
