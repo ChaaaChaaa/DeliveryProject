@@ -8,5 +8,4 @@ import org.springframework.stereotype.Repository;
 public interface DeliveryRepository extends JpaRepository<Delivery,Long> {
     Delivery findByDeliveryId(Long deliveryId);
     Delivery save(Delivery delivery);
-    void delete(Delivery delivery);
 }
