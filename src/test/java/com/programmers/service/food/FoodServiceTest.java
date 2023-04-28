@@ -40,7 +40,9 @@ class FoodServiceTest {
     @DisplayName("저장된 음식 조회")
     void save() {
         Food food = basicFoodData();
-        Food newFood = foodRepository.save(food);
+//        Food newFood = foodRepository.save(food);
+        FoodRequestDto foodRequestDto = FoodRequestDto.of(food);
+        Food newFood =foodService.save(foodRequestDto);
         assertEquals(food.getPrice(), newFood.getPrice());
     }
 

@@ -172,7 +172,6 @@ class FoodControllerTest {
 
     private Food dummyFoodData() {
         return Food.builder()
-                .id(2L)
                 .price(2000)
                 .description("매콤한라면")
                 .name("신라면")

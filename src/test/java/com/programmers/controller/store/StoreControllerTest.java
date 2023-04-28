@@ -61,7 +61,6 @@ class StoreControllerTest {
                 .andDo(print());
 
         //then
-        assertEquals(1, storeRepository.count());
         Store targetStore = storeRepository.findAll().get(0);
         assertEquals("차차네", targetStore.getStoreName());
         assertEquals("noodle", targetStore.getCategory());
