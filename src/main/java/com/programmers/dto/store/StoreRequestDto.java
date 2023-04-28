@@ -10,7 +10,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Getter
 @NoArgsConstructor
 public class StoreRequestDto {
     private String storeName;
