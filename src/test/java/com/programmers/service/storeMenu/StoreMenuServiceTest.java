@@ -1,17 +1,16 @@
-package com.programmers.service.menu;
+package com.programmers.service.storeMenu;
 
 import com.programmers.domain.food.Food;
-import com.programmers.domain.menu.Menu;
+import com.programmers.domain.storeMenu.StoreMenu;
 import com.programmers.domain.store.Store;
 import com.programmers.dto.food.FoodRequestDto;
-import com.programmers.dto.menu.MenuRequestDto;
-import com.programmers.dto.menu.MenuResponseDto;
+import com.programmers.dto.storeMenu.StoreMenuRequestDto;
+import com.programmers.dto.storeMenu.StoreMenuResponseDto;
 import com.programmers.dto.store.StoreRequestDto;
 import com.programmers.repository.food.FoodRepository;
-import com.programmers.repository.menu.MenuRepository;
+import com.programmers.repository.storeMenu.StoreMenuRepository;
 import com.programmers.repository.store.StoreRepository;
 import com.programmers.service.food.FoodService;
-import com.programmers.service.menu.MenuService;
 import com.programmers.service.store.StoreService;
 
 import org.junit.jupiter.api.Assertions;
@@ -38,7 +37,7 @@ class StoreMenuServiceTest {
     StoreRepository storeRepository;
 
     @Autowired
-    MenuRepository menuRepository;
+    StoreMenuRepository storeMenuRepository;
 
     @Autowired
     FoodService foodService;
@@ -47,11 +46,11 @@ class StoreMenuServiceTest {
     StoreService storeService;
 
     @Autowired
-    MenuService menuService;
+    StoreMenuService storeMenuService;
 
     @BeforeEach
     void clean() {
-        menuRepository.deleteAll();
+        storeMenuRepository.deleteAll();
         foodRepository.deleteAll();
         storeRepository.deleteAll();
     }
@@ -67,16 +66,16 @@ class StoreMenuServiceTest {
         Store store = basicStoreData();
         Store savedStore = storeService.save(StoreRequestDto.of(store));
 
-        Menu menu = Menu.builder()
+        StoreMenu storeMenu = StoreMenu.builder()
                 .food(savedFood)
                 .store(savedStore)
                 .build();
         //when
-        Menu savedMenu = menuRepository.save(menu);
+        StoreMenu savedStoreMenu = storeMenuRepository.save(storeMenu);
 
         // then
-        assertEquals(savedMenu.getFood(), savedFood);
-        assertEquals(savedMenu.getStore(), savedStore);
+        assertEquals(savedStoreMenu.getFood(), savedFood);
+        assertEquals(savedStoreMenu.getStore(), savedStore);
     }
 
     @Test
@@ -89,18 +88,18 @@ class StoreMenuServiceTest {
         Store store = basicStoreData();
         Store savedStore = storeService.save(StoreRequestDto.of(store));
 
-        Menu menu = Menu.builder()
+        StoreMenu storeMenu = StoreMenu.builder()
                 .food(savedFood)
                 .store(savedStore)
                 .build();
 
-        MenuRequestDto menuRequestDto = MenuRequestDto.of(menu);
-        Menu savedMenu = menuRepository.save(menu);
+        StoreMenuRequestDto storeMenuRequestDto = StoreMenuRequestDto.of(storeMenu);
+        StoreMenu savedStoreMenu = storeMenuService.save(storeMenuRequestDto);
 
         //when
-        MenuResponseDto menuResponseDto = menuService.findById(savedMenu.getMenuId(), menuRequestDto);
-        assertEquals(savedFood.getName(), menuResponseDto.getFoodName());
-        assertEquals(savedStore.getStoreName(), menuResponseDto.getStoreName());
+        StoreMenuResponseDto storeMenuResponseDto = storeMenuService.findById(savedStoreMenu.getStoreMenuId(), storeMenuRequestDto);
+        assertEquals(savedFood.getName(), storeMenuResponseDto.getFoodName());
+        assertEquals(savedStore.getStoreName(), storeMenuResponseDto.getStoreName());
     }
 
     @Test
@@ -120,27 +119,27 @@ class StoreMenuServiceTest {
         Store updateStore = updateStoreData();
         Store updatedStore = storeService.save(StoreRequestDto.of(updateStore));
 
-        Menu menu = Menu.builder()
+        StoreMenu storeMenu = StoreMenu.builder()
                 .food(savedFood)
                 .store(savedStore)
                 .build();
 
-        Menu savedMenu = menuRepository.save(menu);
-        Long savedMenuId = savedMenu.getMenuId();
+        StoreMenu savedStoreMenu = storeMenuRepository.save(storeMenu);
+        Long savedMenuId = savedStoreMenu.getStoreMenuId();
 
 
-        Menu updatedMenu = Menu.builder()
+        StoreMenu updatedStoreMenu = StoreMenu.builder()
                 .food(updatedFood)
                 .store(updatedStore)
                 .build();
 
         //when
-        menuService.updateStore(savedMenuId, updatedMenu.getStore());
+        storeMenuService.updateStore(savedMenuId, updatedStoreMenu.getStore());
 
         //then
-        Menu targetMenu = menuService.findById(savedMenuId);
-        assertEquals(savedMenuId, targetMenu.getMenuId());
-        assertEquals(updatedMenu.getStore().getStoreId(), targetMenu.getStore().getStoreId());
+        StoreMenu targetStoreMenu = storeMenuService.findById(savedMenuId);
+        assertEquals(savedMenuId, targetStoreMenu.getStoreMenuId());
+        assertEquals(updatedStoreMenu.getStore().getStoreId(), targetStoreMenu.getStore().getStoreId());
     }
 
     @Test
@@ -160,27 +159,27 @@ class StoreMenuServiceTest {
         Store updatedStore= updateStoreData();
         Store savedUpdatedStore = storeService.save(StoreRequestDto.of(updatedStore));
 
-        Menu menu = Menu.builder()
+        StoreMenu storeMenu = StoreMenu.builder()
                 .food(savedFood)
                 .store(savedStore)
                 .build();
 
-        Menu savedMenu = menuRepository.save(menu);
-        Long savedMenuId = savedMenu.getMenuId();
+        StoreMenu savedStoreMenu = storeMenuRepository.save(storeMenu);
+        Long savedMenuId = savedStoreMenu.getStoreMenuId();
 
 
-        Menu updatedMenu = Menu.builder()
+        StoreMenu updatedStoreMenu = StoreMenu.builder()
                 .food(savedUpdatedFood)
                 .store(savedUpdatedStore)
                 .build();
 
         //when
-        menuService.updateFood(savedMenuId, updatedMenu.getFood());
+        storeMenuService.updateFood(savedMenuId, updatedStoreMenu.getFood());
 
         //then
-        Menu targetMenu = menuService.findById(savedMenuId);
-        assertEquals(savedMenuId, targetMenu.getMenuId());
-        assertEquals(updatedMenu.getFood().getId(), targetMenu.getFood().getId());
+        StoreMenu targetStoreMenu = storeMenuService.findById(savedMenuId);
+        assertEquals(savedMenuId, targetStoreMenu.getStoreMenuId());
+        assertEquals(updatedStoreMenu.getFood().getId(), targetStoreMenu.getFood().getId());
     }
 
     @Test
@@ -192,18 +191,18 @@ class StoreMenuServiceTest {
         Store store = basicStoreData();
         Store savedStore = storeService.save(StoreRequestDto.of(store));
 
-        Menu menu = Menu.builder()
+        StoreMenu storeMenu = StoreMenu.builder()
                 .food(savedFood)
                 .store(savedStore)
                 .build();
 
-        Menu savedMenu = menuRepository.save(menu);
+        StoreMenu savedStoreMenu = storeMenuRepository.save(storeMenu);
 
         //when
-        menuRepository.delete(savedMenu);
+        storeMenuRepository.delete(savedStoreMenu);
 
         //then
-        Optional<Menu> findId = menuRepository.findById(savedMenu.getMenuId());
+        Optional<StoreMenu> findId = storeMenuRepository.findById(savedStoreMenu.getStoreMenuId());
         Assertions.assertTrue(findId.isEmpty());
 
     }
