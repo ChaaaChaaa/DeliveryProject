@@ -1,17 +1,17 @@
-package com.programmers.controller.menu;
+package com.programmers.controller.storeMenu;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.programmers.domain.food.Food;
-import com.programmers.domain.menu.Menu;
+import com.programmers.domain.storeMenu.StoreMenu;
 import com.programmers.domain.store.Store;
 import com.programmers.dto.food.FoodRequestDto;
-import com.programmers.dto.menu.MenuRequestDto;
+import com.programmers.dto.storeMenu.StoreMenuRequestDto;
 import com.programmers.dto.store.StoreRequestDto;
 import com.programmers.repository.food.FoodRepository;
-import com.programmers.repository.menu.MenuRepository;
+import com.programmers.repository.storeMenu.StoreMenuRepository;
 import com.programmers.repository.store.StoreRepository;
 import com.programmers.service.food.FoodService;
-import com.programmers.service.menu.MenuService;
+import com.programmers.service.storeMenu.StoreMenuService;
 import com.programmers.service.store.StoreService;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -47,7 +47,7 @@ class StoreMenuControllerTest {
     StoreRepository storeRepository;
 
     @Autowired
-    MenuRepository menuRepository;
+    StoreMenuRepository storeMenuRepository;
 
     @Autowired
     FoodService foodService;
@@ -56,12 +56,12 @@ class StoreMenuControllerTest {
     StoreService storeService;
 
     @Autowired
-    MenuService menuService;
+    StoreMenuService storeMenuService;
 
     @BeforeEach
     void clean() {
-        mockMvc = MockMvcBuilders.standaloneSetup(new MenuController(menuService)).build();
-        menuRepository.deleteAll();
+        mockMvc = MockMvcBuilders.standaloneSetup(new StoreMenuController(storeMenuService)).build();
+        storeMenuRepository.deleteAll();
         foodRepository.deleteAll();
         storeRepository.deleteAll();
     }
@@ -80,14 +80,14 @@ class StoreMenuControllerTest {
         Store savedStore = storeService.save(StoreRequestDto.of(store));
 
         //when
-        MenuRequestDto menuRequestDto = MenuRequestDto.builder()
+        StoreMenuRequestDto storeMenuRequestDto = StoreMenuRequestDto.builder()
                 .foodName(savedFood.getName())
                 .storeName(savedStore.getStoreName())
                 .build();
-        String json = objectMapper.writeValueAsString(menuRequestDto);
+        String json = objectMapper.writeValueAsString(storeMenuRequestDto);
 
         //then
-        mockMvc.perform(post("/menu/save")
+        mockMvc.perform(post("/storeMenu/save")
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding(StandardCharsets.UTF_8)
                         .content(json))
@@ -106,16 +106,16 @@ class StoreMenuControllerTest {
         Store savedStore = storeService.save(StoreRequestDto.of(store));
         ObjectMapper objectMapper = new ObjectMapper();
 
-        Menu menu = Menu.builder()
+        StoreMenu storeMenu = StoreMenu.builder()
                 .food(savedFood)
                 .store(savedStore)
                 .build();
 
-        Menu savedMenu = menuRepository.save(menu);
-        String json = objectMapper.writeValueAsString(menu);
+        StoreMenu savedStoreMenu = storeMenuRepository.save(storeMenu);
+        String json = objectMapper.writeValueAsString(storeMenu);
 
         //when,then
-        mockMvc.perform(get("/menu/{menuId}", savedMenu.getMenuId())
+        mockMvc.perform(get("/storeMenu/{storeMenuId}", savedStoreMenu.getStoreMenuId())
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding(StandardCharsets.UTF_8)
                         .content(json))
@@ -134,12 +134,12 @@ class StoreMenuControllerTest {
         Store savedStore = storeService.save(StoreRequestDto.of(store));
         ObjectMapper objectMapper = new ObjectMapper();
 
-        Menu menu = Menu.builder()
+        StoreMenu storeMenu = StoreMenu.builder()
                 .food(savedFood)
                 .store(savedStore)
                 .build();
 
-        menuRepository.save(menu);
+        storeMenuRepository.save(storeMenu);
 
         //when
         Food updateFood = updateFoodData();
@@ -150,16 +150,16 @@ class StoreMenuControllerTest {
         StoreRequestDto storeRequestDto = StoreRequestDto.of(updateStore);
         Store updateSavedStore = storeService.save(storeRequestDto);
 
-        Menu updateMenu = Menu.builder()
+        StoreMenu updateStoreMenu = StoreMenu.builder()
                 .food(updateSavedFood)
                 .store(updateSavedStore)
                 .build();
 
-        Menu savedMenu = menuRepository.save(updateMenu);
-        String json = objectMapper.writeValueAsString(menu);
+        StoreMenu savedStoreMenu = storeMenuRepository.save(updateStoreMenu);
+        String json = objectMapper.writeValueAsString(storeMenu);
 
         //then
-        mockMvc.perform(put("/menu/{menuId}/updateStore", savedMenu.getMenuId())
+        mockMvc.perform(put("/storeMenu/{storeMenuId}/updateStore", savedStoreMenu.getStoreMenuId())
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding(StandardCharsets.UTF_8)
                         .content(json))
@@ -179,12 +179,12 @@ class StoreMenuControllerTest {
         Store savedStore = storeService.save(StoreRequestDto.of(store));
         ObjectMapper objectMapper = new ObjectMapper();
 
-        Menu menu = Menu.builder()
+        StoreMenu storeMenu = StoreMenu.builder()
                 .food(savedFood)
                 .store(savedStore)
                 .build();
 
-        menuRepository.save(menu);
+        storeMenuRepository.save(storeMenu);
 
         //when
         Food updateFood = updateFoodData();
@@ -195,16 +195,16 @@ class StoreMenuControllerTest {
         StoreRequestDto storeRequestDto = StoreRequestDto.of(updateStore);
         Store updateSavedStore = storeService.save(storeRequestDto);
 
-        Menu updateMenu = Menu.builder()
+        StoreMenu updateStoreMenu = StoreMenu.builder()
                 .food(updateSavedFood)
                 .store(updateSavedStore)
                 .build();
 
-        Menu savedMenu = menuRepository.save(updateMenu);
-        String json = objectMapper.writeValueAsString(menu);
+        StoreMenu savedStoreMenu = storeMenuRepository.save(updateStoreMenu);
+        String json = objectMapper.writeValueAsString(storeMenu);
 
         //then
-        mockMvc.perform(put("/menu/{menuId}/updateFood", savedMenu.getMenuId())
+        mockMvc.perform(put("/storeMenu/{storeMenuId}/updateFood", savedStoreMenu.getStoreMenuId())
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding(StandardCharsets.UTF_8)
                         .content(json))
@@ -214,7 +214,7 @@ class StoreMenuControllerTest {
 
     @Test
     @DisplayName("/delete 요청시 db에서 메뉴를 삭제한다.")
-    void deleteMenuId() throws Exception {
+    void deleteStoreMenuId() throws Exception {
         //given
         Food food = basicFoodData();
         FoodRequestDto foodRequestDto = FoodRequestDto.of(food);
@@ -224,22 +224,22 @@ class StoreMenuControllerTest {
         Store savedStore = storeService.save(StoreRequestDto.of(store));
         ObjectMapper objectMapper = new ObjectMapper();
 
-        Menu menu = Menu.builder()
+        StoreMenu storeMenu = StoreMenu.builder()
                 .food(savedFood)
                 .store(savedStore)
                 .build();
 
-        Menu savedMenu = menuRepository.save(menu);
-        String json = objectMapper.writeValueAsString(menu);
+        StoreMenu savedStoreMenu = storeMenuRepository.save(storeMenu);
+        String json = objectMapper.writeValueAsString(storeMenu);
 
         //when,then
-        mockMvc.perform(delete("/menu/{menuId}", savedMenu.getMenuId())
+        mockMvc.perform(delete("/storeMenu/{storeMenuId}", savedStoreMenu.getStoreMenuId())
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding(StandardCharsets.UTF_8)
                         .content(json))
                 .andExpect(status().isOk())
                 .andDo(print());
-        assertEquals(0L, menuRepository.count());
+        assertEquals(0L, storeMenuRepository.count());
     }
 
     private Food basicFoodData() {
