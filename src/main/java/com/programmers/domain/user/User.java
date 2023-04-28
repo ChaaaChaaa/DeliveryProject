@@ -31,6 +31,7 @@ import lombok.Setter;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false)
     private Long userId;
 
     @NotBlank(message = "이름은 필수 입력 값입니다.")
@@ -39,18 +40,21 @@ public class User {
     private String userName;
 
     @NotBlank(message = "비밀번호는 필수 입력 값입니다.")
+    @NotNull
     @Column(nullable = false)
     private String password;
 
     @NotBlank(message = "닉네임은 필수 입력 값입니다.")
-    @Column(nullable = false, unique = true)
+    @NotNull
+    @Column(nullable = false)
     private String nickName;
 
     @Column(columnDefinition = "ENUM('NORMAL', 'SILVER', 'GOLD')")
     @Enumerated(EnumType.STRING)
     private Grade grade;
     @NotBlank(message = "전화번호는 필수 입력 값입니다.")
-    @Column(nullable = false, unique = true)
+    @NotNull
+    @Column(nullable = false)
     private String phoneNumber;
 
     @Column(columnDefinition = "ENUM('CUSTOMER', 'STORE')")
