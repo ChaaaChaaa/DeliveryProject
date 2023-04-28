@@ -1,5 +1,7 @@
 package com.programmers.dto.user;
 
+import com.programmers.domain.user.Grade;
+import com.programmers.domain.user.Role;
 import com.programmers.domain.user.User;
 
 import org.hibernate.validator.constraints.Length;
@@ -10,19 +12,25 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@NoArgsConstructor
 public class UserRequestDto {
     @NotNull
-    private final Long userId;
+    private Long userId;
     @NotBlank
     @Length(min = 1, max = 30)
     private String userName;
     @NotBlank
     @Length(min = 1, max = 30)
-    private final String password;
+    private String password;
     @NotBlank
     @Length(min = 1, max = 30)
-    private final String nickName;
+    private String nickName;
     @NotBlank
     @Length(min = 1, max = 30)
     private String phoneNumber;
