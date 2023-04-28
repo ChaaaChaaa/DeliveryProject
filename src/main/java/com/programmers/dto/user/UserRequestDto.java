@@ -45,6 +45,21 @@ public class UserRequestDto {
         this.grade = grade;
     }
 
+
+    public static UserRequestDto of(User user) {
+        return UserRequestDto.builder()
+                .userId(user.getUserId())
+                .userName(user.getUserName())
+                .password(user.getPassword())
+                .nickName(user.getNickName())
+                .phoneNumber(user.getPhoneNumber())
+                .role(user.getRole())
+                .createdAt(user.getCreatedAt())
+                .grade(user.getGrade())
+                .build();
+    }
+
+
     public User toEntity() {
         return User.builder()
                 .userName(userName)
