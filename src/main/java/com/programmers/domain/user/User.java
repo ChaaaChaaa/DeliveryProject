@@ -34,6 +34,7 @@ public class User {
     @Column(nullable = false)
     private Long userId;
 
+    @Column(name = "userName", nullable = false)
     @NotBlank(message = "이름은 필수 입력 값입니다.")
     @NotNull
     @Pattern(regexp = "^[a-zA-Z]*$", message = "이름은 영문으로만 입력 가능합니다.")
@@ -80,8 +81,8 @@ public class User {
     }
 
 
-    public void changeName(String name) {
-        this.name = name;
+    public void changeUserName(String userName) {
+        this.userName = userName;
     }
 
     public void changeNickName(String nickName) {

@@ -41,7 +41,7 @@ public class UserResponseDto {
     public static UserResponseDto of(User user){
         return UserResponseDto.builder()
                 .userId(user.getUserId())
-                .name(user.getName())
+                .userName(user.getUserName())
                 .password(user.getPassword())
                 .nickName(user.getNickName())
                 .phoneNumber(user.getPhoneNumber())
