@@ -9,6 +9,8 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -43,13 +45,17 @@ public class User {
     @NotBlank(message = "닉네임은 필수 입력 값입니다.")
     @Column(nullable = false, unique = true)
     private String nickName;
-    private String grade;
 
+    @Column(columnDefinition = "ENUM('NORMAL', 'SILVER', 'GOLD')")
+    @Enumerated(EnumType.STRING)
+    private Grade grade;
     @NotBlank(message = "전화번호는 필수 입력 값입니다.")
     @Column(nullable = false, unique = true)
     private String phoneNumber;
-    private String role;
 
+    @Column(columnDefinition = "ENUM('CUSTOMER', 'STORE')")
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @CreatedDate
     private LocalDateTime createdAt;
@@ -58,9 +64,8 @@ public class User {
     private LocalDateTime updatedAt;
 
     @Builder
-    public User(Long userId, String name, String password, String nickName, String grade, String phoneNumber, String role, LocalDateTime createdAt, LocalDateTime updatedAt) {
-        this.userId = userId;
-        this.name = name;
+    public User(String userName, String password, String nickName, Grade grade, String phoneNumber, Role role, LocalDateTime createdAt) {
+        this.userName = userName;
         this.password = password;
         this.nickName = nickName;
         this.grade = grade;

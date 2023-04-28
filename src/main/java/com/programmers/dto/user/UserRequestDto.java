@@ -25,7 +25,13 @@ public class UserRequestDto {
     private final String nickName;
     @NotBlank
     @Length(min = 1, max = 30)
-    private final String phoneNumber;
+    private String phoneNumber;
+
+    private Role role;
+    private LocalDateTime createdAt;
+    private Grade grade;
+
+
 
     @Builder
     public UserRequestDto(Long userId, String userName, String password, String nickName, String phoneNumber, Role role, LocalDateTime createdAt, Grade grade) {
@@ -34,6 +40,9 @@ public class UserRequestDto {
         this.password = password;
         this.nickName = nickName;
         this.phoneNumber = phoneNumber;
+        this.role = role;
+        this.createdAt = LocalDateTime.now();
+        this.grade = grade;
     }
 
     public User toEntity() {
@@ -43,6 +52,9 @@ public class UserRequestDto {
                 .password(password)
                 .nickName(nickName)
                 .phoneNumber(phoneNumber)
+                .role(role)
+                .createdAt(createdAt)
+                .grade(grade)
                 .build();
     }
 }

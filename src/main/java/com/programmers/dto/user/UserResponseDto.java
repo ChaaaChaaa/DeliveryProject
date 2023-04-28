@@ -1,5 +1,7 @@
 package com.programmers.dto.user;
 
+import com.programmers.domain.user.Grade;
+import com.programmers.domain.user.Role;
 import com.programmers.domain.user.User;
 
 import java.time.LocalDateTime;
@@ -17,9 +19,9 @@ public class UserResponseDto {
     private String userName;
     private String password;
     private String nickName;
-    private String grade;
+    private Grade grade;
     private String phoneNumber;
-    private String role;
+    private Role role;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
@@ -43,6 +45,8 @@ public class UserResponseDto {
                 .password(user.getPassword())
                 .nickName(user.getNickName())
                 .phoneNumber(user.getPhoneNumber())
+                .grade(user.getGrade())
+                .role(user.getRole())
                 .build();
     }
 }
