@@ -11,7 +11,7 @@ public class DeliveryRequestDto {
     private long deliveryId;
 
     @Builder
-    public DeliveryRequestDto(long deliveryId, String deliveryState) {
+    public DeliveryRequestDto(long deliveryId) {
         this.deliveryId = deliveryId;
     }
 
