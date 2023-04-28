@@ -23,7 +23,6 @@ public class UserResponseDto {
     private String phoneNumber;
     private Role role;
     private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
 
     @Builder
     public UserResponseDto(Long userId, String userName, String password, String nickName, Grade grade, String phoneNumber, Role role, LocalDateTime createdAt) {
@@ -35,7 +34,6 @@ public class UserResponseDto {
         this.phoneNumber = phoneNumber;
         this.role = role;
         this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
     }
 
     public static UserResponseDto of(User user){

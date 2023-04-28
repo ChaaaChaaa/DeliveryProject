@@ -66,8 +66,6 @@ public class User {
     @CreatedDate
     private LocalDateTime createdAt;
 
-    @LastModifiedDate
-    private LocalDateTime updatedAt;
 
     @Builder
     public User(String userName, String password, String nickName, Grade grade, String phoneNumber, Role role, LocalDateTime createdAt) {
@@ -77,8 +75,7 @@ public class User {
         this.grade = grade;
         this.phoneNumber = phoneNumber;
         this.role = role;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+        this.createdAt = LocalDateTime.now();
     }
 
 
