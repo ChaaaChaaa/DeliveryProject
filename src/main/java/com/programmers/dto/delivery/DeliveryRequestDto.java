@@ -1,5 +1,9 @@
 package com.programmers.dto.delivery;
 
+import com.programmers.domain.delivery.Delivery;
+
+import javax.validation.constraints.NotNull;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

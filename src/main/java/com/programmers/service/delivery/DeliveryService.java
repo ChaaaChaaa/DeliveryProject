@@ -1,6 +1,7 @@
 package com.programmers.service.delivery;
 
 import com.programmers.domain.delivery.Delivery;
+import com.programmers.dto.delivery.DeliveryRequestDto;
 import com.programmers.dto.delivery.DeliveryResponseDto;
 import com.programmers.repository.delivery.DeliveryRepository;
 import lombok.RequiredArgsConstructor;

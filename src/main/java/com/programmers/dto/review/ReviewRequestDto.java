@@ -3,6 +3,9 @@ package com.programmers.dto.review;
 import com.programmers.domain.order.OrderList;
 import com.programmers.domain.review.Review;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
