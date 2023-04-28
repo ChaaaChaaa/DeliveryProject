@@ -29,7 +29,7 @@ class JwtTokenProviderTest {
     @Test
     void createToken() {
         User user = basicUserData();
-        user.changeName("니노");
+        user.setUserName("니노");
         user.changePhoneNumber("01033333333");
 
         String token = jwtTokenProvider.createToken(user);
@@ -45,8 +45,7 @@ class JwtTokenProviderTest {
 
     private User basicUserData() {
         return User.builder()
-                .userId(1L)
-                .name("chacha")
+                .userName("chacha")
                 .password("123456")
                 .nickName("차차")
                 .phoneNumber("01011111111")
