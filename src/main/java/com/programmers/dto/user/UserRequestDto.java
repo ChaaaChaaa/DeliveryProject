@@ -16,7 +16,7 @@ public class UserRequestDto {
     private final Long userId;
     @NotBlank
     @Length(min = 1, max = 30)
-    private final String name;
+    private String userName;
     @NotBlank
     @Length(min = 1, max = 30)
     private final String password;
@@ -28,9 +28,9 @@ public class UserRequestDto {
     private final String phoneNumber;
 
     @Builder
-    public UserRequestDto(Long userId, String name, String password, String nickName, String phoneNumber) {
+    public UserRequestDto(Long userId, String userName, String password, String nickName, String phoneNumber, Role role, LocalDateTime createdAt, Grade grade) {
         this.userId = userId;
-        this.name = name;
+        this.userName = userName;
         this.password = password;
         this.nickName = nickName;
         this.phoneNumber = phoneNumber;

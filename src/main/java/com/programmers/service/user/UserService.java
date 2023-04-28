@@ -51,10 +51,10 @@ public class UserService {
             throw new DuplicateNickNameException();
         }
 
-        updatedUser.setName(userResponseDto.getName());
-        updatedUser.setNickName(userResponseDto.getNickName());
-        updatedUser.setPassword(userResponseDto.getPassword());
-        updatedUser.setPhoneNumber(userResponseDto.getPhoneNumber());
+        updatedUser.changeUserName(userRequestDto.getUserName());
+        updatedUser.changeNickName(userRequestDto.getNickName());
+        updatedUser.changePassword(userRequestDto.getPassword());
+        updatedUser.changePhoneNumber(userRequestDto.getPhoneNumber());
         userRepository.save(updatedUser);
     }
 

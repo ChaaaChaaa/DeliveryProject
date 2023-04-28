@@ -13,6 +13,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -30,8 +32,9 @@ public class User {
     private Long userId;
 
     @NotBlank(message = "이름은 필수 입력 값입니다.")
-    @Column(nullable = false)
-    private String name;
+    @NotNull
+    @Pattern(regexp = "^[a-zA-Z]*$", message = "이름은 영문으로만 입력 가능합니다.")
+    private String userName;
 
     @NotBlank(message = "비밀번호는 필수 입력 값입니다.")
     @Column(nullable = false)
