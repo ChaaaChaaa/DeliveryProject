@@ -30,7 +30,7 @@ public class ReviewRequestDto {
         this.reviewPicture = reviewPicture;
     }
 
-    public static ReviewRequestDto of(Review review){
+    public static ReviewRequestDto of(Review review) {
         return ReviewRequestDto.builder()
                 .orderList(review.getOrderList())
                 .rating(review.getRating())
@@ -39,7 +39,7 @@ public class ReviewRequestDto {
                 .build();
     }
 
-    public Review toEntity(){
+    public Review toEntity() {
         return Review.builder()
                 .orderList(orderList)
                 .rating(rating)
@@ -47,6 +47,4 @@ public class ReviewRequestDto {
                 .reviewPicture(reviewPicture)
                 .build();
     }
-
-
 }

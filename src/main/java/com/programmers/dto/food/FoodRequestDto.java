@@ -34,7 +34,7 @@ public class FoodRequestDto {
         this.image = image;
     }
 
-    public static FoodRequestDto of(Food food){
+    public static FoodRequestDto of(Food food) {
         return FoodRequestDto.builder()
                 .name(food.getName())
                 .price(food.getPrice())

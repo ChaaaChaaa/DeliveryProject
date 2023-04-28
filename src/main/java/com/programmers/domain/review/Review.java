@@ -20,11 +20,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
+@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @DynamicUpdate
 public class Review {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reviewId;
@@ -49,4 +51,6 @@ public class Review {
         this.content = content;
         this.reviewPicture = reviewPicture;
     }
+
 }
+

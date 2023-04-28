@@ -44,6 +44,7 @@ public class StoreMenu {
         this.food = food;
     }
 
+
     public void changeStore(Store store) {
         this.store = store;
     }

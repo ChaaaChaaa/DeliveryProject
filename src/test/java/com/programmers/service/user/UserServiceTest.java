@@ -43,4 +43,13 @@ class UserServiceTest {
     @Test
     void deleteById() {
     }
+
+    private UserRequestDto dummyUserData() {
+        return UserRequestDto.builder()
+                .userName("mandu")
+                .nickName("mandu")
+                .password("testtesttest")
+                .phoneNumber("22222222222")
+                .build();
+    }
 }
