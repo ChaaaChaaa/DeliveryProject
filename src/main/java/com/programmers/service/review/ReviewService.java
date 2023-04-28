@@ -1,13 +1,14 @@
 package com.programmers.service.review;
 
-import com.programmers.domain.menu.Menu;
-import com.programmers.domain.order.Order;
+import com.programmers.domain.order.OrderList;
+import com.programmers.domain.orderItem.OrderItem;
 import com.programmers.domain.review.Review;
 import com.programmers.domain.store.Store;
+import com.programmers.domain.storeMenu.StoreMenu;
 import com.programmers.dto.review.ReviewRequestDto;
 import com.programmers.dto.review.ReviewResponseDto;
-import com.programmers.repository.menu.MenuRepository;
-import com.programmers.repository.order.OrderRepository;
+import com.programmers.repository.order.OrderListRepository;
+import com.programmers.repository.orderItem.OrderItemRepository;
 import com.programmers.repository.review.ReviewRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -23,9 +24,8 @@ import java.util.List;
 
 public class ReviewService {
     private final ReviewRepository reviewRepository;
-    private final OrderRepository orderRepository;
-    private final MenuRepository menuRepository;
-    List<Store> stores;
+    private final OrderListRepository orderListRepository;
+    private final OrderItemRepository orderItemRepository;
 
     @Transactional
     public Review save(ReviewRequestDto reviewRequestDto) {
