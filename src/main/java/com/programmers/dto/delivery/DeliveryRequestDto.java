@@ -2,8 +2,8 @@ package com.programmers.dto.delivery;
 
 import lombok.Builder;
 import lombok.Getter;
-
-import javax.validation.constraints.NotNull;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 public class DeliveryRequestDto {
