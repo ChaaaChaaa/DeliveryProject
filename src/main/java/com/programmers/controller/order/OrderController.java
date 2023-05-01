@@ -1,15 +1,15 @@
 package com.programmers.controller.order;
 
 import com.programmers.domain.delivery.Delivery;
-import com.programmers.domain.order.OrderList;
 import com.programmers.domain.user.User;
-import com.programmers.dto.order.OrderRequestDto;
+import com.programmers.dto.order.OrderRequest;
 import com.programmers.dto.order.OrderResponseDto;
 import com.programmers.service.orderList.OrderListService;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,8 +22,8 @@ public class OrderController {
     private final OrderListService orderListService;
 
     @PostMapping("/save")
-    public OrderList save(OrderRequestDto orderRequestDto) {
-        return orderListService.save(orderRequestDto);
+    public void save(@RequestBody OrderRequest orderRequest) {
+        orderListService.save(orderRequest);
     }
 
     @GetMapping("/{orderListId}")
