@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-@RequestMapping("/storeMenu")
+@RequestMapping("/storeMenus")
 @RestController
 public class StoreMenuController {
     private final StoreMenuService storeMenuService;

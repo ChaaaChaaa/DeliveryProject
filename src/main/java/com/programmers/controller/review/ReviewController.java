@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-@RequestMapping("/review")
+@RequestMapping("/reviews")
 @RestController
 public class ReviewController {
     private final ReviewService reviewService;

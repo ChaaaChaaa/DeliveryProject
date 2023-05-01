@@ -65,7 +65,7 @@ class DeliveryControllerTest {
 
         //when,then
 
-        mockMvc.perform(get("/deliveries/{deliveryId}", savedDelivery.getDeliveryId()))
+        mockMvc.perform(get("/deliveries/search/{deliveryId}", savedDelivery.getDeliveryId()))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(jsonPath("$.deliveryId").value(String.valueOf(savedDelivery.getDeliveryId())));

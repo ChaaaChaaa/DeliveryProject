@@ -87,7 +87,7 @@ class StoreMenuControllerTest {
         String json = objectMapper.writeValueAsString(storeMenuRequestDto);
 
         //then
-        mockMvc.perform(post("/storeMenu/save")
+        mockMvc.perform(post("/storeMenus/save")
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding(StandardCharsets.UTF_8)
                         .content(json))
@@ -159,7 +159,7 @@ class StoreMenuControllerTest {
         String json = objectMapper.writeValueAsString(storeMenu);
 
         //then
-        mockMvc.perform(put("/storeMenu/{storeMenuId}/updateStore", savedStoreMenu.getStoreMenuId())
+        mockMvc.perform(put("/storeMenus/{storeMenuId}/updateStore", savedStoreMenu.getStoreMenuId())
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding(StandardCharsets.UTF_8)
                         .content(json))
@@ -204,7 +204,7 @@ class StoreMenuControllerTest {
         String json = objectMapper.writeValueAsString(storeMenu);
 
         //then
-        mockMvc.perform(put("/storeMenu/{storeMenuId}/updateFood", savedStoreMenu.getStoreMenuId())
+        mockMvc.perform(put("/storeMenus/{storeMenuId}/updateFood", savedStoreMenu.getStoreMenuId())
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding(StandardCharsets.UTF_8)
                         .content(json))
@@ -233,7 +233,7 @@ class StoreMenuControllerTest {
         String json = objectMapper.writeValueAsString(storeMenu);
 
         //when,then
-        mockMvc.perform(delete("/storeMenu/{storeMenuId}", savedStoreMenu.getStoreMenuId())
+        mockMvc.perform(delete("/storeMenus/{storeMenuId}", savedStoreMenu.getStoreMenuId())
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding(StandardCharsets.UTF_8)
                         .content(json))

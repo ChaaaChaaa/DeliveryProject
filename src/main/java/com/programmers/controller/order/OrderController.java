@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-@RequestMapping("/order")
+@RequestMapping("/order-list")
 @RestController
 public class OrderController {
     private final OrderListService orderListService;

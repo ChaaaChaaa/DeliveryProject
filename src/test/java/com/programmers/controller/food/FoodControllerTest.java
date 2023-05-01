@@ -83,7 +83,7 @@ class FoodControllerTest {
         mockMvc.perform(get("/foods/{id}", newFood.getId()))
                 .andExpect(status().isOk())
                 .andDo(print())
-                .andExpect(jsonPath("$.foodId").value(newFood.getId()))
+                .andExpect(jsonPath("$.id").value(newFood.getId()))
                 .andExpect(jsonPath("$.name").value("라면"))
                 .andExpect(jsonPath("$.price").value(1000));
     }
