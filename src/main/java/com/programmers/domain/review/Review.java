@@ -31,7 +31,7 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reviewId;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "orderListId", foreignKey = @ForeignKey(name = "fk_review_orderlist"))
     private OrderList orderList;
 
