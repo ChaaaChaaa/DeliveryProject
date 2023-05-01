@@ -2,7 +2,9 @@ package com.programmers.service.orderList;
 
 import com.programmers.domain.delivery.Delivery;
 import com.programmers.domain.order.OrderList;
+import com.programmers.domain.orderItem.OrderItem;
 import com.programmers.domain.user.User;
+import com.programmers.dto.order.OrderRequest;
 import com.programmers.dto.order.OrderRequestDto;
 import com.programmers.dto.order.OrderResponseDto;
 import com.programmers.exception.delivery.DeliveryNotFoundException;
@@ -15,6 +17,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -29,22 +33,23 @@ public class OrderListService {
     private final OrderItemRepository orderItemRepository;
 
 @Transactional
-    public OrderList save(OrderRequestDto orderRequestDto) {
+    public OrderList save(OrderRequest orderRequest) {
         // order save
-        User user = userRepository.findByUserId(orderRequestDto.getUser().getUserId()).orElseThrow(UserNotFoundException::new);
-        Delivery delivery = deliveryRepository.findById(orderRequestDto.getDelivery().getDeliveryId()).orElseThrow(DeliveryNotFoundException::new);
+        User user = userRepository.findByUserId(orderRequest.getUserId()).orElseThrow(UserNotFoundException::new);
+        Delivery delivery = deliveryRepository.findById(orderRequest.getDeliveryId()).orElseThrow(DeliveryNotFoundException::new);
 
         OrderList savedOrderList = OrderList.builder()
+  //              .orderListId(orderRequestDto.getOrderListId())
                 .user(user)
                 .delivery(delivery)
-                .paymentMethod(orderRequestDto.getPaymentMethod())
-                .orderState(orderRequestDto.getOrderState())
-                .totalPrice(orderRequestDto.getTotalPrice())
+                .paymentMethod(orderRequest.getPaymentMethod())
+                .orderState(orderRequest.getOrderState())
+                .totalPrice(orderRequest.getTotalPrice())
                 .build();
         orderListRepository.save(savedOrderList);
 
         // orderItemList save
-        orderItemRepository.saveAll(orderRequestDto.getOrderItems());
+        orderItemRepository.saveAll(orderRequest.getOrderItems(savedOrderList.getOrderListId()));
         return savedOrderList;
     }
 
