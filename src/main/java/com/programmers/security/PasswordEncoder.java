@@ -1,6 +1,5 @@
 package com.programmers.security;
 
 public interface PasswordEncoder {
-    String encode(CharSequence rawPassword);
-    boolean matches(CharSequence rawPassword, String encodedPassword);
+	boolean matches(CharSequence rawPassword, String encodedPassword);
 }

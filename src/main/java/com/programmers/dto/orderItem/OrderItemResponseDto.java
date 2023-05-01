@@ -11,28 +11,28 @@ import lombok.Setter;
 @Setter
 @Getter
 public class OrderItemResponseDto {
-    private final Long orderItemId;
-    private final OrderList orderList;
-    private final StoreMenu storeMenu;
-    private final Long quantity;
-    private final int price;
+	private final Long orderItemId;
+	private final OrderList orderList;
+	private final StoreMenu storeMenu;
+	private final Long quantity;
+	private final int price;
 
-    @Builder
-    public OrderItemResponseDto(Long orderItemId, OrderList orderList, StoreMenu storeMenu, Long quantity, int price) {
-        this.orderItemId = orderItemId;
-        this.orderList = orderList;
-        this.storeMenu = storeMenu;
-        this.quantity = quantity;
-        this.price = price;
-    }
+	@Builder
+	public OrderItemResponseDto(Long orderItemId, OrderList orderList, StoreMenu storeMenu, Long quantity, int price) {
+		this.orderItemId = orderItemId;
+		this.orderList = orderList;
+		this.storeMenu = storeMenu;
+		this.quantity = quantity;
+		this.price = price;
+	}
 
-    public static OrderItemResponseDto of(OrderItem orderItem) {
-        return OrderItemResponseDto.builder()
-                .orderItemId(orderItem.getOrderItemId())
-                .orderList(orderItem.getOrderList())
-                .storeMenu(orderItem.getStoreMenu())
-                .quantity(orderItem.getQuantity())
-                .price(orderItem.getPrice())
-                .build();
-    }
+	public static OrderItemResponseDto of(OrderItem orderItem) {
+		return OrderItemResponseDto.builder()
+			.orderItemId(orderItem.getOrderItemId())
+			.orderList(orderItem.getOrderList())
+			.storeMenu(orderItem.getStoreMenu())
+			.quantity(orderItem.getQuantity())
+			.price(orderItem.getPrice())
+			.build();
+	}
 }

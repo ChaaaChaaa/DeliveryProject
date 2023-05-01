@@ -1,8 +1,8 @@
 package com.programmers.dto.delivery;
 
-import com.programmers.domain.delivery.Delivery;
-
 import javax.validation.constraints.NotNull;
+
+import com.programmers.domain.delivery.Delivery;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -13,17 +13,16 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class DeliveryRequestDto {
-    @NotNull
-    private long deliveryId;
+	@NotNull
+	private long deliveryId;
 
-    @Builder
-    public DeliveryRequestDto(long deliveryId) {
-        this.deliveryId = deliveryId;
-    }
+	@Builder
+	public DeliveryRequestDto(long deliveryId) {
+		this.deliveryId = deliveryId;
+	}
 
-
-    public Delivery toEntity() {
-        return Delivery.builder()
-                .build();
-    }
+	public Delivery toEntity() {
+		return Delivery.builder()
+			.build();
+	}
 }

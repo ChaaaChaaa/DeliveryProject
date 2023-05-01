@@ -1,5 +1,19 @@
 package com.programmers.controller.orderItem;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.programmers.domain.delivery.Delivery;
 import com.programmers.domain.food.Food;
 import com.programmers.domain.order.OrderList;
@@ -25,167 +39,133 @@ import com.programmers.service.orderList.OrderListService;
 import com.programmers.service.store.StoreService;
 import com.programmers.service.user.UserService;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.time.LocalDateTime;
-
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 @AutoConfigureMockMvc
 @SpringBootTest
 @Transactional
 class OrderItemControllerTest {
-    private MockMvc mockMvc;
+	@Autowired
+	OrderItemRepository orderItemRepository;
+	@Autowired
+	StoreMenuRepository storeMenuRepository;
+	@Autowired
+	DeliveryRepository deliveryRepository;
+	@Autowired
+	OrderItemService orderItemService;
+	private MockMvc mockMvc;
+	@Autowired
+	private FoodService foodService;
 
-    @Autowired
-    OrderItemRepository orderItemRepository;
+	@Autowired
+	private StoreService storeService;
 
-    @Autowired
-    StoreMenuRepository storeMenuRepository;
+	@Autowired
+	private UserService userService;
 
-    @Autowired
-    DeliveryRepository deliveryRepository;
+	@Autowired
+	private OrderListService orderListService;
 
-    @Autowired
-    OrderItemService orderItemService;
+	@BeforeEach
+	void clean() {
+		mockMvc = MockMvcBuilders.standaloneSetup(new OrderItemController(orderItemService)).build();
+		orderItemRepository.deleteAll();
+	}
 
-    @Autowired
-    private FoodService foodService;
+	@Test
+	@DisplayName("/get 요청시 db에서 각 주문 요소를 찾아온다.")
+	void searchOrderItemByOrderItemId() throws Exception {
+		//given
+		Food food = basicFoodData();
+		FoodRequestDto foodRequestDto = FoodRequestDto.of(food);
+		Food savedFood = foodService.save(foodRequestDto);
 
-    @Autowired
-    private StoreService storeService;
+		Store store = basicStoreData();
+		Store savedStore = storeService.save(StoreRequestDto.of(store));
 
-    @Autowired
-    private UserService userService;
+		StoreMenu storeMenu = StoreMenu.builder()
+			.food(savedFood)
+			.store(savedStore)
+			.build();
+		StoreMenu savedStoreMenu = storeMenuRepository.save(storeMenu);
 
-    @Autowired
-    private OrderListService orderListService;
+		User user = basicUserData();
+		UserRequestDto userRequestDto = UserRequestDto.of(user);
+		User savedUser = userService.save(userRequestDto);
 
-    @BeforeEach
-    void clean(){
-        mockMvc = MockMvcBuilders.standaloneSetup(new OrderItemController(orderItemService)).build();
-        orderItemRepository.deleteAll();
-    }
+		Delivery delivery = basicDelivery();
+		Delivery savedDelivery = deliveryRepository.save(delivery);
 
-    @Test
-    @DisplayName("/get 요청시 db에서 각 주문 요소를 찾아온다.")
-    void searchOrderItemByOrderItemId() throws Exception {
-        //given
-        Food food = basicFoodData();
-        FoodRequestDto foodRequestDto = FoodRequestDto.of(food);
-        Food savedFood = foodService.save(foodRequestDto);
+		OrderList orderListInfo = basicOrderData(savedUser, savedDelivery);
+		OrderRequestDto orderRequestDto = OrderRequestDto.of(orderListInfo);
+		OrderList savedOrderList = orderListService.save(orderRequestDto);
 
-        Store store = basicStoreData();
-        Store savedStore = storeService.save(StoreRequestDto.of(store));
+		OrderItem orderItem = basicOrderItemData(savedOrderList, savedStoreMenu);
+		OrderItemRequestDto orderItemRequestDto = OrderItemRequestDto.of(orderItem);
 
-        StoreMenu storeMenu = StoreMenu.builder()
-                .food(savedFood)
-                .store(savedStore)
-                .build();
-        StoreMenu savedStoreMenu = storeMenuRepository.save(storeMenu);
+		OrderItem savedOrderItem = orderItemRepository.save(orderItemRequestDto.toEntity());
 
+		//when
+		mockMvc.perform(get("/order-items/{orderItemId}", savedOrderItem.getOrderItemId()))
+			.andExpect(status().isOk())
+			.andDo(print())
+			.andExpect(jsonPath("$.orderItemId").value(savedOrderItem.getOrderItemId().intValue()))
+			.andExpect(jsonPath("$.quantity").value(savedOrderItem.getQuantity().intValue()))
+			.andExpect(jsonPath("$.price").value(savedOrderItem.getPrice()))
+			.andExpect(jsonPath("$.orderList.orderListId").value(savedOrderList.getOrderListId().intValue()))
+			.andExpect(jsonPath("$.storeMenu.storeMenuId").value(savedStoreMenu.getStoreMenuId().intValue()))
+			.andExpect(jsonPath("$.storeMenu.food.name").value(savedFood.getName()))
+			.andExpect(jsonPath("$.storeMenu.store.storeName").value(savedStore.getStoreName()));
+	}
 
-        User user = basicUserData();
-        UserRequestDto userRequestDto = UserRequestDto.of(user);
-        User savedUser = userService.save(userRequestDto);
+	private OrderItem basicOrderItemData(OrderList savedOrderList, StoreMenu savedStoreMenu) {
+		return OrderItem.builder()
+			.orderList(savedOrderList)
+			.storeMenu(savedStoreMenu)
+			.quantity(2L)
+			.price(1000)
+			.build();
+	}
 
-        Delivery delivery = basicDelivery();
-        Delivery savedDelivery = deliveryRepository.save(delivery);
+	private OrderList basicOrderData(User user, Delivery delivery) {
+		return OrderList.builder()
+			.user(user)
+			.delivery(delivery)
+			.paymentMethod(Payment.CREDIT_CARD)
+			.orderState(OrderState.SHIPPING)
+			.totalPrice(10000)
+			.build();
+	}
 
+	private Delivery basicDelivery() {
+		return Delivery.builder()
+			.build();
+	}
 
-        OrderList orderListInfo = basicOrderData(savedUser, savedDelivery);
-        OrderRequestDto orderRequestDto = OrderRequestDto.of(orderListInfo);
-        //OrderList savedOrderList = orderListService.save(orderRequestDto);
+	private User basicUserData() {
+		return User.builder()
+			.userName("test")
+			.password("1234")
+			.nickName("차차")
+			.phoneNumber("11111111111")
+			.grade(Grade.NORMAL)
+			.role(Role.CUSTOMER)
+			.build();
 
+	}
 
-        //OrderItem orderItem = basicOrderItemData(savedOrderList, savedStoreMenu);
-       // OrderItemRequestDto orderItemRequestDto = OrderItemRequestDto.of(orderItem);
+	private Food basicFoodData() {
+		return Food.builder()
+			.price(1000)
+			.description("맛있는라면")
+			.name("라면")
+			.build();
+	}
 
-        //OrderItem savedOrderItem = orderItemRepository.save(orderItemRequestDto.toEntity());
-
-        //when
-//        mockMvc.perform(get("/order-items/{orderItemId}",savedOrderItem.getOrderItemId()))
-//                .andExpect(status().isOk())
-//                .andDo(print())
-//                .andExpect(jsonPath("$.orderItemId").value(savedOrderItem.getOrderItemId().intValue()))
-//                .andExpect(jsonPath("$.quantity").value(savedOrderItem.getQuantity().intValue()))
-//                .andExpect(jsonPath("$.price").value(savedOrderItem.getPrice()))
-//                .andExpect(jsonPath("$.orderList.orderListId").value(savedOrderList.getOrderListId().intValue()))
-//                .andExpect(jsonPath("$.storeMenu.storeMenuId").value(savedStoreMenu.getStoreMenuId().intValue()))
-//                .andExpect(jsonPath("$.storeMenu.food.name").value(savedFood.getName()))
-//                .andExpect(jsonPath("$.storeMenu.store.storeName").value(savedStore.getStoreName()));
-    }
-
-
-    private OrderItem basicOrderItemData(OrderList savedOrderList, StoreMenu savedStoreMenu) {
-        return OrderItem.builder()
-                .orderList(savedOrderList)
-                .storeMenu(savedStoreMenu)
-                .quantity(2L)
-                .price(1000)
-                .build();
-    }
-
-    private OrderList basicOrderData(User user, Delivery delivery) {
-        return OrderList.builder()
-                .user(user)
-                .delivery(delivery)
-                .paymentMethod(Payment.CREDIT_CARD)
-                .orderState(OrderState.SHIPPING)
-                .totalPrice(10000)
-                .build();
-    }
-
-    private Delivery basicDelivery() {
-        return Delivery.builder()
-                .build();
-    }
-
-    private User basicUserData() {
-        return User.builder()
-                .userName("test")
-                .password("1234")
-                .nickName("차차")
-                .phoneNumber("11111111111")
-                .grade(Grade.NORMAL)
-                .role(Role.CUSTOMER)
-                .build();
-
-    }
-
-    private StoreMenu basicStoreMenuData() {
-        return StoreMenu.builder()
-                .food(basicFoodData())
-                .store(basicStoreData())
-                .build();
-    }
-
-    private Food basicFoodData() {
-        return Food.builder()
-                .price(1000)
-                .description("맛있는라면")
-                .name("라면")
-                .build();
-    }
-
-    private Store basicStoreData() {
-        return Store.builder()
-                .category("noodle")
-                .storeName("차차네")
-                .rating(5.0f)
-                .reviewCount(100)
-                .build();
-    }
+	private Store basicStoreData() {
+		return Store.builder()
+			.category("noodle")
+			.storeName("차차네")
+			.rating(5.0f)
+			.reviewCount(100)
+			.build();
+	}
 }

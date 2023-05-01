@@ -1,8 +1,8 @@
 package com.programmers.dto.login;
 
-import com.programmers.domain.user.User;
-
 import javax.validation.constraints.NotBlank;
+
+import com.programmers.domain.user.User;
 
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -12,22 +12,22 @@ import lombok.Getter;
 @EqualsAndHashCode
 public class LoginFormRequestDto {
 
-    @NotBlank
-    private final String nickName;
+	@NotBlank
+	private final String nickName;
 
-    @NotBlank
-    private final String password;
+	@NotBlank
+	private final String password;
 
-    @Builder
-    public LoginFormRequestDto(String nickName, String password) {
-        this.nickName = nickName;
-        this.password = password;
-    }
+	@Builder
+	public LoginFormRequestDto(String nickName, String password) {
+		this.nickName = nickName;
+		this.password = password;
+	}
 
-    public User toEntity() {
-        return User.builder()
-                .nickName(nickName)
-                .password(password)
-                .build();
-    }
+	public User toEntity() {
+		return User.builder()
+			.nickName(nickName)
+			.password(password)
+			.build();
+	}
 }
