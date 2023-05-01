@@ -1,5 +1,6 @@
 package com.programmers.dto.user;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.programmers.domain.user.Grade;
 import com.programmers.domain.user.Role;
 import com.programmers.domain.user.User;
@@ -24,6 +25,7 @@ public class UserResponseDto {
     private Grade grade;
     private String phoneNumber;
     private Role role;
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm")
     private LocalDateTime createdAt;
 
     @Builder

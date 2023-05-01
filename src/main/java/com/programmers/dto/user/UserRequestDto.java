@@ -75,7 +75,6 @@ public class UserRequestDto {
                 .nickName(nickName)
                 .phoneNumber(phoneNumber)
                 .role(role)
-                .createdAt(createdAt)
                 .grade(grade)
                 .build();
     }
