@@ -6,15 +6,17 @@ import com.programmers.domain.storeMenu.StoreMenu;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class OrderItemRequestDto {
-    private final OrderList orderList;
-    private final StoreMenu storeMenu;
-    private final Long quantity;
-    private final int price;
+    private OrderList orderList;
+    private StoreMenu storeMenu;
+    private Long quantity;
+    private int price;
     private Long orderItemId;
 
     @Builder
@@ -25,21 +27,21 @@ public class OrderItemRequestDto {
         this.price = price;
     }
 
-    public static OrderItem toEntity(OrderItemRequestDto orderItemRequestDto) {
-        return OrderItem.builder()
-                .orderList(orderItemRequestDto.orderList)
-                .storeMenu(orderItemRequestDto.storeMenu)
-                .quantity(orderItemRequestDto.getQuantity())
-                .price(orderItemRequestDto.getPrice())
-                .build();
-    }
-
     public static OrderItemRequestDto of(OrderItem orderItem) {
         return OrderItemRequestDto.builder()
                 .orderList(orderItem.getOrderList())
                 .storeMenu(orderItem.getStoreMenu())
                 .quantity(orderItem.getQuantity())
                 .price(orderItem.getPrice())
+                .build();
+    }
+
+    public OrderItem toEntity() {
+        return OrderItem.builder()
+                .orderList(orderList)
+                .storeMenu(storeMenu)
+                .quantity(quantity)
+                .price(price)
                 .build();
     }
 }
