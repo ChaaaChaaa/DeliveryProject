@@ -44,7 +44,6 @@ public class OrderResponseDto {
                 .paymentMethod(orderList.getPaymentMethod())
                 .orderState(orderList.getOrderState())
                 .totalPrice(orderList.getTotalPrice())
-                .orderItems(orderList.getOrderItems())
                 .build();
     }
 }

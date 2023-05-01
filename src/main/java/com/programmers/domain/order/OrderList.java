@@ -71,6 +71,5 @@ public class OrderList {
         this.paymentMethod = paymentMethod;
         this.orderState = orderState;
         this.totalPrice = totalPrice;
-        this.orderItems = new ArrayList<>();
     }
 }

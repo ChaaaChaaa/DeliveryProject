@@ -68,7 +68,7 @@ public class User {
 
 
     @Builder
-    public User(String userName, String password, String nickName, Grade grade, String phoneNumber, Role role, LocalDateTime createdAt) {
+    public User(String userName, String password, String nickName, Grade grade, String phoneNumber, Role role) {
         this.userName = userName;
         this.password = password;
         this.nickName = nickName;

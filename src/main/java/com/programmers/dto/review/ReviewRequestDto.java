@@ -13,7 +13,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ReviewRequestDto {
-    @NotNull
     private Long reviewId;
     @NotNull
     private OrderList orderList;

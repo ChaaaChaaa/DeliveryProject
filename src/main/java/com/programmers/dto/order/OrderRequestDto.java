@@ -19,8 +19,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class OrderRequestDto {
-    @NotNull
-    private Long orderListId;
+
     @NotNull
     private User user;
     @NotNull
@@ -52,7 +51,6 @@ public class OrderRequestDto {
                 .paymentMethod(orderList.getPaymentMethod())
                 .orderState(orderList.getOrderState())
                 .totalPrice(orderList.getTotalPrice())
-                .orderItems(orderList.getOrderItems())
                 .build();
     }
 }

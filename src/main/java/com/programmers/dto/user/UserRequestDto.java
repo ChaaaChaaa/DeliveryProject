@@ -20,7 +20,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class UserRequestDto {
-    @NotNull
+
     private Long userId;
     @NotBlank
     @Length(min = 1, max = 30)
