@@ -4,11 +4,11 @@ import lombok.Getter;
 
 @Getter
 public class ErrorResponseDto {
-    private final String errorCode;
-    private final String errorMessage;
+	private final String errorCode;
+	private final String errorMessage;
 
-    public ErrorResponseDto(String errorCode, String errorMessage) {
-        this.errorCode = errorCode;
-        this.errorMessage = errorMessage;
-    }
+	public ErrorResponseDto(String errorCode, String errorMessage) {
+		this.errorCode = errorCode;
+		this.errorMessage = errorMessage;
+	}
 }

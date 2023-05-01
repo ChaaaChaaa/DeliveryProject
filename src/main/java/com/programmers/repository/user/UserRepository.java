@@ -1,21 +1,21 @@
 package com.programmers.repository.user;
 
-import com.programmers.domain.Food;
-import com.programmers.domain.User;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.lang.Nullable;
+import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
+import com.programmers.domain.user.User;
 
-public interface UserRepository extends JpaRepository<User,Long> {
-    User save(User user);
+@Repository
+public interface UserRepository extends JpaRepository<User, Long> {
 
-    Optional<User> findById(Long id);
+	Optional<User> findByNickName(String nickName);
 
-    Optional<User> findByNickName(String NickName);
+	Optional<User> findByUserId(Long userId);
 
-    Optional<User> findByPhoneNumber(int PhoneNumber);
+	Optional<User> findByPhoneNumber(String PhoneNumber);
 
-    void delete(@Nullable User user);
+	void delete(@Nullable User user);
 }
