@@ -8,16 +8,19 @@ import com.programmers.domain.orderItem.OrderItem;
 import com.programmers.domain.user.User;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.constraints.NotNull;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class OrderRequestDto {
 
     @NotNull
@@ -32,7 +35,7 @@ public class OrderRequestDto {
     private int totalPrice;
 
     @NotNull
-    private List<OrderItem> orderItems; //주문 항목에 대한 list가 이미 있기때문에
+    private List<OrderItem> orderItems;
 
     @Builder
     public OrderRequestDto(User user, Delivery delivery, Payment paymentMethod, OrderState orderState, int totalPrice, List<OrderItem> orderItems) {
@@ -52,5 +55,11 @@ public class OrderRequestDto {
                 .orderState(orderList.getOrderState())
                 .totalPrice(orderList.getTotalPrice())
                 .build();
+    }
+
+    public List<OrderItem> getOrderItems(Long orderListId) {
+        return orderItems.stream()
+                .map(orderItem -> orderItem.toOrderItem(new OrderList(orderListId, null, null, null, null, 0)))
+                .collect(Collectors.toList());
     }
 }
