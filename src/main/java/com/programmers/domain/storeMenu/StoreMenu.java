@@ -39,7 +39,8 @@ public class StoreMenu {
 
 
     @Builder
-    public StoreMenu(Store store, Food food) {
+    public StoreMenu(Long storeMenuId, Store store, Food food) {
+        this.storeMenuId = storeMenuId;
         this.store = store;
         this.food = food;
     }

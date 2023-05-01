@@ -63,12 +63,9 @@ public class OrderList {
     @NotNull
     private int totalPrice;
 
-    @OneToMany(mappedBy = "orderList")
-    @JsonIgnore
-    private List<OrderItem> orderItems;
-
     @Builder
-    public OrderList(User user, Delivery delivery, Payment paymentMethod, OrderState orderState, int totalPrice) {
+    public OrderList(Long orderListId,User user, Delivery delivery, Payment paymentMethod, OrderState orderState, int totalPrice) {
+        this.orderListId = orderListId;
         this.user = user;
         this.delivery = delivery;
         this.paymentMethod = paymentMethod;
