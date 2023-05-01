@@ -115,7 +115,7 @@ class StoreMenuControllerTest {
         String json = objectMapper.writeValueAsString(storeMenu);
 
         //when,then
-        mockMvc.perform(get("/storeMenu/{storeMenuId}", savedStoreMenu.getStoreMenuId())
+        mockMvc.perform(get("/storeMenus/{storeMenuId}", savedStoreMenu.getStoreMenuId())
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding(StandardCharsets.UTF_8)
                         .content(json))
