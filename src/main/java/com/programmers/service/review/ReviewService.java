@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
-
+@Transactional
 public class ReviewService {
     private final ReviewRepository reviewRepository;
     private final OrderListRepository orderListRepository;
@@ -32,7 +32,11 @@ public class ReviewService {
 
     @Transactional
     public Review save(ReviewRequestDto reviewRequestDto) {
-        return reviewRepository.save(reviewRequestDto.toEntity());
+        Review review = reviewRequestDto.toEntity();
+        OrderList orderList = review.getOrderList();
+        orderList = orderListRepository.save(orderList);
+        review.setOrderList(orderList);
+        return reviewRepository.save(review);
     }
 
     public ReviewResponseDto findById(Long reviewId) {
